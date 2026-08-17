@@ -506,6 +506,66 @@ Frontend foundation is complete and ready for:
 
 6. **Add map provider** (Mapbox/Google Maps) credentials when available
 
+## 2026-08-17 --- Frontend Map Accessibility & Location-Based UX (OpenCode #2)
+
+### Added
+
+- **Map Accessibility Improvements:**
+  - Added `role="application"` to map container
+  - Added keyboard navigation instructions to map ARIA label
+  - Added focus management for venue list items
+  - Added `aria-label` with venue details for each list item
+  - Added `aria-current` for selected venue indication
+  - Improved focus ring styles for keyboard navigation
+
+- **Location-Based Attribute Display:**
+  - Created `LocationBasedAttributes` component
+  - Groups accessibility attributes by location/entrance
+  - Shows venue-level vs location-specific attributes separately
+  - Displays coordinate availability (exact vs venue-level)
+  - Shows location type badges (entrance, floor, area)
+  - Location-specific coordinate indicators
+
+- **Accessibility Summary:**
+  - Created `VerificationSummary` component
+  - Shows counts: Available / Partial / Unknown / Not Available
+  - Quick visual overview of accessibility status
+
+- **Data Source Tracking:**
+  - Added data source state to venue detail page
+  - Shows "Live Data" / "Demo Data" / "Error" indicators
+  - Different banner colors for each data source
+  - Clear messaging about data origin
+
+### Technical Decisions
+
+- **Location Grouping:** Attributes grouped by location_id to show entrance-specific information
+- **Coordinate Indicators:** Visual distinction between exact and approximate coordinates
+- **Keyboard First:** List view remains fully accessible for keyboard users
+
+### Files Changed
+
+**New:**
+- `components/location-based-attributes.tsx`
+
+**Modified:**
+- `components/map/interactive-map.tsx` - Accessibility improvements
+- `app/venues/[id]/page.tsx` - Location-based display, data source tracking
+
+### Build
+
+```bash
+npm run build
+# Result: ✓ Compiled successfully, 7 pages generated
+```
+
+### Tests
+
+```bash
+npm test
+# Result: 5 passed, 43 tests total
+```
+
 ## 2026-08-17 --- Interactive Map Integration Complete (OpenCode #2)
 
 ### Added
