@@ -7,8 +7,10 @@ import { Header, Footer } from "@/components/layout";
 import { Venue, AccessibilityAttribute, Evidence, VenueAccessibilityDetail } from "@/lib/api/types";
 import { venuesApi, accessibilityApi, evidenceApi } from "@/lib/api/client";
 import { AccessibilityAttributeList } from "@/components/accessibility-attributes";
+import { LocationBasedAttributes, VerificationSummary } from "@/components/location-based-attributes";
 import { EvidenceList } from "@/components/evidence";
 import { VerificationLegend } from "@/components/verification-badge";
+import { DataSourceIndicator, DataSourceAlert } from "@/components/data-source-indicator";
 import { ReportForm } from "@/components/report-form";
 import { MapView } from "@/components/map-view";
 import { Button } from "@/components/ui/button";
@@ -157,6 +159,7 @@ export default function VenueDetailPage() {
   const [evidence, setEvidence] = useState<Evidence[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [dataSource, setDataSource] = useState<"api" | "demo" | "error">("demo");
 
   useEffect(() => {
     const loadVenueData = async () => {
@@ -174,12 +177,19 @@ export default function VenueDetailPage() {
         setVenue(venueData);
         setAttributes(attributesData);
         setEvidence(evidenceData);
+        setDataSource("api");
       } catch (err) {
         console.log("API unavailable, using demo data");
         // Use demo data if API fails
-        setVenue(DEMO_VENUE);
-        setAttributes(DEMO_ATTRIBUTES);
-        setEvidence(DEMO_EVIDENCE);
+        if (venueId.startsWith("demo-")) {
+          setVenue(DEMO_VENUE);
+          setAttributes(DEMO_ATTRIBUTES);
+          setEvidence(DEMO_EVIDENCE);
+          setDataSource("demo");
+        } else {
+          setError("Failed to load venue data. Please try again.");
+          setDataSource("error");
+        }
       } finally {
         setIsLoading(false);
       }
@@ -236,15 +246,23 @@ export default function VenueDetailPage() {
       <Header />
       
       <main id="main-content" className="flex-1">
-        {/* Demo Banner */}
-        <div className="bg-amber-50 border-b border-amber-200">
+        {/* Data Source Banner */}
+        <div className={`border-b ${dataSource === 'demo' ? 'bg-amber-50 border-amber-200' : dataSource === 'api' ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'}`}>
           <div className="container py-3">
-            <div className="flex items-center gap-2 text-amber-800 text-sm">
-              <AlertTriangle className="h-4 w-4 shrink-0" />
-              <span>
-                <strong>DEMO DATA:</strong> This page shows demo/test data for development. 
-                Real accessibility data will be imported from research.
-              </span>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <DataSourceIndicator source={dataSource} />
+                {dataSource === 'demo' && (
+                  <span className="text-amber-800 text-sm">
+                    Synthetic data for development. Real data coming from research.
+                  </span>
+                )}
+                {dataSource === 'api' && (
+                  <span className="text-green-800 text-sm">
+                    Live data from accessibility database
+                  </span>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -369,10 +387,13 @@ export default function VenueDetailPage() {
                 </CardContent>
               </Card>
 
-              {/* Detailed Attributes */}
+              {/* Detailed Attributes - Location Based */}
               <div>
-                <h2 className="text-xl font-semibold mb-4">Detailed Accessibility Information</h2>
-                <AccessibilityAttributeList attributes={attributes} groupByCategory={true} />
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-xl font-semibold">Detailed Accessibility</h2>
+                  <VerificationSummary attributes={attributes} />
+                </div>
+                <LocationBasedAttributes attributes={attributes} showEvidenceCount={true} />
               </div>
 
               {/* Evidence Section */}

@@ -422,7 +422,9 @@ export function InteractiveMapView({
             ref={mapContainerRef}
             className="w-full"
             style={{ height }}
-            aria-label="Interactive map showing venue locations"
+            role="application"
+            aria-label="Interactive map showing venue locations. Use arrow keys to navigate, plus and minus to zoom. List view available below for keyboard access."
+            tabIndex={0}
           />
 
           {/* Info Window (rendered but hidden, used by Google Maps) */}
@@ -461,12 +463,13 @@ export function InteractiveMapView({
                   <button
                     key={venue.venue_id}
                     onClick={() => handleVenueSelect(venue.venue_id)}
-                    className={`w-full text-left p-3 rounded-lg border transition-all hover:bg-accent ${
+                    className={`w-full text-left p-3 rounded-lg border transition-all hover:bg-accent focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
                       isSelected
                         ? "border-primary bg-primary/5 ring-2 ring-primary/20"
                         : "border-border bg-background"
                     }`}
-                    aria-selected={isSelected}
+                    aria-current={isSelected ? "true" : undefined}
+                    aria-label={`${venue.name}, ${venue.address}, ${venue.city}. ${venueAttrs.length} accessibility features recorded.`}
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex-1 min-w-0">

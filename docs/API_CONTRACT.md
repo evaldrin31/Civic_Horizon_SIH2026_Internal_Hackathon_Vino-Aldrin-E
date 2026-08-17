@@ -103,6 +103,107 @@ Get a specific venue by ID.
 
 **Error:** 404 if venue not found
 
+#### GET `/api/v1/venues/{venue_id}/detail`
+
+Get a venue with complete nested data including locations, attributes, and evidence.
+
+**Path Parameters:**
+- `venue_id` (UUID, required)
+
+**Response:** Full venue object with nested relationships
+```json
+{
+  "venue_id": "550e8400-e29b-41d4-a716-446655440000",
+  "name": "City Hospital",
+  "category": "hospital",
+  "address": "123 Main St",
+  "city": "Mumbai",
+  "state": "Maharashtra",
+  "country": "India",
+  "postal_code": "400001",
+  "latitude": 19.0760,
+  "longitude": 72.8777,
+  "official_url": "https://example.com",
+  "contact_phone": "+91-1234567890",
+  "contact_email": "info@example.com",
+  "created_at": "2024-01-15T10:30:00Z",
+  "updated_at": "2024-01-15T10:30:00Z",
+  "locations": [
+    {
+      "location_id": "550e8400-e29b-41d4-a716-446655440001",
+      "venue_id": "550e8400-e29b-41d4-a716-446655440000",
+      "name": "Main Entrance",
+      "location_type": "entrance",
+      "description": "Primary hospital entrance",
+      "latitude": 19.0760,
+      "longitude": 72.8777,
+      "floor": "Ground",
+      "created_at": "2024-01-15T10:30:00Z",
+      "updated_at": "2024-01-15T10:30:00Z"
+    }
+  ],
+  "attributes": [
+    {
+      "attribute_id": "550e8400-e29b-41d4-a716-446655440002",
+      "venue_id": "550e8400-e29b-41d4-a716-446655440000",
+      "location_id": "550e8400-e29b-41d4-a716-446655440001",
+      "category": "mobility",
+      "attribute_name": "ramp",
+      "value": "yes",
+      "value_type": null,
+      "value_text": null,
+      "notes": "Wheelchair ramp available",
+      "last_observed_at": "2024-01-15T00:00:00Z",
+      "location": {
+        "location_id": "550e8400-e29b-41d4-a716-446655440001",
+        "venue_id": "550e8400-e29b-41d4-a716-446655440000",
+        "name": "Main Entrance",
+        "location_type": "entrance",
+        "description": "Primary hospital entrance",
+        "latitude": 19.0760,
+        "longitude": 72.8777,
+        "floor": "Ground",
+        "created_at": "2024-01-15T10:30:00Z",
+        "updated_at": "2024-01-15T10:30:00Z"
+      },
+      "evidence": [
+        {
+          "evidence_id": "550e8400-e29b-41d4-a716-446655440003",
+          "attribute_id": "550e8400-e29b-41d4-a716-446655440002",
+          "source_id": "550e8400-e29b-41d4-a716-446655440004",
+          "evidence_text": "Photo shows accessible ramp with handrails",
+          "evidence_media_url": null,
+          "observed_at": "2024-01-15T00:00:00Z",
+          "collected_at": "2024-01-15T10:30:00Z",
+          "collector": "audit_team",
+          "verification_status": "verified",
+          "confidence": 0.95,
+          "notes": "Verified during site visit",
+          "source": {
+            "source_id": "550e8400-e29b-41d4-a716-446655440004",
+            "source_type": "professional_audit",
+            "source_name": "Accessibility Audit Team",
+            "source_url": null,
+            "source_reference": null
+          }
+        }
+      ],
+      "created_at": "2024-01-15T10:30:00Z",
+      "updated_at": "2024-01-15T10:30:00Z"
+    }
+  ]
+}
+```
+
+**Use Case:** This endpoint is designed for venue detail pages where complete information is needed in a single request. It returns:
+- All venue metadata
+- All locations/entrances
+- All accessibility attributes
+- Location details for each attribute
+- Evidence with source details for each attribute
+
+**Error:** 404 if venue not found
+
 #### POST `/api/v1/venues`
 
 Create a new venue.
@@ -434,6 +535,62 @@ Get conflicting evidence for the same attribute.
 
 ## Data Import (Admin)
 
+### POST `/api/v1/admin/import/validate`
+
+Dry-run validation for research records without writing to database.
+
+**Request Body:** Array of record objects
+
+**Response:**
+```json
+{
+  "total": 100,
+  "valid": 82,
+  "invalid": 8,
+  "warnings": 10,
+  "duplicates": 5,
+  "conflicts": 2,
+  "errors": [
+    {
+      "record": 17,
+      "field": "venue.latitude",
+      "message": "Invalid latitude: 200",
+      "severity": "error",
+      "venue": "Test Hospital"
+    }
+  ],
+  "warnings_list": [
+    {
+      "record": 5,
+      "field": "evidence.source",
+      "message": "Evidence should have a source for provenance",
+      "severity": "warning",
+      "venue": "City Hospital"
+    }
+  ],
+  "info": []
+}
+```
+
+### POST `/api/v1/admin/import/validate/record`
+
+Validate a single research record without importing.
+
+**Request Body:** Single record object
+
+**Response:**
+```json
+{
+  "valid": true,
+  "issues": [],
+  "issue_count": {
+    "errors": 0,
+    "warnings": 0,
+    "info": 0
+  }
+}
+```
+
 ### POST `/api/v1/admin/import/record`
 
 Import a single structured record.
@@ -478,6 +635,14 @@ Import a single structured record.
   "success": true,
   "venue_id": "...",
   "venue_created": true,
+  "stats": {
+    "venues_created": 1,
+    "venues_matched": 0,
+    "locations_created": 1,
+    "attributes_created": 1,
+    "evidence_created": 1,
+    "sources_created": 1
+  },
   "errors": []
 }
 ```
@@ -497,6 +662,7 @@ Import multiple records (batch).
   "stats": {
     "venues_created": 5,
     "venues_matched": 4,
+    "locations_created": 9,
     "attributes_created": 9,
     "evidence_created": 15,
     "sources_created": 3
@@ -504,6 +670,8 @@ Import multiple records (batch).
   "results": [...]
 }
 ```
+
+**Note:** Use `/validate` endpoint first to check records before importing.
 
 ---
 

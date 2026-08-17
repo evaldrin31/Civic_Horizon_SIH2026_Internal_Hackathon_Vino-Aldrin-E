@@ -117,6 +117,115 @@ def get_venue(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"error": "NOT_FOUND", "message": e.message})
 
 
+@router.get("/{venue_id}/detail")
+def get_venue_with_details(
+    venue_id: str,
+    service: VenueService = Depends(get_venue_service)
+):
+    """Get a venue with all nested details (locations, attributes, evidence).
+    
+    This endpoint returns the complete venue information including:
+    - venue details
+    - all locations/entrances
+    - all accessibility attributes with their locations
+    - evidence for each attribute
+    
+    Use this for venue detail pages where complete information is needed.
+    """
+    try:
+        venue = service.get_venue_with_details(venue_id)
+        
+        # Convert to dict and include nested relationships
+        result = {
+            "venue_id": str(venue.venue_id),
+            "name": venue.name,
+            "category": venue.category,
+            "address": venue.address,
+            "city": venue.city,
+            "state": venue.state,
+            "country": venue.country,
+            "postal_code": venue.postal_code,
+            "latitude": venue.latitude,
+            "longitude": venue.longitude,
+            "official_url": venue.official_url,
+            "contact_phone": venue.contact_phone,
+            "contact_email": venue.contact_email,
+            "created_at": venue.created_at.isoformat() if venue.created_at else None,
+            "updated_at": venue.updated_at.isoformat() if venue.updated_at else None,
+            "locations": [
+                {
+                    "location_id": str(loc.location_id),
+                    "venue_id": str(loc.venue_id),
+                    "name": loc.name,
+                    "location_type": loc.location_type,
+                    "description": loc.description,
+                    "latitude": loc.latitude,
+                    "longitude": loc.longitude,
+                    "floor": loc.floor,
+                    "created_at": loc.created_at.isoformat() if loc.created_at else None,
+                    "updated_at": loc.updated_at.isoformat() if loc.updated_at else None,
+                }
+                for loc in venue.locations
+            ],
+            "attributes": [
+                {
+                    "attribute_id": str(attr.attribute_id),
+                    "venue_id": str(attr.venue_id),
+                    "location_id": str(attr.location_id) if attr.location_id else None,
+                    "category": attr.category,
+                    "attribute_name": attr.attribute_name,
+                    "value": attr.value.value if hasattr(attr.value, 'value') else attr.value,
+                    "value_type": attr.value_type,
+                    "value_text": attr.value_text,
+                    "notes": attr.notes,
+                    "last_observed_at": attr.last_observed_at.isoformat() if attr.last_observed_at else None,
+                    "location": {
+                        "location_id": str(attr.location.location_id),
+                        "venue_id": str(attr.location.venue_id),
+                        "name": attr.location.name,
+                        "location_type": attr.location.location_type,
+                        "description": attr.location.description,
+                        "latitude": attr.location.latitude,
+                        "longitude": attr.location.longitude,
+                        "floor": attr.location.floor,
+                        "created_at": attr.location.created_at.isoformat() if attr.location.created_at else None,
+                        "updated_at": attr.location.updated_at.isoformat() if attr.location.updated_at else None,
+                    } if attr.location else None,
+                    "evidence": [
+                        {
+                            "evidence_id": str(ev.evidence_id),
+                            "attribute_id": str(ev.attribute_id),
+                            "source_id": str(ev.source_id) if ev.source_id else None,
+                            "evidence_text": ev.evidence_text,
+                            "evidence_media_url": ev.evidence_media_url,
+                            "observed_at": ev.observed_at.isoformat() if ev.observed_at else None,
+                            "collected_at": ev.collected_at.isoformat() if ev.collected_at else None,
+                            "collector": ev.collector,
+                            "verification_status": ev.verification_status.value if hasattr(ev.verification_status, 'value') else ev.verification_status,
+                            "confidence": ev.confidence,
+                            "notes": ev.notes,
+                            "source": {
+                                "source_id": str(ev.source.source_id),
+                                "source_type": ev.source.source_type.value if hasattr(ev.source.source_type, 'value') else ev.source.source_type,
+                                "source_name": ev.source.source_name,
+                                "source_url": ev.source.source_url,
+                                "source_reference": ev.source.source_reference,
+                            } if ev.source else None,
+                        }
+                        for ev in attr.evidence
+                    ],
+                    "created_at": attr.created_at.isoformat() if attr.created_at else None,
+                    "updated_at": attr.updated_at.isoformat() if attr.updated_at else None,
+                }
+                for attr in venue.attributes
+            ]
+        }
+        
+        return result
+    except NotFoundException as e:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"error": "NOT_FOUND", "message": e.message})
+
+
 @router.post("", response_model=VenueResponse, status_code=status.HTTP_201_CREATED)
 def create_venue(
     venue_data: VenueCreate,

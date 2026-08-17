@@ -79,6 +79,9 @@ class VenueListResponse(PaginatedResponse):
     items: List[VenueResponse]
 
 
+# Note: VenueDetailResponse is defined at end of file after all related schemas
+
+
 # ============ Venue Location Schemas ============
 
 class VenueLocationBase(BaseSchema):
@@ -290,3 +293,16 @@ class ErrorResponse(BaseSchema):
     code: str
     message: str
     details: Optional[dict] = None
+
+
+# ============ Extended Response Schemas ============
+# Defined here to avoid forward reference issues
+
+class VenueDetailResponse(VenueResponse):
+    """Venue response with full nested details for frontend.
+    
+    This is used by the /venues/{id}/detail endpoint to return
+    complete venue information including locations and accessibility attributes.
+    """
+    locations: List[VenueLocationResponse] = []
+    attributes: List[AccessibilityAttributeResponse] = []
