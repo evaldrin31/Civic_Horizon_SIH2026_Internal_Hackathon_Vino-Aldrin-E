@@ -750,6 +750,70 @@ frontend: integrate real interactive map with Google Maps
 - Update .env.example with map configuration
 ```
 
+## 2026-08-17 --- Frontend Integration Audit Fixes (OpenCode #2)
+
+### Fixed
+
+Based on comprehensive integration audit in `docs/INTEGRATION_AUDIT.md`:
+
+**CRITICAL ISSUE 3 - Deprecated Map Placeholder:**
+- **Problem:** MapView component rendered CSS mock instead of real Google Maps
+- **Impact:** Users never saw actual interactive map
+- **Solution:** 
+  - Rewrote `map-view.tsx` to export InteractiveMapView directly
+  - Removed deprecated MapPlaceholder component
+  - All pages now get real Google Maps with full interactivity
+- **Verification:** All production pages verified to use InteractiveMapView
+
+**HIGH-PRIORITY ISSUE 2 - Multiple API Calls:**
+- **Problem:** Venue detail made 3 separate API calls
+- **Impact:** Unnecessary network overhead and slower page loads
+- **Solution:**
+  - Added `venuesApi.getDetail()` method
+  - Added `VenueDetailResponse` type
+  - Updated venue detail page to use single detail endpoint
+- **Result:** API calls reduced from 3 to 1
+
+**HIGH-PRIORITY ISSUE 5 - Location Type Mismatch:**
+- **Problem:** Frontend used `type`, backend used `location_type`
+- **Impact:** Location types always defaulted to "area"
+- **Solution:**
+  - Updated `VenueLocation` interface to use `location_type`
+  - Updated all demo data references
+  - Updated `location-based-attributes.tsx` component
+- **Result:** Correct location type icons now display
+
+**MEDIUM-PRIORITY 2 - Demo Data in Production:**
+- **Problem:** Demo data silently replaced real data on API errors
+- **Impact:** Users could see fake accessibility information
+- **Solution:**
+  - Only allow demo fallback in development mode
+  - Production shows clear error state
+  - DataSourceIndicator shows appropriate status
+- **Result:** Clear distinction between real and demo data
+
+### Verification
+
+```bash
+npm test
+# Result: 5 passed, 43 tests total
+
+npm run build
+# Result: ✓ Compiled successfully, 7 pages generated
+```
+
+### Files Changed
+
+**Frontend:**
+- `components/map-view.tsx` - Replaced with InteractiveMapView export
+- `components/map/interactive-map.tsx` - Added center/zoom props
+- `lib/api/client.ts` - Added getDetail() endpoint
+- `lib/api/types.ts` - Added VenueDetailResponse, renamed to location_type
+- `app/venues/[id]/page.tsx` - Use detail endpoint, only demo in dev
+- `components/location-based-attributes.tsx` - Use location_type
+- `lib/hooks/use-data.ts` - Updated demo data
+- `lib/map/types.ts` - Added center/zoom to MapContainerProps
+
 ## 2026-08-17 --- Backend Test Failures Resolved (OpenCode #1)
 
 ### Fixed
@@ -918,6 +982,204 @@ const { data, source, isLoading, error, search } = useVenueSearch();
 2. Replace inline demo data with hook-based data fetching
 3. Add loading skeletons for better UX
 4. Enhance venue detail with location-specific display
+
+## 2026-08-17 --- Integration Audit Fixes Complete (OpenCode #1)
+
+### CRITICAL Fixes
+
+**1. Research Key Mismatch - FIXED**
+
+**Issue:** Official research template uses `location.type` and `attribute.name`, but importer expected `location_type` and `attribute_name`.
+
+**Solution:**
+- Importer now maps external research keys to internal model keys:
+  - `location.type` → `location.location_type`
+  - `attribute.name` → `attribute.attribute_name`
+- Validator accepts both keys for backward compatibility
+- Database model unchanged (still uses `location_type` and `attribute_name`)
+- API responses include both fields for compatibility
+
+**Files changed:**
+- `app/importers/importer.py` - Added key mapping logic
+- `app/importers/validator.py` - Accepts both key names
+- `app/routers/venues.py` - Detail endpoint returns both `type` and `location_type`
+
+**2. Evidence Without Attribute - FIXED**
+
+**Issue:** Evidence could be submitted without an attribute block, causing database constraint violations.
+
+**Solution:**
+- Added validation check: evidence requires attribute block
+- Validation returns ERROR if evidence exists without attribute
+- Import rejects such records before database write
+
+**Files changed:**
+- `app/importers/validator.py` - Added `_check_evidence_safety` validation
+
+**3. End-to-End Integration Test - ADDED**
+
+**Test:** `test_import_official_research_template`
+
+**Validates complete pipeline:**
+- Record matches official DATA_RECORD_TEMPLATE.json
+- Validation passes
+- Import succeeds
+- Venue persisted correctly
+- Location created with `type` → `location_type` mapping
+- Attribute created with `name` → `attribute_name` mapping
+- Evidence attached to correct attribute
+- Source/provenance preserved
+- Verification state preserved
+- Coordinates preserved
+- UNKNOWN/YES/NO/PARTIAL semantics preserved
+
+**Files added:**
+- `tests/test_import.py` - 4 new comprehensive tests
+
+### HIGH Priority Fixes
+
+**4. has_accessible_entrance Filter - IMPLEMENTED**
+
+**Feature:** Filter venues by actual entrance accessibility data.
+
+**Implementation:**
+- Joins venue → location → accessibility_attribute
+- Filters for `location_type = 'entrance'`
+- Checks `attribute_name = 'step_free_entrance'`
+- Returns venues with value = YES or PARTIAL
+
+**Endpoints updated:**
+- `GET /api/v1/venues/search?has_accessible_entrance=true`
+- `GET /api/v1/venues/nearby?has_accessible_entrance=true`
+
+**Files changed:**
+- `app/services/venue_service.py` - Added filter logic
+- `app/routers/venues.py` - Added query parameter
+
+**5. Inline Source Handling - IMPLEMENTED**
+
+**Feature:** Support research template's inline source fields (`source_type`, `source_reference`).
+
+**Implementation:**
+- Importer detects inline source fields
+- Creates or reuses source automatically
+- Maps `source_reference` to `source_name`
+
+**Files changed:**
+- `app/importers/importer.py` - Added inline source handling
+
+**6. Haversine Polar Safety - FIXED**
+
+**Issue:** Potential division by zero at poles.
+
+**Solution:**
+- Clamped `cos(latitude)` to minimum of `1e-9`
+- Prevents `ZeroDivisionError`
+
+**Files changed:**
+- `app/services/venue_service.py` - Updated distance calculation
+
+**7. Evidence Source Eager Loading - FIXED**
+
+**Issue:** Detail endpoint didn't load evidence sources.
+
+**Solution:**
+- Added eager loading for `evidence.source` relationship
+- Venue detail now returns complete evidence with source
+
+**Files changed:**
+- `app/services/venue_service.py` - Updated `get_venue_with_details`
+
+### Tests Added
+
+**New Tests (6 added, total 64):**
+
+1. `test_import_official_research_template` - Full end-to-end integration test
+2. `test_import_evidence_without_attribute_rejected` - Evidence safety test
+3. `test_import_unknown_value_preserved` - UNKNOWN semantics test
+4. `test_import_partial_value_preserved` - PARTIAL semantics test
+5. `test_get_venue_with_details` - Detail endpoint test
+6. `test_get_venue_detail_not_found` - Error handling test
+
+**All 64 tests passing**
+
+### API Changes
+
+**No breaking changes.** Backward compatible.
+
+**Added Parameters:**
+- `has_accessible_entrance` (optional, bool) - Search filter
+
+**Response Enhancements:**
+- `VenueLocation` includes both `type` and `location_type`
+- Evidence includes nested `source` object
+
+### Files Modified
+
+**Backend:**
+- `app/importers/importer.py` - Key mapping, inline sources, datetime parsing
+- `app/importers/validator.py` - Evidence without attribute validation
+- `app/services/venue_service.py` - has_accessible_entrance filter, eager loading
+- `app/routers/venues.py` - Detail endpoint, search parameters
+- `tests/test_import.py` - 4 new integration tests
+
+**Documentation:**
+- `docs/CHANGELOG.md` - This entry
+
+### Verification
+
+```bash
+cd backend
+python -m pytest tests/ -v
+# Result: 64 passed, 222 warnings in 1.30s
+```
+
+### External Research Contract (Official)
+
+**Input Format:** `docs/DATA_RECORD_TEMPLATE.json`
+```json
+{
+  "venue": {...},
+  "location": {
+    "name": "Main Entrance",
+    "type": "entrance"
+  },
+  "attribute": {
+    "category": "mobility",
+    "name": "step_free_entrance",
+    "value": "yes"
+  },
+  "evidence": [{
+    "source_type": "professional_audit",
+    "source_reference": "Audit Report 2024"
+  }]
+}
+```
+
+**Mapping:**
+- `location.type` → `venue_locations.location_type`
+- `attribute.name` → `accessibility_attributes.attribute_name`
+- `evidence.source_type/reference` → `sources.source_type/name`
+
+**Status:** ✅ SUPPORTED
+
+### Next Recommended Tasks
+
+1. **OpenCode #2 (Frontend):**
+   - Update `VenueLocation` interface to use `location_type`
+   - Add detail endpoint to API client
+   - Implement has_accessible_entrance filter UI
+   - Replace demo data with real API calls
+
+2. **OpenCode #1 (Backend):**
+   - Monitor import pipeline with real research data
+   - Address any edge cases from Claude's research
+   - Consider authentication for admin endpoints
+
+3. **Integration Testing:**
+   - Test with actual research data from Claude
+   - Verify frontend-backend integration
+   - Performance testing with large datasets
 
 ## 2026-08-17 --- Backend Hardening Complete (OpenCode #1)
 
