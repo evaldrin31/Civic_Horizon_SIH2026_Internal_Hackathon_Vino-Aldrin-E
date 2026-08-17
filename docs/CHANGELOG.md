@@ -566,6 +566,40 @@ npm test
 # Result: 5 passed, 43 tests total
 ```
 
+## 2026-08-17 --- Frontend Accessibility Summary Integration (OpenCode #2)
+
+### Added
+
+- **Accessibility Summary Support:**
+  - Added optional `accessibility_summary` field to Venue interface
+  - Backend now returns summary with search results
+  - Includes: total_attributes, yes_count, no_count, unknown_count, partial_count, has_verified
+  - VenueCard uses real summary data from API when available
+  - Falls back to demo data only when summary unavailable
+  - Helper function `createAttributesFromSummary` for backward compatibility
+
+### Technical Details
+
+- Updated `Venue` type to include accessibility_summary
+- VenueCard now prioritizes API summary over prop attributes
+- Maintains backward compatibility for existing demo data
+- No breaking changes to component API
+
+### Files Changed
+
+- `lib/api/types.ts` - Added accessibility_summary field
+- `components/venue-card.tsx` - Updated to use summary data
+
+### Verification
+
+```bash
+npm test
+# Result: 5 passed, 43 tests total
+
+npm run build
+# Result: ✓ Compiled successfully, 7 pages generated
+```
+
 ## 2026-08-17 --- Interactive Map Integration Complete (OpenCode #2)
 
 ### Added
