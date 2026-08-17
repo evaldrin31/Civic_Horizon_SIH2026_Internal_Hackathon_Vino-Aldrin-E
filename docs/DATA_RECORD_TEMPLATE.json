@@ -1,0 +1,35 @@
+{
+  "venue": {
+    "name": "",
+    "category": "",
+    "address": "",
+    "city": "",
+    "state": "",
+    "country": "India",
+    "latitude": null,
+    "longitude": null
+  },
+  "location": {
+    "name": "",
+    "type": "",
+    "description": ""
+  },
+  "attribute": {
+    "category": "",
+    "name": "",
+    "value": null,
+    "value_type": ""
+  },
+  "evidence": [
+    {
+      "source_type": "",
+      "source_reference": "",
+      "evidence_text": "",
+      "observed_at": null,
+      "collected_at": null,
+      "verification_status": "UNVERIFIED",
+      "confidence": null,
+      "notes": ""
+    }
+  ]
+}
