@@ -70,6 +70,18 @@ def create_accessibility_attribute(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"error": "NOT_FOUND", "message": e.message})
 
 
+@router.get("/accessibility/summary")
+def get_venue_accessibility_summary(
+    venue_id: str,
+    service: AccessibilityService = Depends(get_accessibility_service)
+):
+    """Get a summary of accessibility data for a venue."""
+    try:
+        return service.get_attribute_summary(venue_id)
+    except NotFoundException as e:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"error": "NOT_FOUND", "message": e.message})
+
+
 @router.get("/accessibility/{attribute_id}", response_model=AccessibilityAttributeResponse)
 def get_accessibility_attribute(
     venue_id: str,
@@ -135,17 +147,5 @@ def get_venue_evidence(
             "page_size": page_size,
             "pages": (total + page_size - 1) // page_size
         }
-    except NotFoundException as e:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"error": "NOT_FOUND", "message": e.message})
-
-
-@router.get("/accessibility/summary")
-def get_venue_accessibility_summary(
-    venue_id: str,
-    service: AccessibilityService = Depends(get_accessibility_service)
-):
-    """Get a summary of accessibility data for a venue."""
-    try:
-        return service.get_attribute_summary(venue_id)
     except NotFoundException as e:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"error": "NOT_FOUND", "message": e.message})

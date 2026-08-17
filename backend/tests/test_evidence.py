@@ -37,7 +37,7 @@ def test_get_evidence(client: TestClient, sample_venue_data, sample_attribute_da
     assert response.status_code == 200
     data = response.json()
     assert data["evidence_id"] == evidence_id
-    assert "attribute" in data
+    assert data["attribute_id"] == attribute_id
 
 
 def test_get_venue_evidence(client: TestClient, sample_venue_data, sample_attribute_data, sample_evidence_data):

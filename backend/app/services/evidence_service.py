@@ -11,7 +11,7 @@ from app.models.models import (
     Evidence, Source, VerificationHistory, VerificationStatus,
     AccessibilityAttribute, AccessibilityAttribute as Attr
 )
-from app.schemas.schemas import EvidenceCreate, EvidenceUpdate
+from app.schemas.schemas import EvidenceCreate, EvidenceUpdate, SourceCreate
 
 
 class EvidenceService:
@@ -103,15 +103,34 @@ class EvidenceService:
         if not attr:
             raise NotFoundException("AccessibilityAttribute", str(evidence_data.attribute_id))
         
-        # Validate source if provided
-        if evidence_data.source_id:
+        # Handle inline source creation if provided
+        source_id = evidence_data.source_id
+        if evidence_data.source and not source_id:
+            # Check if source already exists by name
+            existing_source = self.db.query(Source).filter(
+                Source.source_name == evidence_data.source.source_name
+            ).first()
+            if existing_source:
+                source_id = existing_source.source_id
+            else:
+                # Create new source
+                new_source = Source(**evidence_data.source.model_dump())
+                self.db.add(new_source)
+                self.db.flush()
+                source_id = new_source.source_id
+        
+        # Validate source_id if provided
+        if source_id:
             source = self.db.query(Source).filter(
-                Source.source_id == evidence_data.source_id
+                Source.source_id == source_id
             ).first()
             if not source:
-                raise NotFoundException("Source", str(evidence_data.source_id))
+                raise NotFoundException("Source", str(source_id))
         
-        evidence = Evidence(**evidence_data.model_dump())
+        # Create evidence with validated source_id
+        evidence_dict = evidence_data.model_dump(exclude={'source'})
+        evidence_dict['source_id'] = source_id
+        evidence = Evidence(**evidence_dict)
         self.db.add(evidence)
         self.db.commit()
         self.db.refresh(evidence)

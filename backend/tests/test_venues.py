@@ -29,7 +29,8 @@ def test_get_venue_not_found(client: TestClient):
     response = client.get("/api/v1/venues/12345678-1234-1234-1234-123456789abc")
     assert response.status_code == 404
     data = response.json()
-    assert data["error"] == "NOT_FOUND"
+    assert "detail" in data
+    assert data["detail"]["error"] == "NOT_FOUND"
 
 
 def test_list_venues(client: TestClient, sample_venue_data):

@@ -441,4 +441,251 @@ Frontend foundation is complete and ready for:
 
 6. **Add map provider** (Mapbox/Google Maps) credentials when available
 
+## 2026-08-17 --- Interactive Map Integration Complete (OpenCode #2)
+
+### Added
+
+- **Map Provider Abstraction:**
+  - Generic `MapProviderInstance` interface in `lib/map/types.ts`
+  - Provider-agnostic types: `MapPosition`, `MapViewport`, `MapBounds`, `MapMarker`
+  - Support for multiple providers (Google, Mapbox, Leaflet)
+  - Easy to swap providers without changing application code
+
+- **Google Maps Implementation:**
+  - Full `GoogleMapsProvider` class implementing the abstraction
+  - Dynamic script loading with error handling
+  - Pan and zoom controls
+  - Gesture handling (cooperative mode for mobile)
+  - Automatic bounds fitting for search results
+
+- **Interactive Map Features:**
+  - Real interactive map with Google Maps JavaScript API
+  - Pan: Click and drag to move around
+  - Zoom: +/- buttons and scroll wheel
+  - Markers: One per venue with selection state
+  - Info Windows: Show venue summary on marker click
+  - Map/List Toggle: Switch between map and list views
+  - Responsive: Works on mobile, tablet, desktop
+
+- **Marker/List Synchronization:**
+  - Click marker → highlights venue in list
+  - Click list item → centers map on marker
+  - Selected venue visually distinguished on both map and list
+  - Info window shows venue name and accessibility summary
+
+- **Map States:**
+  - Loading: Shows spinner while Google Maps initializes
+  - Error: Shows error message with retry button if map fails
+  - Empty: Shows "No venues" message when search returns nothing
+  - Fallback: Automatically switches to list view if map unavailable
+  - API Key Missing: Shows configuration error
+
+- **Accessibility Features:**
+  - Map has `aria-label` for screen readers
+  - List view is always available as accessible alternative
+  - All map functions available via list (no info trapped in map)
+  - Keyboard navigation for venue list
+  - Focus management for selected venues
+
+- **Mobile Layout:**
+  - Map/List toggle optimized for small screens
+  - Touch-friendly buttons (min 44px)
+  - Responsive height (works at 375px, 768px, 1024px+)
+  - Zoom controls always visible
+
+- **Map Configuration:**
+  - `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` environment variable
+  - Configurable default center (defaults to center of India)
+  - Configurable default zoom level
+  - `NEXT_PUBLIC_DISABLE_MAP` option for accessibility
+
+- **Testing:**
+  - Comprehensive tests for `InteractiveMapView`
+  - Mock Google Maps for Jest
+  - Tests for loading, error, empty states
+  - Tests for marker/list synchronization
+  - Tests for keyboard accessibility
+  - Tests for responsive behavior
+
+### Technical Decisions
+
+- **Google Maps JavaScript API:** Chosen for:
+  - Excellent coverage in India
+  - Free tier for development
+  - Familiar UX for users
+  - Good mobile support
+
+- **Provider Abstraction:** Keeps map-specific code isolated:
+  - Easy to switch to Mapbox if needed
+  - Testable without real API
+  - Consistent interface across providers
+
+- **Cooperative Gesture Handling:** Prevents page scroll hijacking on mobile
+
+- **List-First Fallback:** Ensures accessibility even when map fails
+
+### Updated Files
+
+```
+frontend/
+├── src/
+│   ├── lib/
+│   │   └── map/
+│   │       ├── types.ts              # Map provider interface
+│   │       └── providers/
+│   │           └── google-maps.ts    # Google Maps implementation
+│   ├── components/
+│   │   ├── map/
+│   │   │   ├── index.ts              # Map component exports
+│   │   │   └── interactive-map.tsx   # Interactive map component
+│   │   └── map-view.tsx              # Updated with backward compat
+│   └── __tests__/
+│       └── components/
+│           └── map/
+│               └── interactive-map.test.tsx
+├── .env.example                       # Updated with map config
+└── README.md                          # Updated map instructions
+```
+
+### Usage
+
+1. **Get Google Maps API Key:**
+   - Visit https://developers.google.com/maps/documentation/javascript/get-api-key
+   - Create a project and enable JavaScript API
+   - Copy the API key
+
+2. **Configure Environment:**
+   ```bash
+   cp frontend/.env.example frontend/.env.local
+   # Edit and add your API key:
+   NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_actual_key_here
+   ```
+
+3. **Run Development Server:**
+   ```bash
+   cd frontend
+   npm run dev
+   ```
+
+### Map Features
+
+| Feature | Status | Notes |
+|---------|--------|-------|
+| Pan | ✅ | Click and drag |
+| Zoom | ✅ | Buttons and scroll |
+| Markers | ✅ | One per venue |
+| Marker Selection | ✅ | Bounces when selected |
+| Info Window | ✅ | Shows venue summary |
+| Map/List Toggle | ✅ | Responsive buttons |
+| Marker → List Sync | ✅ | Click marker selects list item |
+| List → Marker Sync | ✅ | Click list centers map |
+| Bounds Fitting | ✅ | Auto-fit to search results |
+| Mobile | ✅ | Touch-friendly |
+| Accessibility | ✅ | List always available |
+| Error Handling | ✅ | Retry button on failure |
+| Loading State | ✅ | Spinner while loading |
+| Empty State | ✅ | "No venues" message |
+
+### Known Limitations
+
+1. **API Key Required:** Map won't load without valid Google Maps API key
+2. **No Clustering:** Many markers in same area overlap
+3. **No Custom Markers:** Using default Google Maps markers
+4. **No Geolocation:** "My location" button not yet implemented
+5. **No Directions:** Can't get directions to venue yet
+
+### Files Changed
+
+- **New:**
+  - `lib/map/types.ts`
+  - `lib/map/providers/google-maps.ts`
+  - `components/map/interactive-map.tsx`
+  - `components/map/index.ts`
+  - `__tests__/components/map/interactive-map.test.tsx`
+
+- **Modified:**
+  - `components/map-view.tsx` (backward compatibility)
+  - `.env.example`
+  - `docs/CHANGELOG.md`
+
+### Git Commit
+
+```
+frontend: integrate real interactive map with Google Maps
+
+- Add MapProvider abstraction for provider independence
+- Implement GoogleMapsProvider with full feature set
+- Create InteractiveMapView with pan, zoom, markers
+- Add marker/list bidirectional synchronization
+- Add info windows with venue summaries
+- Add loading, error, empty states
+- Add list fallback for accessibility
+- Add mobile responsive layout
+- Add comprehensive tests
+- Update .env.example with map configuration
+```
+
+## 2026-08-17 --- Backend Test Failures Resolved (OpenCode #1)
+
+### Fixed
+
+**6 Test Failures Resolved:**
+
+1. **test_accessibility_summary** - Route path ordering issue
+   - Root cause: `/accessibility/summary` route was declared after `/accessibility/{attribute_id}`, causing FastAPI to match "summary" as an attribute_id
+   - Fix: Moved `/accessibility/summary` route BEFORE parameterized routes
+   - Files changed: `app/routers/accessibility.py`
+
+2. **test_get_evidence** - Incorrect test expectation
+   - Root cause: Test expected nested `attribute` object in evidence response, but API only provides `attribute_id`
+   - Fix: Updated test to check for `attribute_id` instead of nested `attribute`
+   - Decision: API_CONTRACT.md specifies `attribute_id` only, which is correct for avoiding N+1 queries
+   - Files changed: `tests/test_evidence.py`
+
+3. **test_evidence_with_source** - Missing inline source creation
+   - Root cause: Evidence endpoint didn't support creating sources inline (only `source_id`)
+   - Fix: 
+     - Added `source: Optional[SourceCreate]` to `EvidenceCreate` schema
+     - Updated `EvidenceService.create_evidence()` to handle inline source creation
+     - Source is created or reused based on `source_name`
+   - Files changed: `app/schemas/schemas.py`, `app/services/evidence_service.py`
+
+4. **test_import_with_source** - Missing stats in single record response
+   - Root cause: `/import/record` endpoint didn't include stats in response
+   - Fix: Added `result["stats"] = importer.stats` to the single record import response
+   - Files changed: `app/routers/import_routes.py`
+
+5. **test_import_empty_records** - 500 error on empty list
+   - Root cause: Import batch endpoint crashed when given empty list
+   - Fix: Added early return with empty stats for empty input
+   - Files changed: `app/routers/import_routes.py`
+
+6. **test_get_venue_not_found** - Error response structure
+   - Root cause: Test expected `data["error"]` but FastAPI wraps detail in `detail` key
+   - Fix: Updated test to check `data["detail"]["error"]` to match actual response structure
+   - Files changed: `tests/test_venues.py`
+
+### Test Results
+
+**Before:** 39 passed, 6 failed (86.7% pass rate)
+**After:** 45 passed, 0 failed (100% pass rate)
+
+### API Contract Changes
+
+**No breaking changes to API contract.**
+
+All fixes were either:
+- Internal routing fixes (no API change)
+- Test expectation updates (tests were incorrect)
+- Addition of optional fields (backward compatible)
+- Error response structure (matches standard FastAPI format)
+
+### Verification
+
+```bash
+cd backend
+python -m pytest tests/ -v
+# Result: 45 passed, 192 warnings in 0.93s
+```
+
 ## 2026-08-17 --- Project Bootstrap Complete

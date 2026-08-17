@@ -23,6 +23,8 @@ def import_records(
 ):
     """Import structured accessibility records.
     
+    Returns immediately with empty stats if no records provided.
+    
     Expected format:
     [
         {
@@ -59,6 +61,24 @@ def import_records(
         }
     ]
     """
+    # Handle empty list
+    if not records:
+        return {
+            "total": 0,
+            "successful": 0,
+            "failed": 0,
+            "stats": {
+                "venues_created": 0,
+                "venues_matched": 0,
+                "locations_created": 0,
+                "attributes_created": 0,
+                "evidence_created": 0,
+                "sources_created": 0,
+                "errors": []
+            },
+            "results": []
+        }
+    
     try:
         result = importer.import_records(records)
         
@@ -98,4 +118,6 @@ def import_single_record(
             }
         )
     
+    # Include stats in the response
+    result["stats"] = importer.stats
     return result

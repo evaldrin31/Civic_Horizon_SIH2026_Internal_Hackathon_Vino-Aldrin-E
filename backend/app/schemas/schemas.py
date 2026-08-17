@@ -210,6 +210,7 @@ class EvidenceCreate(EvidenceBase):
     """Schema for creating evidence."""
     attribute_id: str
     source_id: Optional[str] = None
+    source: Optional[SourceCreate] = None
 
 
 class EvidenceResponse(EvidenceBase):
