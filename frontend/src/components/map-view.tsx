@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { Venue } from "@/lib/api/types";
-import { VenueCardCompact } from "./venue-card";
+import { VenueCardCompact } from "@/components/venue-card";
 import { Button } from "@/components/ui/button";
 import { 
   Map as MapIcon, 
@@ -12,6 +12,9 @@ import {
   ZoomOut,
   AlertCircle
 } from "lucide-react";
+
+// Re-export InteractiveMapView for new code
+export { InteractiveMapView } from "./map/interactive-map";
 
 interface MapViewProps {
   venues: Venue[];
@@ -30,15 +33,9 @@ interface MapPlaceholderProps {
 }
 
 /**
- * MapPlaceholder - Development placeholder for map functionality
+ * MapPlaceholder - Fallback when real map is not available
  * 
- * This component provides a visual placeholder when map provider credentials
- * are not available. It shows venue locations as dots on a grid.
- * 
- * To integrate a real map:
- * 1. Add map provider API key to environment variables
- * 2. Replace this with actual map component (Mapbox, Google Maps, Leaflet, etc.)
- * 3. Update imports and configuration
+ * @deprecated Use InteractiveMapView instead
  */
 function MapPlaceholder({ 
   venues, 
@@ -56,7 +53,6 @@ function MapPlaceholder({
   };
 
   // Simple projection: convert lat/lng to x/y percentage
-  // This is a simplified view - real maps use proper projections
   const project = (lat: number, lng: number) => {
     // India approximate bounds
     const latMin = 8, latMax = 37;
@@ -162,7 +158,10 @@ function MapPlaceholder({
 }
 
 /**
- * MapView - Main map component with list view toggle
+ * MapView - Legacy compatibility export
+ * 
+ * For new code, import directly from './interactive-map'
+ * @deprecated Use InteractiveMapView from './interactive-map'
  */
 export function MapView({ 
   venues, 
