@@ -23,6 +23,7 @@ export class GoogleMapsProvider implements MapProviderInstance {
   private infoWindow: google.maps.InfoWindow | null = null;
   private container: HTMLElement | null = null;
   private listeners: google.maps.MapsEventListener[] = [];
+  private userLocationMarker: google.maps.Marker | null = null;
   
   // Event callbacks
   private clickCallback: ((position: MapPosition) => void) | null = null;
@@ -298,6 +299,64 @@ export class GoogleMapsProvider implements MapProviderInstance {
     if (this.infoWindow) {
       this.infoWindow.close();
     }
+  }
+
+  /**
+   * Add or update user's location marker
+   */
+  setUserLocation(position: MapPosition): void {
+    if (!this.map) return;
+
+    // Remove existing user location marker
+    if (this.userLocationMarker) {
+      this.userLocationMarker.setMap(null);
+    }
+
+    // Create new user location marker with blue dot
+    this.userLocationMarker = new google.maps.Marker({
+      position: position,
+      map: this.map,
+      title: "Your Location",
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 10,
+        fillColor: "#4285F4",
+        fillOpacity: 1,
+        strokeColor: "#FFFFFF",
+        strokeWeight: 2,
+      },
+      zIndex: 1000, // Keep above venue markers
+    });
+
+    // Add accuracy circle if needed
+    // (Optional: could add a circle showing accuracy radius)
+  }
+
+  /**
+   * Pan to user's location
+   */
+  panToUserLocation(): boolean {
+    if (!this.map || !this.userLocationMarker) return false;
+    
+    const position = this.userLocationMarker.getPosition();
+    if (position) {
+      this.map.panTo(position);
+      this.map.setZoom(15);
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Get current map bounds
+   */
+  getBounds(): MapBounds | null {
+    if (!this.map) return null;
+    
+    const bounds = this.map.getBounds();
+    if (!bounds) return null;
+    
+    return this.convertBounds(bounds);
   }
 
   private convertBounds(bounds: google.maps.LatLngBounds): MapBounds {

@@ -753,4 +753,110 @@ python -m pytest tests/ -v
 # Result: 45 passed, 192 warnings in 0.93s
 ```
 
+## 2026-08-17 --- Frontend API Integration & Map Enhancements (OpenCode #2)
+
+### Added
+
+- **Real API Integration:**
+  - Created `lib/hooks/use-data.ts` with data fetching hooks
+  - `useVenueSearch()` - Searches venues with backend API fallback to demo data
+  - `useNearbySearch()` - Nearby venue search with geolocation
+  - `useVenueDetail()` - Fetches venue + attributes + evidence
+  - `useGeolocation()` - Browser geolocation with error handling
+  - Proper distinction between: `api` | `demo` | `error` | `loading` | `empty`
+
+- **Data Source Transparency:**
+  - Created `DataSourceIndicator` component
+  - Shows "Live Data" / "Demo Data" / "Error" / "Loading" / "No Results" badges
+  - Clear visual distinction between real and synthetic data
+  - Users always know what data source they're viewing
+
+- **Data Source Alert Component:**
+  - Shows error messages with retry buttons
+  - Shows demo data warnings
+  - Shows empty state messages
+  - Proper error recovery
+
+- **Enhanced Google Maps:**
+  - Added `setUserLocation()` method to provider
+  - Added `panToUserLocation()` method
+  - Added `getBounds()` method
+  - Blue dot marker for user's current position
+  - "My Location" button in map controls
+  - Automatic pan to user location on request
+
+- **Synthetic Demo Data:**
+  - 3 demo venues with location-specific attributes
+  - Main Entrance with coordinates
+  - Ground Floor without coordinates
+  - Multiple accessibility attributes (yes, no, unknown, partial)
+  - Realistic evidence with verification states
+  - Clearly labeled "DEMO DATA"
+
+- **API Error Handling:**
+  - Graceful fallback from API to demo data
+  - Network error detection
+  - HTTP error handling
+  - Timeout handling
+  - User-friendly error messages
+
+### Technical Decisions
+
+- **Hook-based Data Fetching:** Reusable hooks for consistent data loading
+- **Source Tracking:** Every data fetch tracks its source for transparency
+- **Demo as Fallback:** Never show fake data as real; always indicate source
+- **Geolocation as Hook:** Encapsulates browser geolocation complexity
+
+### Files Changed
+
+**New:**
+- `lib/hooks/use-data.ts` - Data fetching hooks
+- `components/data-source-indicator.tsx` - Data source UI
+
+**Modified:**
+- `lib/map/providers/google-maps.ts` - User location methods
+- `lib/map/types.ts` - Added user location interface
+- `components/map/interactive-map.tsx` - My Location button
+
+### Tests
+
+```bash
+npm test
+# Result: 5 passed, 43 tests total
+```
+
+### Build
+
+```bash
+npm run build
+# Result: ✓ Compiled successfully, 7 pages generated
+```
+
+### Usage
+
+**My Location:**
+```typescript
+const { position, requestLocation } = useGeolocation();
+// Click "My Location" button to center map on user
+```
+
+**Data Source Indicator:**
+```typescript
+<DataSourceIndicator source={dataSource} />
+// Shows: Live Data / Demo Data / Error / Loading / No Results
+```
+
+**Search with API:**
+```typescript
+const { data, source, isLoading, error, search } = useVenueSearch();
+// Automatically falls back to demo data on API error
+```
+
+### Next Steps
+
+1. Integrate hooks into page components (Home, Nearby, Venue Detail)
+2. Replace inline demo data with hook-based data fetching
+3. Add loading skeletons for better UX
+4. Enhance venue detail with location-specific display
+
 ## 2026-08-17 --- Project Bootstrap Complete

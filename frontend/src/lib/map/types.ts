@@ -73,6 +73,11 @@ export interface MapProviderInstance {
   // Info Windows
   openInfoWindow: (markerId: string, content: HTMLElement) => void;
   closeInfoWindow: () => void;
+  
+  // User Location
+  setUserLocation: (position: MapPosition) => void;
+  panToUserLocation: () => boolean;
+  getBounds: () => MapBounds | null;
 }
 
 // ==================== Provider Factory ====================

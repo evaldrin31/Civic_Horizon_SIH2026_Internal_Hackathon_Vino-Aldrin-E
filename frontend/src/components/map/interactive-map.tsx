@@ -21,7 +21,9 @@ import { VenueCardCompact } from "@/components/venue-card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { AccessibilitySummaryCompact } from "@/components/accessibility-attributes";
+import { DataSourceIndicator } from "@/components/data-source-indicator";
 import { formatCategory } from "@/lib/utils";
+import { useGeolocation } from "@/lib/hooks/use-data";
 import {
   Map as MapIcon,
   List,
@@ -32,6 +34,7 @@ import {
   Minus,
   Navigation,
   ChevronRight,
+  LocateFixed,
 } from "lucide-react";
 
 // Component props extending the base props
@@ -66,6 +69,9 @@ export function InteractiveMapView({
 
   // Get API key from environment
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+
+  // Geolocation hook
+  const { position: userPosition, error: geoError, requestLocation } = useGeolocation();
 
   // Calculate bounds for all venues
   const calculateBounds = useCallback((venueList: Venue[]): MapBounds | null => {
@@ -230,6 +236,18 @@ export function InteractiveMapView({
     }
   };
 
+  const handleMyLocation = async () => {
+    await requestLocation();
+  };
+
+  // Update user location on map when position changes
+  useEffect(() => {
+    if (userPosition && providerRef.current) {
+      providerRef.current.setUserLocation(userPosition);
+      providerRef.current.panToUserLocation();
+    }
+  }, [userPosition]);
+
   const handleRetry = () => {
     setMapAvailable(true);
     setError(null);
@@ -332,6 +350,14 @@ export function InteractiveMapView({
                 title="Fit to results"
               >
                 <Crosshair className="h-4 w-4" />
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleMyLocation}
+                title="My Location"
+              >
+                <LocateFixed className="h-4 w-4" />
               </Button>
             </>
           )}
