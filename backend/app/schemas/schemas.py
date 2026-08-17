@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import List, Optional
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, computed_field, field_validator
 
 
 # ============ Base Schemas ============
@@ -100,11 +100,20 @@ class VenueLocationCreate(VenueLocationBase):
 
 
 class VenueLocationResponse(VenueLocationBase):
-    """Schema for venue location response."""
+    """Schema for venue location response.
+    
+    Note: Includes 'type' field as alias for 'location_type' for frontend compatibility.
+    """
     location_id: str
     venue_id: str
     created_at: datetime
     updated_at: datetime
+    
+    @computed_field
+    @property
+    def type(self) -> str:
+        """Return location_type as 'type' for frontend compatibility."""
+        return self.location_type
 
 
 # ============ Accessibility Attribute Schemas ============

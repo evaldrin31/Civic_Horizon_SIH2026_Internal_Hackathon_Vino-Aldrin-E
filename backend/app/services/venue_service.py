@@ -25,12 +25,13 @@ class VenueService:
     
     def get_venue_with_details(self, venue_id: str) -> Venue:
         """Get a venue with all related data."""
+        from app.models.models import Evidence, Source
         venue = (
             self.db.query(Venue)
             .options(
                 joinedload(Venue.locations),
                 joinedload(Venue.attributes).joinedload(AccessibilityAttribute.location),
-                joinedload(Venue.attributes).joinedload(AccessibilityAttribute.evidence)
+                joinedload(Venue.attributes).joinedload(AccessibilityAttribute.evidence).joinedload(Evidence.source)
             )
             .filter(Venue.venue_id == venue_id)
             .first()
@@ -68,10 +69,13 @@ class VenueService:
         category: Optional[str] = None,
         city: Optional[str] = None,
         state: Optional[str] = None,
+        has_accessible_entrance: Optional[bool] = None,
         skip: int = 0,
         limit: int = 20
     ) -> tuple[List[Venue], int]:
         """Search venues by name and filters."""
+        from app.models.models import AttributeValue
+        
         query = self.db.query(Venue)
         
         if query_str:
@@ -82,6 +86,34 @@ class VenueService:
             query = query.filter(Venue.city.ilike(f"%{city}%"))
         if state:
             query = query.filter(Venue.state.ilike(f"%{state}%"))
+        
+        # Filter for accessible entrance based on actual location/entrance data
+        if has_accessible_entrance is not None:
+            if has_accessible_entrance:
+                # Venue must have at least one entrance location with step_free_entrance = yes/partial
+                query = query.join(VenueLocation).join(
+                    AccessibilityAttribute,
+                    (AccessibilityAttribute.venue_id == Venue.venue_id) & 
+                    (AccessibilityAttribute.location_id == VenueLocation.location_id)
+                ).filter(
+                    VenueLocation.location_type == "entrance",
+                    AccessibilityAttribute.attribute_name == "step_free_entrance",
+                    AccessibilityAttribute.value.in_([AttributeValue.YES, AttributeValue.PARTIAL])
+                ).distinct()
+            else:
+                # Venue does NOT have accessible entrance (explicit NO or only UNKNOWN)
+                # This is more complex - we'd need to find venues where step_free_entrance is NO
+                # or where there's no evidence of accessible entrance
+                # For MVP, we'll filter for explicit NO
+                query = query.join(VenueLocation).join(
+                    AccessibilityAttribute,
+                    (AccessibilityAttribute.venue_id == Venue.venue_id) & 
+                    (AccessibilityAttribute.location_id == VenueLocation.location_id)
+                ).filter(
+                    VenueLocation.location_type == "entrance",
+                    AccessibilityAttribute.attribute_name == "step_free_entrance",
+                    AccessibilityAttribute.value == AttributeValue.NO
+                ).distinct()
         
         total = query.count()
         venues = query.order_by(Venue.name).offset(skip).limit(limit).all()
@@ -94,6 +126,7 @@ class VenueService:
         longitude: float,
         radius_km: float = 5.0,
         category: Optional[str] = None,
+        has_accessible_entrance: Optional[bool] = None,
         skip: int = 0,
         limit: int = 20
     ) -> tuple[List[Venue], int]:
@@ -101,11 +134,13 @@ class VenueService:
         
         Uses simple Haversine approximation. For production, consider PostGIS.
         """
+        from app.models.models import AttributeValue
+        
         # Approximate degrees per km at equator
         # 1 degree latitude = ~111 km
         # 1 degree longitude varies by latitude (~111 km at equator, 0 at poles)
         lat_delta = radius_km / 111.0
-        lon_delta = radius_km / (111.0 * abs(__import__('math').cos(__import__('math').radians(latitude))))
+        lon_delta = radius_km / (111.0 * max(abs(__import__('math').cos(__import__('math').radians(latitude))), 1e-9))
         
         query = self.db.query(Venue).filter(
             Venue.latitude.between(latitude - lat_delta, latitude + lat_delta),
@@ -114,6 +149,31 @@ class VenueService:
         
         if category:
             query = query.filter(Venue.category.ilike(f"%{category}%"))
+        
+        # Filter for accessible entrance based on actual location/entrance data
+        if has_accessible_entrance is not None:
+            if has_accessible_entrance:
+                # Venue must have at least one entrance location with step_free_entrance = yes/partial
+                query = query.join(VenueLocation).join(
+                    AccessibilityAttribute,
+                    (AccessibilityAttribute.venue_id == Venue.venue_id) & 
+                    (AccessibilityAttribute.location_id == VenueLocation.location_id)
+                ).filter(
+                    VenueLocation.location_type == "entrance",
+                    AccessibilityAttribute.attribute_name == "step_free_entrance",
+                    AccessibilityAttribute.value.in_([AttributeValue.YES, AttributeValue.PARTIAL])
+                ).distinct()
+            else:
+                # Venue does NOT have accessible entrance (explicit NO)
+                query = query.join(VenueLocation).join(
+                    AccessibilityAttribute,
+                    (AccessibilityAttribute.venue_id == Venue.venue_id) & 
+                    (AccessibilityAttribute.location_id == VenueLocation.location_id)
+                ).filter(
+                    VenueLocation.location_type == "entrance",
+                    AccessibilityAttribute.attribute_name == "step_free_entrance",
+                    AccessibilityAttribute.value == AttributeValue.NO
+                ).distinct()
         
         total = query.count()
         venues = query.order_by(Venue.name).offset(skip).limit(limit).all()

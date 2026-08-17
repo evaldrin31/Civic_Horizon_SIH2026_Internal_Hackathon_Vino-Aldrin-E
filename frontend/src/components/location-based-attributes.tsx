@@ -152,7 +152,7 @@ function LocationCard({
   if (!location) return null;
 
   const hasExactCoordinates = location.latitude !== undefined && location.longitude !== undefined;
-  const locationType = location.type || "area";
+  const locationType = location.location_type || "area";
   const icon = locationTypeIcons[locationType] || locationTypeIcons.default;
 
   // Calculate stats

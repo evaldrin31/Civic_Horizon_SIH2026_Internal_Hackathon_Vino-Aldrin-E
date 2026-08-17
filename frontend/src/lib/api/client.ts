@@ -18,6 +18,7 @@ import {
   VerificationHistory,
   EvidenceConflict,
   Source,
+  VenueDetailResponse,
 } from './types';
 
 // Configuration
@@ -146,6 +147,14 @@ export const venuesApi = {
     return fetchApi<void>(`/venues/${venueId}`, {
       method: 'DELETE',
     });
+  },
+
+  /**
+   * Get venue detail with all related data
+   * GET /api/v1/venues/{venue_id}/detail
+   */
+  getDetail: async (venueId: string): Promise<VenueDetailResponse> => {
+    return fetchApi<VenueDetailResponse>(`/venues/${venueId}/detail`);
   },
 };
 

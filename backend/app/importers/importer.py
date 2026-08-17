@@ -17,6 +17,7 @@ Design decisions:
 - Produces detailed import error reports
 """
 
+from datetime import datetime
 from typing import List, Optional, Any
 from uuid import UUID
 
@@ -35,6 +36,26 @@ from app.services.evidence_service import EvidenceService
 from app.services.source_service import SourceService
 
 logger = get_logger(__name__)
+
+
+def _parse_datetime(value):
+    """Parse datetime from various string formats."""
+    if value is None:
+        return None
+    if isinstance(value, datetime):
+        return value
+    if isinstance(value, str):
+        # Try ISO format
+        try:
+            return datetime.fromisoformat(value.replace('Z', '+00:00'))
+        except ValueError:
+            # Try other common formats
+            for fmt in ['%Y-%m-%d', '%Y-%m-%d %H:%M:%S', '%d/%m/%Y']:
+                try:
+                    return datetime.strptime(value, fmt)
+                except ValueError:
+                    continue
+    return None
 
 
 class DataImporter:
@@ -76,8 +97,10 @@ class DataImporter:
         # Validate attribute data if present
         attr_data = record.get("attribute")
         if attr_data:
-            if "attribute_name" not in attr_data:
-                raise ImportException("Attribute missing 'attribute_name'", index)
+            # Accept both 'name' (official template) and 'attribute_name' (legacy)
+            attr_name = attr_data.get("attribute_name") or attr_data.get("name")
+            if not attr_name:
+                raise ImportException("Attribute missing 'name' or 'attribute_name'", index)
             if "value" in attr_data:
                 value = attr_data["value"]
                 valid_values = ["yes", "no", "unknown", "partial"]
@@ -177,9 +200,14 @@ class DataImporter:
             # Create location if specified
             location_id = None
             if location_data:
+                # Map external research keys to internal model keys
+                mapped_location_data = dict(location_data)
+                if "type" in mapped_location_data:
+                    mapped_location_data["location_type"] = mapped_location_data.pop("type")
+                
                 location = VenueLocation(
                     venue_id=venue.venue_id,
-                    **location_data
+                    **mapped_location_data
                 )
                 self.db.add(location)
                 self.db.flush()
@@ -189,6 +217,12 @@ class DataImporter:
             # Create attribute if specified
             attribute_id = None
             if attr_data:
+                # Map external research keys to internal model keys
+                # External: "name" -> Internal: "attribute_name"
+                attr_name = attr_data.get("attribute_name") or attr_data.get("name")
+                if not attr_name:
+                    raise ImportException("Attribute missing 'name' or 'attribute_name'", index)
+                
                 # Validate value doesn't convert UNKNOWN to NO
                 value = attr_data.get("value", "unknown")
                 if value == "unknown" and attr_data.get("evidence"):
@@ -199,7 +233,7 @@ class DataImporter:
                     venue_id=venue.venue_id,
                     location_id=location_id,
                     category=attr_data.get("category", "general"),
-                    attribute_name=attr_data["attribute_name"],
+                    attribute_name=attr_name,
                     value=AttributeValue(value),
                     value_type=attr_data.get("value_type"),
                     value_text=attr_data.get("value_text"),
@@ -213,7 +247,7 @@ class DataImporter:
             
             # Create evidence
             for ev_data in evidence_list:
-                # Handle source
+                # Handle source - supports nested 'source' object or inline 'source_type'/'source_reference'
                 source_id = None
                 if "source" in ev_data:
                     source = self._get_or_create_source(ev_data["source"])
@@ -222,15 +256,27 @@ class DataImporter:
                     del ev_data["source"]  # Remove nested source data
                 elif "source_id" in ev_data:
                     source_id = ev_data["source_id"]
+                elif ev_data.get("source_type") or ev_data.get("source_reference"):
+                    # Handle inline source fields from research template
+                    inline_source = {
+                        "source_type": ev_data.get("source_type", "direct_observation"),
+                        "source_name": ev_data.get("source_reference") or ev_data.get("source_type", "Unknown Source"),
+                        "source_url": ev_data.get("source_url"),
+                        "source_reference": ev_data.get("source_reference")
+                    }
+                    source = self._get_or_create_source(inline_source)
+                    if source:
+                        source_id = source.source_id
                 
                 # Create evidence
+                observed_at = _parse_datetime(ev_data.get("observed_at"))
                 ev = Evidence(
                     attribute_id=attribute_id,
                     source_id=source_id,
                     evidence_text=ev_data.get("evidence_text"),
                     evidence_media_url=ev_data.get("evidence_media_url"),
                     evidence_media_hash=ev_data.get("evidence_media_hash"),
-                    observed_at=ev_data.get("observed_at"),
+                    observed_at=observed_at,
                     collector=ev_data.get("collector"),
                     verification_status=VerificationStatus(
                         ev_data.get("verification_status", "unverified")

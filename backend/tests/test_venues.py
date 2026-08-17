@@ -104,3 +104,34 @@ def test_venue_invalid_coordinates(client: TestClient, sample_venue_data):
     invalid_data = {**sample_venue_data, "latitude": 100}
     response = client.post("/api/v1/venues", json=invalid_data)
     assert response.status_code == 422
+
+
+def test_get_venue_with_details(client: TestClient, sample_venue_data):
+    """Test the venue detail endpoint returns nested data for frontend."""
+    # Create venue
+    create_response = client.post("/api/v1/venues", json=sample_venue_data)
+    venue_id = create_response.json()["venue_id"]
+    
+    # Get venue with details
+    response = client.get(f"/api/v1/venues/{venue_id}/detail")
+    assert response.status_code == 200
+    data = response.json()
+    
+    # Check venue data
+    assert data["name"] == sample_venue_data["name"]
+    assert data["venue_id"] == venue_id
+    
+    # Check nested arrays exist (even if empty)
+    assert "locations" in data
+    assert "attributes" in data
+    assert isinstance(data["locations"], list)
+    assert isinstance(data["attributes"], list)
+
+
+def test_get_venue_detail_not_found(client: TestClient):
+    """Test venue detail returns 404 for non-existent venue."""
+    response = client.get("/api/v1/venues/12345678-1234-1234-1234-123456789abc/detail")
+    assert response.status_code == 404
+    data = response.json()
+    assert "detail" in data
+    assert data["detail"]["error"] == "NOT_FOUND"

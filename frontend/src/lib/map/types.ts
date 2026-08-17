@@ -115,6 +115,8 @@ export interface MapContainerProps {
   selectedVenueId?: string | null;
   onVenueSelect?: (venue: Venue) => void;
   onViewportChange?: (viewport: MapViewport) => void;
+  center?: { lat: number; lng: number };
+  zoom?: number;
   height?: string;
   className?: string;
 }

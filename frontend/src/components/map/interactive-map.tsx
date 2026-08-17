@@ -38,7 +38,7 @@ import {
 } from "lucide-react";
 
 // Component props extending the base props
-interface InteractiveMapViewProps extends MapContainerProps {
+export interface InteractiveMapViewProps extends MapContainerProps {
   attributes?: Record<string, AccessibilityAttribute[]>;
 }
 
@@ -47,6 +47,8 @@ export function InteractiveMapView({
   selectedVenueId,
   onVenueSelect,
   onViewportChange,
+  center,
+  zoom,
   attributes = {},
   height = "500px",
   className = "",
@@ -58,8 +60,8 @@ export function InteractiveMapView({
   const [mapAvailable, setMapAvailable] = useState(true);
   const [selectedId, setSelectedId] = useState<string | null>(selectedVenueId || null);
   const [currentViewport, setCurrentViewport] = useState<MapViewport>({
-    center: { lat: 20.5937, lng: 78.9629 }, // Center of India
-    zoom: 5,
+    center: center || { lat: 20.5937, lng: 78.9629 }, // Center of India
+    zoom: zoom || 5,
   });
 
   // Refs

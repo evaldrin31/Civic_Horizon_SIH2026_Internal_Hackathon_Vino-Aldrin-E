@@ -44,7 +44,7 @@ export interface VenueLocation {
   location_id: string;
   venue_id: string;
   name: string;
-  type: string;
+  location_type: string;
   description?: string;
   latitude?: number;
   longitude?: number;
@@ -210,4 +210,11 @@ export interface VenueAccessibilityDetail {
   locations: VenueLocation[];
   evidence: Evidence[];
   summary: AccessibilitySummary;
+}
+
+export interface VenueDetailResponse {
+  venue: Venue;
+  locations: VenueLocation[];
+  attributes: AccessibilityAttribute[];
+  evidence: Evidence[];
 }

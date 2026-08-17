@@ -67,7 +67,7 @@ const DEMO_ATTRIBUTES: AccessibilityAttribute[] = [
       location_id: "demo-loc-1",
       venue_id: "demo-venue-1",
       name: "Main Entrance",
-      type: "entrance",
+      location_type: "entrance",
       description: "Primary hospital entrance facing Healthcare Avenue",
     },
     created_at: "2024-01-15T10:30:00Z",
@@ -101,7 +101,7 @@ const DEMO_ATTRIBUTES: AccessibilityAttribute[] = [
       location_id: "demo-loc-2",
       venue_id: "demo-venue-1",
       name: "Ground Floor",
-      type: "floor",
+      location_type: "floor",
       description: "Main floor with reception",
     },
     created_at: "2024-01-15T10:30:00Z",
@@ -167,27 +167,23 @@ export default function VenueDetailPage() {
       setError(null);
 
       try {
-        // Try to load from API
-        const [venueData, attributesData, evidenceData] = await Promise.all([
-          venuesApi.getById(venueId),
-          accessibilityApi.getForVenue(venueId).then(r => r.items),
-          evidenceApi.getForVenue(venueId).then(r => r.items),
-        ]);
+        // Use the optimized detail endpoint
+        const detailData = await venuesApi.getDetail(venueId);
 
-        setVenue(venueData);
-        setAttributes(attributesData);
-        setEvidence(evidenceData);
+        setVenue(detailData.venue);
+        setAttributes(detailData.attributes);
+        setEvidence(detailData.evidence);
         setDataSource("api");
       } catch (err) {
-        console.log("API unavailable, using demo data");
-        // Use demo data if API fails
-        if (venueId.startsWith("demo-")) {
+        console.log("API unavailable, checking for demo data");
+        // Only use demo data in development mode
+        if (process.env.NODE_ENV === 'development' && venueId.startsWith("demo-")) {
           setVenue(DEMO_VENUE);
           setAttributes(DEMO_ATTRIBUTES);
           setEvidence(DEMO_EVIDENCE);
           setDataSource("demo");
         } else {
-          setError("Failed to load venue data. Please try again.");
+          setError("Failed to load venue data. The accessibility database may be unavailable.");
           setDataSource("error");
         }
       } finally {

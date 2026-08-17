@@ -919,4 +919,134 @@ const { data, source, isLoading, error, search } = useVenueSearch();
 3. Add loading skeletons for better UX
 4. Enhance venue detail with location-specific display
 
+## 2026-08-17 --- Backend Hardening Complete (OpenCode #1)
+
+### Fixed
+
+**Frontend-Backend Contract Alignment:**
+1. **VenueLocation.type field** - Frontend expected `type`, backend used `location_type`
+   - Added `@computed_field` to expose `type` property in `VenueLocationResponse`
+   - Maintains backward compatibility with existing `location_type` field
+   - Files changed: `app/schemas/schemas.py`
+
+2. **Missing venue detail endpoint** - Frontend needed nested data in single request
+   - Added `GET /api/v1/venues/{venue_id}/detail` endpoint
+   - Returns venue + locations + attributes + evidence in one request
+   - Files changed: `app/routers/venues.py`
+
+**API Contract Documentation:**
+3. Updated `docs/API_CONTRACT.md` with:
+   - Validation endpoints (`/validate`, `/validate/record`)
+   - Venue detail endpoint with full response schema
+   - Import response format with stats
+
+### Security Improvements
+
+4. **CORS Configuration** - Added proper CORS middleware
+   - Configurable allowed origins via environment
+   - Safe defaults for production
+   - Files changed: `app/main.py`
+
+5. **Request Size Limits** - Added body size validation
+   - Prevents oversized request attacks
+   - Returns 413 Payload Too Large
+   - Files changed: `app/main.py`
+
+6. **SQL Injection Prevention** - Verified safe query construction
+   - All queries use SQLAlchemy ORM (parameterized)
+   - No raw SQL with string formatting
+   - No unsafe dynamic queries
+
+7. **Input Validation** - Pydantic schemas enforce constraints
+   - String length limits
+   - Coordinate ranges (-90 to 90, -180 to 180)
+   - Enum validation for status fields
+   - Pattern matching for attribute values
+
+### Geo Data Verification
+
+8. **Coordinate Validation** - Verified correct implementation
+   - Venue coordinates: required, validated -90 to 90 / -180 to 180
+   - Location coordinates: optional, same validation
+   - Nearby search: uses bounding box approximation (MVP-ready)
+   - No PostGIS required for MVP
+
+### Import Pipeline Hardening
+
+9. **Transaction Safety** - Verified correct rollback behavior
+   - Single record import: rollback on any error
+   - Batch import: per-record transactions
+   - All exceptions trigger rollback
+   - Files verified: `app/importers/importer.py`
+
+10. **Evidence Safety Rules** - Verified correct enforcement
+    - UNKNOWN never automatically becomes NO
+    - AI inference cannot be VERIFIED
+    - Positive claims (yes/partial) require evidence
+    - Files verified: `app/importers/validator.py`
+
+11. **Validation Coverage** - Comprehensive validation
+    - Venue required fields
+    - Coordinate ranges
+    - Attribute value enums
+    - Verification status enums
+    - Source type enums
+    - Evidence safety checks
+
+### Tests Added
+
+12. **New Tests (2 added, total 60):**
+    - `test_get_venue_with_details` - Tests detail endpoint
+    - `test_get_venue_detail_not_found` - Tests 404 handling
+    - All 60 tests passing
+
+### Files Modified
+
+- `app/schemas/schemas.py` - Added computed_field for type alias
+- `app/routers/venues.py` - Added detail endpoint
+- `app/main.py` - Added CORS and size limits
+- `tests/test_venues.py` - Added detail endpoint tests
+- `docs/API_CONTRACT.md` - Updated with validation and detail endpoints
+
+### Verification
+
+```bash
+# All tests pass
+cd backend
+python -m pytest tests/ -v
+# Result: 60 passed, 192 warnings in 1.17s
+
+# New endpoints available
+GET  /api/v1/venues/{venue_id}/detail
+POST /api/v1/admin/import/validate
+POST /api/v1/admin/import/validate/record
+```
+
+### Security Checklist
+
+- [x] SQL injection protection (ORM parameterized queries)
+- [x] Input validation (Pydantic schemas)
+- [x] CORS configuration
+- [x] Request size limits
+- [x] Error handling (no sensitive data leakage)
+- [x] Enum validation
+- [x] No path traversal risks
+- [x] No secrets in code
+
+### Remaining Limitations (MVP)
+
+1. **Authentication/Authorization** - Not implemented (future)
+2. **Rate limiting** - Not implemented (use nginx/cloudflare)
+3. **HTTPS enforcement** - Deployment-level (nginx/kubernetes)
+4. **Advanced search** - No fuzzy matching (PostgreSQL text search sufficient)
+5. **Media processing** - URLs stored only (Cloudinary/S3 for production)
+6. **Background jobs** - No async workers (import runs synchronously)
+7. **PostGIS** - Not needed for MVP (bounding box sufficient)
+
+### Frontend Dependencies
+
+- Map integration: Google Maps API key required
+- Backend URL: Configurable via NEXT_PUBLIC_API_URL
+- Real data: Awaiting Claude's research
+
 ## 2026-08-17 --- Project Bootstrap Complete

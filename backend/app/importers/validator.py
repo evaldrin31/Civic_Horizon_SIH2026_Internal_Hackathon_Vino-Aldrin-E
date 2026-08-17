@@ -311,12 +311,13 @@ class ResearchRecordValidator:
                     venue_name=venue_name
                 ))
         
-        # Check attribute name
-        if not attribute.get("name"):
+        # Check attribute name (accepts both 'name' and 'attribute_name')
+        attr_name = attribute.get("name") or attribute.get("attribute_name")
+        if not attr_name:
             issues.append(ValidationIssue(
                 record_index=index,
                 field="attribute.name",
-                message="Attribute name is required when attribute section is present",
+                message="Attribute name is required when attribute section is present (use 'name' or 'attribute_name')",
                 severity=ValidationSeverity.ERROR,
                 venue_name=venue_name
             ))
@@ -499,6 +500,17 @@ class ResearchRecordValidator:
         
         attribute = record.get("attribute", {})
         evidence_list = record.get("evidence", [])
+        
+        # CRITICAL: Evidence requires an attribute block
+        if evidence_list and not attribute:
+            issues.append(ValidationIssue(
+                record_index=index,
+                field="evidence",
+                message="Evidence requires an attribute block - cannot attach evidence without specifying what attribute it proves",
+                severity=ValidationSeverity.ERROR,
+                venue_name=venue_name
+            ))
+            return issues  # Return early since other checks need attribute
         
         # Check: No evidence with value=yes/verified
         if attribute.get("value") in ["yes", "partial"]:

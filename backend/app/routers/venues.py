@@ -51,6 +51,7 @@ def search_venues(
     category: Optional[str] = Query(None, description="Filter by category"),
     city: Optional[str] = Query(None, description="Filter by city"),
     state: Optional[str] = Query(None, description="Filter by state"),
+    has_accessible_entrance: Optional[bool] = Query(None, description="Filter for venues with accessible entrance"),
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),
     service: VenueService = Depends(get_venue_service)
@@ -62,6 +63,7 @@ def search_venues(
         category=category,
         city=city,
         state=state,
+        has_accessible_entrance=has_accessible_entrance,
         skip=skip,
         limit=page_size
     )
@@ -81,6 +83,7 @@ def get_nearby_venues(
     lon: float = Query(..., ge=-180, le=180, description="Longitude"),
     radius: float = Query(5.0, ge=0.1, le=100, description="Search radius in km"),
     category: Optional[str] = Query(None, description="Filter by category"),
+    has_accessible_entrance: Optional[bool] = Query(None, description="Filter for venues with accessible entrance"),
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),
     service: VenueService = Depends(get_venue_service)
@@ -92,6 +95,7 @@ def get_nearby_venues(
         longitude=lon,
         radius_km=radius,
         category=category,
+        has_accessible_entrance=has_accessible_entrance,
         skip=skip,
         limit=page_size
     )
@@ -158,6 +162,7 @@ def get_venue_with_details(
                     "venue_id": str(loc.venue_id),
                     "name": loc.name,
                     "location_type": loc.location_type,
+                    "type": loc.location_type,  # Frontend compatibility alias
                     "description": loc.description,
                     "latitude": loc.latitude,
                     "longitude": loc.longitude,
@@ -184,6 +189,7 @@ def get_venue_with_details(
                         "venue_id": str(attr.location.venue_id),
                         "name": attr.location.name,
                         "location_type": attr.location.location_type,
+                        "type": attr.location.location_type,  # Frontend compatibility alias
                         "description": attr.location.description,
                         "latitude": attr.location.latitude,
                         "longitude": attr.location.longitude,
