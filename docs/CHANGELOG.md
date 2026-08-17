@@ -238,4 +238,207 @@ Backend foundation is complete and ready for:
 - Frontend API integration
 - Further enhancement based on SIH requirements
 
+## 2026-08-17 --- Frontend Foundation Complete (OpenCode #2)
+
+### Added
+
+- **Frontend Technology Stack:**
+  - Next.js 14 with App Router (React 18)
+  - TypeScript for type safety
+  - Tailwind CSS for styling
+  - Radix UI primitives for accessibility
+  - Lucide React for icons
+
+- **API Integration:**
+  - Complete TypeScript types matching API_CONTRACT.md
+  - Centralized API client layer (`lib/api/client.ts`)
+  - Type-safe API methods for all endpoints
+  - Error handling with custom ApiClientError class
+
+- **UI Components:**
+  - Button, Input, Textarea, Badge, Card primitives
+  - Select and Dialog components (Radix-based)
+  - All components follow accessibility best practices
+
+- **Core Components:**
+  - `VenueCard` - Reusable venue display with accessibility summary
+  - `SearchBar` - Venue search with filters and "nearby" functionality
+  - `MapView` - Map + list experience (placeholder for real map)
+  - `AccessibilityAttributeList` - Display accessibility info by category
+  - `Evidence` - Evidence display with verification status
+  - `VerificationBadge` - Visual verification state indicators
+  - `ReportForm` - User report/correction flow
+
+- **Pages:**
+  - Home (`/`) - Search, map, venue discovery
+  - Venue Detail (`/venues/[id]`) - Detailed accessibility information
+  - Nearby (`/nearby`) - Geolocation-based venue discovery
+  - About (`/about`) - Platform explanation and verification guide
+
+- **Layout:**
+  - Responsive header with navigation
+  - Skip-to-content link for keyboard navigation
+  - Footer with project status
+  - Mobile-responsive navigation
+
+- **Accessibility Implementation:**
+  - Semantic HTML throughout
+  - Proper heading hierarchy
+  - ARIA labels and roles where needed
+  - Keyboard navigation support
+  - Focus management
+  - Reduced motion preferences support
+  - High contrast mode support
+  - Screen reader friendly structure
+
+- **Responsive Design:**
+  - Mobile-first approach
+  - Breakpoints: sm (640px), md (768px), lg (1024px), xl (1280px)
+  - Responsive grid layouts
+  - Touch-friendly interactions
+
+- **Demo Data:**
+  - Clearly marked demo venues and data
+  - No fake real-world accessibility claims
+  - "DEMO DATA" labels throughout UI
+  - Falls back to demo data when API unavailable
+
+- **Testing:**
+  - Jest test runner configured
+  - React Testing Library for component tests
+  - Tests for verification badge rendering
+  - Tests for accessibility attribute formatting
+  - Tests for API client methods
+  - Tests for utility functions
+
+- **Configuration:**
+  - `next.config.mjs` with image domains
+  - `tailwind.config.ts` with custom theme
+  - `.env.example` for environment variables
+  - `jest.config.js` for test configuration
+
+### Technical Decisions
+
+- **Next.js 14 + App Router:** Modern React framework with server components, automatic optimization
+- **TypeScript:** Type safety for API contracts and component props
+- **Tailwind CSS:** Utility-first CSS for rapid development, built-in responsive design
+- **Radix UI:** Unstyled, accessible primitives as foundation for custom components
+- **Client-side data fetching:** Using SWR pattern via useEffect + fetch for flexibility
+
+### Current Limitations
+
+1. **Map integration:** Placeholder implementation - real map provider pending
+2. **Authentication:** User authentication not implemented
+3. **Real-time updates:** No WebSocket or server-sent events
+4. **Image handling:** No venue image upload/display
+5. **Advanced search:** No autocomplete or fuzzy matching
+6. **Offline support:** No service worker or offline capabilities
+
+### Known Issues
+
+1. API client falls back to demo data when backend unavailable (by design)
+2. Map placeholder is simplified visual representation
+3. Report form connects to mock API (real endpoint pending)
+
+### Files Created
+
+```
+frontend/
+├── src/
+│   ├── app/
+│   │   ├── globals.css           # Global styles with CSS variables
+│   │   ├── layout.tsx            # Root layout with metadata
+│   │   ├── page.tsx              # Home page with search
+│   │   ├── venues/
+│   │   │   └── [id]/
+│   │   │       └── page.tsx      # Venue detail page
+│   │   ├── nearby/
+│   │   │   └── page.tsx          # Nearby venues page
+│   │   └── about/
+│   │       └── page.tsx          # About page
+│   ├── components/
+│   │   ├── ui/                   # Base UI primitives
+│   │   │   ├── button.tsx
+│   │   │   ├── input.tsx
+│   │   │   ├── textarea.tsx
+│   │   │   ├── badge.tsx
+│   │   │   ├── card.tsx
+│   │   │   ├── select.tsx
+│   │   │   └── dialog.tsx
+│   │   ├── layout.tsx            # Header, Footer
+│   │   ├── venue-card.tsx        # Venue card components
+│   │   ├── search-bar.tsx        # Search with filters
+│   │   ├── map-view.tsx          # Map + list view
+│   │   ├── accessibility-attributes.tsx
+│   │   ├── evidence.tsx
+│   │   ├── verification-badge.tsx
+│   │   └── report-form.tsx
+│   ├── lib/
+│   │   ├── utils.ts              # Utility functions
+│   │   └── api/
+│   │       ├── types.ts          # TypeScript API types
+│   │       └── client.ts         # API client
+│   └── __tests__/
+│       ├── components/
+│       │   ├── verification-badge.test.tsx
+│       │   └── accessibility-attributes.test.tsx
+│       └── lib/
+│           ├── api/
+│           │   └── client.test.ts
+│           └── utils.test.ts
+├── jest.config.js
+├── jest.setup.ts
+├── next.config.mjs
+├── tailwind.config.ts
+├── tsconfig.json
+├── package.json
+└── .env.example
+```
+
+### Git Commits
+
+Suggested commits for this work:
+1. `frontend: initialize Next.js with TypeScript and Tailwind`
+2. `frontend: add API types and client matching API contract`
+3. `frontend: add base UI components and layout`
+4. `frontend: add venue card and search components`
+5. `frontend: add accessibility and evidence components`
+6. `frontend: add map view and report form`
+7. `frontend: add all pages and routing`
+8. `test: add component and utility tests`
+9. `docs: update CHANGELOG with frontend implementation`
+
+### Current Status
+
+Frontend foundation is complete and ready for:
+- Backend API integration (when backend is running)
+- Real accessibility data import from Claude's research
+- Map provider integration
+- Authentication implementation
+- User testing and feedback
+
+### Next Recommended Steps
+
+1. **Start the development server:**
+   ```bash
+   cd frontend
+   npm run dev
+   ```
+
+2. **Run tests:**
+   ```bash
+   npm test
+   ```
+
+3. **Build for production:**
+   ```bash
+   npm run build
+   ```
+
+4. **Wait for backend to be running**, then update `NEXT_PUBLIC_API_URL`
+
+5. **Wait for Claude's research data** to replace demo data
+
+6. **Add map provider** (Mapbox/Google Maps) credentials when available
+
 ## 2026-08-17 --- Project Bootstrap Complete
