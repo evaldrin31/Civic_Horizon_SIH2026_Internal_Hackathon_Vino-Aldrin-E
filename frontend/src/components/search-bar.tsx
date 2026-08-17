@@ -17,6 +17,7 @@ interface SearchFilters {
   category: string;
   city: string;
   state: string;
+  has_accessible_entrance?: boolean;
 }
 
 interface SearchBarProps {
@@ -51,6 +52,11 @@ const states = [
   { value: "West Bengal", label: "West Bengal" },
 ];
 
+const accessibilityFilters = [
+  { value: "", label: "Any Accessibility" },
+  { value: "has_entrance", label: "Has Accessible Entrance" },
+];
+
 export function SearchBar({ 
   onSearch, 
   initialFilters = {},
@@ -64,6 +70,7 @@ export function SearchBar({
     category: initialFilters.category || "",
     city: initialFilters.city || "",
     state: initialFilters.state || "",
+    has_accessible_entrance: initialFilters.has_accessible_entrance,
   });
   const [showFilters, setShowFilters] = useState(false);
 
@@ -77,15 +84,15 @@ export function SearchBar({
     }
   };
 
-  const updateFilter = (key: keyof SearchFilters, value: string) => {
+  const updateFilter = (key: keyof SearchFilters, value: string | boolean | undefined) => {
     setFilters(prev => ({ ...prev, [key]: value }));
   };
 
   const clearFilters = () => {
-    setFilters({ q: "", category: "", city: "", state: "" });
+    setFilters({ q: "", category: "", city: "", state: "", has_accessible_entrance: undefined });
   };
 
-  const hasActiveFilters = filters.category || filters.city || filters.state;
+  const hasActiveFilters = filters.category || filters.city || filters.state || filters.has_accessible_entrance !== undefined;
 
   if (variant === "hero") {
     return (
@@ -156,7 +163,7 @@ export function SearchBar({
         {/* Expanded Filters */}
         {showFilters && (
           <div className="mt-4 p-4 bg-muted/50 rounded-lg">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <div>
                 <label className="text-sm font-medium mb-1 block">Category</label>
                 <Select 
@@ -201,6 +208,24 @@ export function SearchBar({
                   value={filters.city}
                   onChange={(e) => updateFilter("city", e.target.value)}
                 />
+              </div>
+              <div>
+                <label className="text-sm font-medium mb-1 block">Accessibility</label>
+                <Select 
+                  value={filters.has_accessible_entrance === true ? "has_entrance" : ""} 
+                  onValueChange={(value) => updateFilter("has_accessible_entrance", value === "has_entrance" ? true : undefined)}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Any Accessibility" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {accessibilityFilters.map((filter) => (
+                      <SelectItem key={filter.value} value={filter.value}>
+                        {filter.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
             {hasActiveFilters && (
@@ -254,7 +279,7 @@ export function SearchBar({
 
       {/* Expanded Filters */}
       {showFilters && (
-        <div className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           <Select 
             value={filters.category} 
             onValueChange={(value) => updateFilter("category", value)}
@@ -285,19 +310,35 @@ export function SearchBar({
               ))}
             </SelectContent>
           </Select>
-          <div className="flex gap-2">
-            <Input
-              type="text"
-              placeholder="City"
-              value={filters.city}
-              onChange={(e) => updateFilter("city", e.target.value)}
-            />
-            {hasActiveFilters && (
-              <Button variant="ghost" size="icon" onClick={clearFilters}>
-                <X className="h-4 w-4" />
+          <Input
+            type="text"
+            placeholder="City"
+            value={filters.city}
+            onChange={(e) => updateFilter("city", e.target.value)}
+          />
+          <Select 
+            value={filters.has_accessible_entrance === true ? "has_entrance" : ""} 
+            onValueChange={(value) => updateFilter("has_accessible_entrance", value === "has_entrance" ? true : undefined)}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Any Accessibility" />
+            </SelectTrigger>
+            <SelectContent>
+              {accessibilityFilters.map((filter) => (
+                <SelectItem key={filter.value} value={filter.value}>
+                  {filter.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          {hasActiveFilters && (
+            <div className="flex justify-end lg:col-span-4">
+              <Button variant="ghost" size="sm" onClick={clearFilters}>
+                <X className="h-4 w-4 mr-1" />
+                Clear Filters
               </Button>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       )}
     </div>

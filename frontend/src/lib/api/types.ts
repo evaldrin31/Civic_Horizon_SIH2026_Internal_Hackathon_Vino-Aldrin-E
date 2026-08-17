@@ -170,9 +170,10 @@ export interface VenueSearchParams {
   category?: string;
   city?: string;
   state?: string;
+  has_accessible_entrance?: boolean;
   page?: number;
   page_size?: number;
-  [key: string]: string | number | undefined;
+  [key: string]: string | number | boolean | undefined;
 }
 
 export interface NearbySearchParams {
@@ -180,16 +181,16 @@ export interface NearbySearchParams {
   lon: number;
   radius?: number;
   category?: string;
+  has_accessible_entrance?: boolean;
   page?: number;
   page_size?: number;
-  [key: string]: string | number | undefined;
+  [key: string]: string | number | boolean | undefined;
 }
 
 export interface UnifiedSearchParams extends VenueSearchParams {
   lat?: number;
   lon?: number;
   radius?: number;
-  [key: string]: string | number | undefined;
 }
 
 // ==================== Report ====================

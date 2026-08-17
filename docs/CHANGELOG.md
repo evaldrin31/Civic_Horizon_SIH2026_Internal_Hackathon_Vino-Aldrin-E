@@ -566,6 +566,79 @@ npm test
 # Result: 5 passed, 43 tests total
 ```
 
+## 2026-08-17 --- Evidence UI Enhancement & Search Filter (OpenCode #2)
+
+### Added
+
+- **Enhanced Evidence UI:**
+  - Comprehensive evidence card display with all backend fields
+  - Source information: name, type, URL when available
+  - Evidence details: text, observation date, collection date, collector
+  - Verification status badges with clear semantics
+  - Confidence indicator with visual bar and percentage
+  - Freshness indicator with age-based coloring (Recent, months ago, Outdated)
+  - Proper handling of missing data (shows "Not available" instead of fabricating)
+
+- **Conflict Detection & Display:**
+  - Automatic conflict detection when evidence values differ for same attribute
+  - "Conflicting Reports" warning banner when conflicts exist
+  - Evidence cards highlight conflicts with amber border
+  - Conflict count displayed in evidence summary
+  - No conflict warning shown when evidence agrees
+
+- **has_accessible_entrance Filter:**
+  - Added `has_accessible_entrance` parameter to search filters
+  - Backend filter integration for both search and nearby endpoints
+  - UI filter in search bar (hero and default variants)
+  - Filter sends boolean value to backend (not client-side filtering)
+
+- **Verification Semantics:**
+  - YES: accessible/available (green)
+  - NO: not accessible/unavailable (red)
+  - PARTIAL: partially accessible (amber)
+  - UNKNOWN: insufficient information (gray)
+  - UNKNOWN never visually represented as NO
+
+### Tests
+
+- **New Evidence Tests (40 tests):**
+  - Evidence rendering with all fields
+  - Source type badges
+  - Verification status display
+  - YES/NO/PARTIAL/UNKNOWN value semantics
+  - Conflict detection and display
+  - Freshness/timestamp handling
+  - Confidence indicator (with null/undefined handling)
+  - Empty and error states
+
+### Technical Details
+
+- Updated `EvidenceCard` component with enhanced field display
+- Added `hasConflictingEvidence()` and `getAttributeConflicts()` helper functions
+- Updated `VenueSearchParams` and `NearbySearchParams` with `has_accessible_entrance`
+- Updated `SearchFilters` interface to support boolean filters
+- Fixed type compatibility with boolean parameters
+- All existing tests continue to pass (43 → 83 total)
+
+### Files Changed
+
+- `components/evidence.tsx` - Complete rewrite with enhanced evidence display
+- `components/search-bar.tsx` - Added has_accessible_entrance filter UI
+- `lib/api/types.ts` - Updated search params with boolean filter support
+- `__tests__/components/evidence.test.tsx` - New comprehensive test suite
+
+### Verification
+
+```bash
+npm test
+# Result: 6 passed, 83 tests total (40 new evidence tests)
+
+npm run build
+# Result: ✓ Compiled successfully, 7 pages generated
+```
+
+---
+
 ## 2026-08-17 --- Frontend Accessibility Summary Integration (OpenCode #2)
 
 ### Added
