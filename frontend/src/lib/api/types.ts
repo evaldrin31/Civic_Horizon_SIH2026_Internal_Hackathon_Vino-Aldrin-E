@@ -38,6 +38,15 @@ export interface Venue {
   contact_email?: string;
   created_at: string;
   updated_at: string;
+  // Optional accessibility summary from search results
+  accessibility_summary?: {
+    total_attributes: number;
+    yes_count: number;
+    no_count: number;
+    unknown_count: number;
+    partial_count: number;
+    has_verified: boolean;
+  };
 }
 
 export interface VenueLocation {

@@ -26,13 +26,47 @@ interface VenueCardProps {
   showDistance?: boolean;
 }
 
+// Helper to create attributes array from summary for backward compatibility
+function createAttributesFromSummary(venue: Venue): AccessibilityAttribute[] {
+  if (!venue.accessibility_summary) return [];
+  
+  const summary = venue.accessibility_summary;
+  const attributes: AccessibilityAttribute[] = [];
+  
+  // Create a representative attribute for each status
+  if (summary.yes_count > 0) {
+    attributes.push({
+      attribute_id: `summary-yes-${venue.venue_id}`,
+      venue_id: venue.venue_id,
+      location_id: null,
+      category: 'mobility',
+      attribute_name: 'accessible_features',
+      value: 'yes',
+      value_type: 'summary',
+      notes: `${summary.yes_count} accessible features`,
+      last_observed_at: undefined,
+      location: null,
+      created_at: venue.created_at,
+      updated_at: venue.updated_at,
+    });
+  }
+  
+  return attributes;
+}
+
 export function VenueCard({ 
   venue, 
-  attributes = [], 
-  evidence = [],
+  attributes: propAttributes = [], 
+  evidence: propEvidence = [],
   distance,
   showDistance = false 
 }: VenueCardProps) {
+  // Use real API summary if available, otherwise fall back to props (for demo data)
+  const attributes = venue.accessibility_summary 
+    ? createAttributesFromSummary(venue)
+    : propAttributes;
+  const evidence = propEvidence;
+  
   // Determine overall freshness based on last_observed_at
   const lastObservedDates = attributes
     .map(a => a.last_observed_at)
@@ -142,10 +176,15 @@ export function VenueCard({
 // Compact version for map popups or smaller displays
 export function VenueCardCompact({ 
   venue, 
-  attributes = [],
+  attributes: propAttributes = [],
   distance 
 }: VenueCardProps) {
-  const yesCount = attributes.filter(a => a.value === 'yes').length;
+  // Use real API summary if available
+  const attributes = venue.accessibility_summary
+    ? createAttributesFromSummary(venue)
+    : propAttributes;
+  
+  const yesCount = venue.accessibility_summary?.yes_count || attributes.filter(a => a.value === 'yes').length;
   
   return (
     <div className="p-3 min-w-[200px]">
