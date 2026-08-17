@@ -138,6 +138,65 @@ Status: Accepted Date: 2026-08-17
 - Cannot use `from app.import.importer import ...` syntax
 - `app/importers/` is semantically equivalent and syntactically valid
 
+## D-012 --- Research Data Validation
+
+Status: Accepted Date: 2026-08-17
+
+**Decision:** Implement three-tier validation (ERROR/WARNING/INFO) with dry-run capability.
+
+**Key Principles:**
+- ERROR: Blocks import (invalid data, safety violations)
+- WARNING: Allows import but flags concerns (missing data, single source)
+- INFO: Informational only (recommendations, observations)
+- Dry-run validation before any database writes
+- Machine-readable import reports
+
+**Rationale:**
+- Research data inherently contains uncertainty
+- Must preserve "unknown" states
+- Cannot automatically convert missing to "no"
+- Need clear feedback loop to Claude
+- Supports iterative research workflow
+
+## D-013 --- Evidence Safety Enforcement
+
+Status: Accepted Date: 2026-08-17
+
+**Decision:** Backend enforces evidence safety principles via validation rules.
+
+**Enforced Rules:**
+1. UNKNOWN value cannot be VERIFIED (contradictory)
+2. AI inference cannot be VERIFIED (max REPORTED/CORROBORATED)
+3. Positive claim (yes/partial) requires evidence
+4. Conflicting observations preserved, not overwritten
+5. Missing evidence does not default to NO
+
+**Rationale:**
+- Prevents accidental data corruption
+- Maintains integrity of research process
+- Preserves uncertainty for downstream decisions
+- Supports evidence-based verification workflow
+
+## D-014 --- Dry-Run Import Pattern
+
+Status: Accepted Date: 2026-08-17
+
+**Decision:** Separate validation from import via `/validate` endpoints.
+
+**Pattern:**
+```
+1. POST /validate (dry-run, no DB writes)
+2. Review report
+3. Fix errors
+4. POST /import (actual import)
+```
+
+**Rationale:**
+- Allows safe experimentation
+- Prevents partial/corrupted imports
+- Gives clear feedback to researchers
+- Supports batch processing
+
 ## Pending
 
 -   Final attribute taxonomy (depends on Claude's research)

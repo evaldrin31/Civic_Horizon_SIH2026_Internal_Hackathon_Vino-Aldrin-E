@@ -18,6 +18,71 @@
 
 Foundation documentation created.
 
+## 2026-08-17 --- Research Data Ingestion Ready (OpenCode #1)
+
+### Added
+
+- **Research Record Validation:**
+  - `ResearchRecordValidator` class with comprehensive validation rules
+  - `POST /api/v1/admin/import/validate` - Dry-run batch validation
+  - `POST /api/v1/admin/import/validate/record` - Single record validation
+  - `ImportReport` with detailed statistics and issue tracking
+  - `ValidationIssue` with severity levels (error/warning/info)
+  - Quality rules for data validation
+  - Evidence safety enforcement
+  - Duplicate detection by venue name+address+city
+  - Conflict detection framework
+
+- **Validation Rules:**
+  - ERROR: Missing required fields, invalid coordinates, invalid enums
+  - ERROR: Evidence safety violations (positive claim without evidence, AI verified, unknown verified)
+  - WARNING: Missing recommended fields, missing source, missing dates
+  - WARNING: AI inference without corroboration, single-source evidence
+  - INFO: General recommendations
+
+- **Evidence Safety Principles:**
+  - UNKNOWN never automatically becomes NO
+  - AI INFERENCE ≠ OBSERVED FACT
+  - NO EVIDENCE ≠ VERIFIED
+  - Preserve uncertainty through API
+  - Preserve conflicting observations
+
+- **Data Directory Support:**
+  - `data/research/` - Raw research output
+  - `data/processed/` - Validated records
+  - `data/verified/` - Verified records
+  - `data/raw/` - Original source data
+
+- **Documentation:**
+  - `docs/IMPORT_WORKFLOW.md` - Complete import workflow guide
+  - Research record templates
+  - Validation examples
+  - Troubleshooting guide
+
+- **Tests:**
+  - 13 new validation tests (100% passing)
+  - Valid record validation
+  - Missing required fields
+  - Invalid coordinates
+  - Invalid attribute values
+  - Batch validation
+  - Empty batch handling
+  - Duplicate detection
+  - Evidence safety rules
+  - AI inference restrictions
+  - Conflict detection
+  - All 58 tests now passing (45 original + 13 new)
+
+### Files Added
+
+- `app/importers/validator.py` - Validation engine
+- `tests/test_validation.py` - Validation test suite
+- `docs/IMPORT_WORKFLOW.md` - Import workflow documentation
+
+### Files Modified
+
+- `app/routers/import_routes.py` - Added validation endpoints
+
 ## 2026-08-17 --- Backend Foundation Complete (OpenCode #1)
 
 ### Added
