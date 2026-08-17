@@ -6,7 +6,9 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
+from app.core.logging import get_logger
 from app.importers.importer import DataImporter
+from app.importers.validator import ResearchRecordValidator, ImportReport
 from app.schemas.schemas import ErrorResponse
 
 router = APIRouter(prefix="/import", tags=["import"])
@@ -14,6 +16,10 @@ router = APIRouter(prefix="/import", tags=["import"])
 
 def get_importer(db: Session = Depends(get_db)) -> DataImporter:
     return DataImporter(db)
+
+
+def get_validator() -> ResearchRecordValidator:
+    return ResearchRecordValidator()
 
 
 @router.post("/records", status_code=status.HTTP_201_CREATED)
@@ -121,3 +127,85 @@ def import_single_record(
     # Include stats in the response
     result["stats"] = importer.stats
     return result
+
+
+@router.post("/validate", status_code=status.HTTP_200_OK)
+def validate_import(
+    records: List[dict],
+    validator: ResearchRecordValidator = Depends(get_validator)
+):
+    """
+    Dry-run validation for research records.
+    
+    Validates records without writing to database.
+    Returns comprehensive validation report with errors, warnings, and duplicates.
+    
+    Expected format: Same as /import/records endpoint
+    
+    Response includes:
+    - total: Total records processed
+    - valid: Number of valid records
+    - invalid: Number of invalid records
+    - warnings: Number of warnings
+    - duplicates: Number of duplicate candidates
+    - conflicts: Number of conflicts detected
+    - errors: List of validation errors
+    - warnings_list: List of validation warnings
+    - info: List of informational messages
+    """
+    if not records:
+        return {
+            "total": 0,
+            "valid": 0,
+            "invalid": 0,
+            "warnings": 0,
+            "duplicates": 0,
+            "conflicts": 0,
+            "errors": [],
+            "warnings_list": [],
+            "info": []
+        }
+    
+    try:
+        report = validator.validate_batch(records)
+        return report.to_dict()
+        
+    except Exception as e:
+        logger = get_logger(__name__)
+        logger.exception("Validation error")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"message": f"Validation failed: {str(e)}"}
+        )
+
+
+@router.post("/validate/record", status_code=status.HTTP_200_OK)
+def validate_single_record(
+    record: dict,
+    validator: ResearchRecordValidator = Depends(get_validator)
+):
+    """
+    Validate a single research record without importing.
+    
+    Returns detailed validation results for the record.
+    """
+    try:
+        is_valid, issues = validator.validate_single(record, 0)
+        
+        return {
+            "valid": is_valid,
+            "issues": [issue.to_dict() for issue in issues],
+            "issue_count": {
+                "errors": sum(1 for i in issues if i.severity.value == "error"),
+                "warnings": sum(1 for i in issues if i.severity.value == "warning"),
+                "info": sum(1 for i in issues if i.severity.value == "info")
+            }
+        }
+        
+    except Exception as e:
+        logger = get_logger(__name__)
+        logger.exception("Validation error")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail={"message": f"Validation failed: {str(e)}"}
+        )
