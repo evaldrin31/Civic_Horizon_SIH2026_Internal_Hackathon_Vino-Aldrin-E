@@ -1,7 +1,6 @@
 """Venue API routes."""
 
 from typing import Optional
-from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
@@ -108,14 +107,14 @@ def get_nearby_venues(
 
 @router.get("/{venue_id}", response_model=VenueResponse)
 def get_venue(
-    venue_id: UUID,
+    venue_id: str,
     service: VenueService = Depends(get_venue_service)
 ):
     """Get a venue by ID."""
     try:
         return service.get_venue(venue_id)
     except NotFoundException as e:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=e.message)
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"error": "NOT_FOUND", "message": e.message})
 
 
 @router.post("", response_model=VenueResponse, status_code=status.HTTP_201_CREATED)
@@ -129,7 +128,7 @@ def create_venue(
 
 @router.patch("/{venue_id}", response_model=VenueResponse)
 def update_venue(
-    venue_id: UUID,
+    venue_id: str,
     venue_data: VenueUpdate,
     service: VenueService = Depends(get_venue_service)
 ):
@@ -137,16 +136,16 @@ def update_venue(
     try:
         return service.update_venue(venue_id, venue_data)
     except NotFoundException as e:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=e.message)
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"error": "NOT_FOUND", "message": e.message})
 
 
 @router.delete("/{venue_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_venue(
-    venue_id: UUID,
+    venue_id: str,
     service: VenueService = Depends(get_venue_service)
 ):
     """Delete a venue."""
     try:
         service.delete_venue(venue_id)
     except NotFoundException as e:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=e.message)
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"error": "NOT_FOUND", "message": e.message})

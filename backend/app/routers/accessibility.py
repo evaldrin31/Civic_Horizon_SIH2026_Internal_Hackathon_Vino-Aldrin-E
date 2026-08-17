@@ -1,7 +1,6 @@
 """Accessibility API routes."""
 
 from typing import Optional
-from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
@@ -29,7 +28,7 @@ def get_evidence_service(db: Session = Depends(get_db)) -> EvidenceService:
 
 @router.get("/accessibility", response_model=AccessibilityAttributeListResponse)
 def get_venue_accessibility(
-    venue_id: UUID,
+    venue_id: str,
     category: Optional[str] = Query(None, description="Filter by category"),
     attribute_name: Optional[str] = Query(None, description="Filter by attribute name"),
     page: int = Query(1, ge=1),
@@ -55,12 +54,12 @@ def get_venue_accessibility(
             "pages": (total + page_size - 1) // page_size
         }
     except NotFoundException as e:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=e.message)
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"error": "NOT_FOUND", "message": e.message})
 
 
 @router.post("/accessibility", response_model=AccessibilityAttributeResponse, status_code=status.HTTP_201_CREATED)
 def create_accessibility_attribute(
-    venue_id: UUID,
+    venue_id: str,
     attr_data: AccessibilityAttributeCreate,
     service: AccessibilityService = Depends(get_accessibility_service)
 ):
@@ -68,26 +67,26 @@ def create_accessibility_attribute(
     try:
         return service.create_attribute(attr_data)
     except NotFoundException as e:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=e.message)
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"error": "NOT_FOUND", "message": e.message})
 
 
 @router.get("/accessibility/{attribute_id}", response_model=AccessibilityAttributeResponse)
 def get_accessibility_attribute(
-    venue_id: UUID,
-    attribute_id: UUID,
+    venue_id: str,
+    attribute_id: str,
     service: AccessibilityService = Depends(get_accessibility_service)
 ):
     """Get a specific accessibility attribute."""
     try:
         return service.get_attribute(attribute_id)
     except NotFoundException as e:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=e.message)
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"error": "NOT_FOUND", "message": e.message})
 
 
 @router.patch("/accessibility/{attribute_id}", response_model=AccessibilityAttributeResponse)
 def update_accessibility_attribute(
-    venue_id: UUID,
-    attribute_id: UUID,
+    venue_id: str,
+    attribute_id: str,
     attr_data: AccessibilityAttributeUpdate,
     service: AccessibilityService = Depends(get_accessibility_service)
 ):
@@ -95,25 +94,25 @@ def update_accessibility_attribute(
     try:
         return service.update_attribute(attribute_id, attr_data)
     except NotFoundException as e:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=e.message)
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"error": "NOT_FOUND", "message": e.message})
 
 
 @router.delete("/accessibility/{attribute_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_accessibility_attribute(
-    venue_id: UUID,
-    attribute_id: UUID,
+    venue_id: str,
+    attribute_id: str,
     service: AccessibilityService = Depends(get_accessibility_service)
 ):
     """Delete an accessibility attribute."""
     try:
         service.delete_attribute(attribute_id)
     except NotFoundException as e:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=e.message)
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"error": "NOT_FOUND", "message": e.message})
 
 
 @router.get("/evidence", response_model=EvidenceListResponse)
 def get_venue_evidence(
-    venue_id: UUID,
+    venue_id: str,
     verification_status: Optional[str] = Query(None, description="Filter by verification status"),
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),
@@ -137,16 +136,16 @@ def get_venue_evidence(
             "pages": (total + page_size - 1) // page_size
         }
     except NotFoundException as e:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=e.message)
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"error": "NOT_FOUND", "message": e.message})
 
 
 @router.get("/accessibility/summary")
 def get_venue_accessibility_summary(
-    venue_id: UUID,
+    venue_id: str,
     service: AccessibilityService = Depends(get_accessibility_service)
 ):
     """Get a summary of accessibility data for a venue."""
     try:
         return service.get_attribute_summary(venue_id)
     except NotFoundException as e:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=e.message)
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"error": "NOT_FOUND", "message": e.message})

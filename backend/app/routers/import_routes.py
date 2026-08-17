@@ -6,7 +6,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
-from app.import.importer import DataImporter
+from app.importers.importer import DataImporter
 from app.schemas.schemas import ErrorResponse
 
 router = APIRouter(prefix="/import", tags=["import"])

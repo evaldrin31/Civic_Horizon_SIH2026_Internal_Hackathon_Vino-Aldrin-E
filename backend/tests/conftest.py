@@ -12,6 +12,10 @@ from sqlalchemy.pool import StaticPool
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
+# Mock database configuration BEFORE importing app
+os.environ["DATABASE_URL"] = "sqlite:///:memory:"
+os.environ["DATABASE_ECHO"] = "false"
+
 from app.core.database import Base, get_db
 from app.main import app
 

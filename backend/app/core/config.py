@@ -22,8 +22,8 @@ class Settings(BaseSettings):
     app_version: str = "0.1.0"
     debug: bool = Field(default=False)
     
-    # Database
-    database_url: str = Field(default="postgresql://user:password@localhost:5432/aip")
+        # Database - supports PostgreSQL (production) and SQLite (testing)
+    database_url: str = Field(default="sqlite:///./aip_test.db")
     database_echo: bool = Field(default=False)
     
     # API

@@ -1,7 +1,6 @@
 """Venue service layer."""
 
 from typing import List, Optional
-from uuid import UUID
 
 from sqlalchemy import func
 from sqlalchemy.orm import Session, joinedload
@@ -17,14 +16,14 @@ class VenueService:
     def __init__(self, db: Session):
         self.db = db
     
-    def get_venue(self, venue_id: UUID) -> Venue:
+    def get_venue(self, venue_id: str) -> Venue:
         """Get a venue by ID."""
         venue = self.db.query(Venue).filter(Venue.venue_id == venue_id).first()
         if not venue:
             raise NotFoundException("Venue", str(venue_id))
         return venue
     
-    def get_venue_with_details(self, venue_id: UUID) -> Venue:
+    def get_venue_with_details(self, venue_id: str) -> Venue:
         """Get a venue with all related data."""
         venue = (
             self.db.query(Venue)
@@ -129,7 +128,7 @@ class VenueService:
         self.db.refresh(venue)
         return venue
     
-    def update_venue(self, venue_id: UUID, venue_data: VenueUpdate) -> Venue:
+    def update_venue(self, venue_id: str, venue_data: VenueUpdate) -> Venue:
         """Update an existing venue."""
         venue = self.get_venue(venue_id)
         
@@ -141,7 +140,7 @@ class VenueService:
         self.db.refresh(venue)
         return venue
     
-    def delete_venue(self, venue_id: UUID) -> None:
+    def delete_venue(self, venue_id: str) -> None:
         """Delete a venue."""
         venue = self.get_venue(venue_id)
         self.db.delete(venue)

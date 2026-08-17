@@ -112,6 +112,32 @@ Status: Accepted Date: 2026-08-17
 }
 ```
 
+## D-010 --- UUID Cross-Database Compatibility
+
+Status: Accepted Date: 2026-08-17
+
+**Decision:** Use String(36) for UUIDs to support both PostgreSQL (production) and SQLite (testing).
+
+**Rationale:**
+- PostgreSQL native UUID type is preferred for production
+- SQLite does not support native UUID types
+- String(36) format "550e8400-e29b-41d4-a716-446655440000" works identically in both
+- No UUID conversion needed in application code
+- Simplifies testing and local development
+
+**Migration Path:** When moving to production PostgreSQL, the schema uses String(36) which works correctly. Future optimization could migrate to native PostgreSQL UUID if needed.
+
+## D-011 --- Reserved Keyword Avoidance
+
+Status: Accepted Date: 2026-08-17
+
+**Decision:** Renamed `app/import/` to `app/importers/` to avoid Python reserved keyword collision.
+
+**Rationale:**
+- `import` is a Python reserved keyword
+- Cannot use `from app.import.importer import ...` syntax
+- `app/importers/` is semantically equivalent and syntactically valid
+
 ## Pending
 
 -   Final attribute taxonomy (depends on Claude's research)

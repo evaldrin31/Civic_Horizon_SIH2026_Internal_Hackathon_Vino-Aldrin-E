@@ -1,7 +1,6 @@
 """Evidence API routes."""
 
 from typing import Optional
-from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.orm import Session
@@ -23,14 +22,14 @@ def get_evidence_service(db: Session = Depends(get_db)) -> EvidenceService:
 
 @router.get("/{evidence_id}", response_model=EvidenceResponse)
 def get_evidence(
-    evidence_id: UUID,
+    evidence_id: str,
     service: EvidenceService = Depends(get_evidence_service)
 ):
     """Get evidence by ID with full details."""
     try:
         return service.get_evidence(evidence_id)
     except NotFoundException as e:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=e.message)
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"error": "NOT_FOUND", "message": e.message})
 
 
 @router.post("", response_model=EvidenceResponse, status_code=status.HTTP_201_CREATED)
@@ -42,12 +41,12 @@ def create_evidence(
     try:
         return service.create_evidence(evidence_data)
     except NotFoundException as e:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=e.message)
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"error": "NOT_FOUND", "message": e.message})
 
 
 @router.patch("/{evidence_id}", response_model=EvidenceResponse)
 def update_evidence(
-    evidence_id: UUID,
+    evidence_id: str,
     evidence_data: EvidenceUpdate,
     service: EvidenceService = Depends(get_evidence_service)
 ):
@@ -70,14 +69,14 @@ def update_evidence(
         return evidence
         
     except NotFoundException as e:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=e.message)
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"error": "NOT_FOUND", "message": e.message})
     except ValidationException as e:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e.message)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail={"error": "VALIDATION_ERROR", "message": e.message})
 
 
 @router.get("/{evidence_id}/conflicts")
 def get_evidence_conflicts(
-    evidence_id: UUID,
+    evidence_id: str,
     service: EvidenceService = Depends(get_evidence_service)
 ):
     """Get conflicting evidence for the attribute this evidence supports."""
@@ -85,12 +84,12 @@ def get_evidence_conflicts(
         evidence = service.get_evidence(evidence_id)
         return service.get_evidence_conflicts(evidence.attribute_id)
     except NotFoundException as e:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=e.message)
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"error": "NOT_FOUND", "message": e.message})
 
 
 @router.get("/{evidence_id}/history", response_model=list[VerificationHistoryResponse])
 def get_verification_history(
-    evidence_id: UUID,
+    evidence_id: str,
     service: EvidenceService = Depends(get_evidence_service)
 ):
     """Get verification history for evidence."""
@@ -98,4 +97,4 @@ def get_verification_history(
         history, _ = service.get_verification_history(evidence_id)
         return history
     except NotFoundException as e:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=e.message)
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"error": "NOT_FOUND", "message": e.message})

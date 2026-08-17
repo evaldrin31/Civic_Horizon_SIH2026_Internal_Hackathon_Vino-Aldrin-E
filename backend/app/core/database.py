@@ -10,13 +10,29 @@ from app.core.config import get_settings
 
 settings = get_settings()
 
+# Determine engine configuration based on database URL
+def get_engine():
+    """Create engine based on configuration."""
+    url = settings.database_url
+    
+    # SQLite configuration for testing
+    if url.startswith("sqlite"):
+        return create_engine(
+            url,
+            echo=settings.database_echo,
+            connect_args={"check_same_thread": False}
+        )
+    
+    # PostgreSQL configuration for production
+    return create_engine(
+        url,
+        echo=settings.database_echo,
+        pool_pre_ping=True,
+        pool_recycle=300
+    )
+
 # Create engine
-engine = create_engine(
-    settings.database_url,
-    echo=settings.database_echo,
-    pool_pre_ping=True,
-    pool_recycle=300
-)
+engine = get_engine()
 
 # Session factory
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

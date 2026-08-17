@@ -69,7 +69,7 @@ class VenueUpdate(BaseSchema):
 
 class VenueResponse(VenueBase):
     """Schema for venue response."""
-    venue_id: UUID
+    venue_id: str
     created_at: datetime
     updated_at: datetime
 
@@ -98,8 +98,8 @@ class VenueLocationCreate(VenueLocationBase):
 
 class VenueLocationResponse(VenueLocationBase):
     """Schema for venue location response."""
-    location_id: UUID
-    venue_id: UUID
+    location_id: str
+    venue_id: str
     created_at: datetime
     updated_at: datetime
 
@@ -127,15 +127,15 @@ class AccessibilityAttributeBase(BaseSchema):
 
 class AccessibilityAttributeCreate(AccessibilityAttributeBase):
     """Schema for creating an accessibility attribute."""
-    venue_id: UUID
-    location_id: Optional[UUID] = None
+    venue_id: str
+    location_id: Optional[str] = None
 
 
 class AccessibilityAttributeResponse(AccessibilityAttributeBase):
     """Schema for accessibility attribute response."""
-    attribute_id: UUID
-    venue_id: UUID
-    location_id: Optional[UUID]
+    attribute_id: str
+    venue_id: str
+    location_id: Optional[str]
     location: Optional[VenueLocationResponse] = None
     created_at: datetime
     updated_at: datetime
@@ -177,7 +177,7 @@ class SourceCreate(SourceBase):
 
 class SourceResponse(SourceBase):
     """Schema for source response."""
-    source_id: UUID
+    source_id: str
     created_at: datetime
     updated_at: datetime
 
@@ -208,15 +208,15 @@ class EvidenceBase(BaseSchema):
 
 class EvidenceCreate(EvidenceBase):
     """Schema for creating evidence."""
-    attribute_id: UUID
-    source_id: Optional[UUID] = None
+    attribute_id: str
+    source_id: Optional[str] = None
 
 
 class EvidenceResponse(EvidenceBase):
     """Schema for evidence response."""
-    evidence_id: UUID
-    attribute_id: UUID
-    source_id: Optional[UUID]
+    evidence_id: str
+    attribute_id: str
+    source_id: Optional[str]
     source: Optional[SourceResponse] = None
     collected_at: datetime
     created_at: datetime
@@ -235,10 +235,19 @@ class EvidenceUpdate(BaseSchema):
     notes: Optional[str] = None
 
 
+class AccessibilityAttributeUpdate(BaseSchema):
+    """Schema for updating an accessibility attribute."""
+    value: Optional[str] = Field(None, pattern="^(yes|no|unknown|partial)$")
+    value_type: Optional[str] = Field(None, max_length=50)
+    value_text: Optional[str] = None
+    notes: Optional[str] = None
+    last_observed_at: Optional[datetime] = None
+
+
 class VerificationHistoryResponse(BaseSchema):
     """Schema for verification history response."""
-    history_id: UUID
-    evidence_id: UUID
+    history_id: str
+    evidence_id: str
     previous_status: Optional[str]
     new_status: str
     change_reason: Optional[str]
