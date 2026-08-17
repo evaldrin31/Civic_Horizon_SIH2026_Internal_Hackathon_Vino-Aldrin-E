@@ -368,6 +368,51 @@ describe('getAttributeConflicts', () => {
     
     expect(conflicts.size).toBe(0);
   });
+
+  it('handles null attribute gracefully', () => {
+    const evidenceWithNullAttr = [
+      { ...mockEvidence, evidence_id: 'ev-1', attribute: null },
+      { ...mockEvidence, evidence_id: 'ev-2', attribute: null },
+    ];
+    
+    // Should not throw and should return empty map
+    const conflicts = getAttributeConflicts(evidenceWithNullAttr);
+    expect(conflicts.size).toBe(0);
+  });
+
+  it('handles undefined attribute gracefully', () => {
+    const evidenceWithUndefinedAttr = [
+      { ...mockEvidence, evidence_id: 'ev-1', attribute: undefined },
+      { ...mockEvidence, evidence_id: 'ev-2', attribute: undefined },
+    ];
+    
+    // Should not throw and should return empty map
+    const conflicts = getAttributeConflicts(evidenceWithUndefinedAttr);
+    expect(conflicts.size).toBe(0);
+  });
+
+  it('ignores evidence without usable attribute values', () => {
+    const mixedEvidence = [
+      { ...mockEvidence, evidence_id: 'ev-1', attribute: { ...mockEvidence.attribute!, value: 'yes' } },
+      { ...mockEvidence, evidence_id: 'ev-2', attribute: null },
+      { ...mockEvidence, evidence_id: 'ev-3', attribute: undefined },
+    ];
+    
+    // Only one evidence with a value, so no conflicts possible
+    expect(hasConflictingEvidence(mixedEvidence)).toBe(false);
+    const conflicts = getAttributeConflicts(mixedEvidence);
+    expect(conflicts.size).toBe(0);
+  });
+
+  it('handles undefined attribute value gracefully', () => {
+    const evidenceWithUndefinedValue = [
+      { ...mockEvidence, evidence_id: 'ev-1', attribute: { ...mockEvidence.attribute!, value: 'yes' } },
+      { ...mockEvidence, evidence_id: 'ev-2', attribute: { ...mockEvidence.attribute!, value: undefined as unknown as AttributeValue } },
+    ];
+    
+    // Should not throw and should filter out undefined values
+    expect(hasConflictingEvidence(evidenceWithUndefinedValue)).toBe(false);
+  });
 });
 
 describe('Verification Status Values', () => {
@@ -426,5 +471,74 @@ describe('Verification Status Values', () => {
     // Should show as "unknown" not "no"
     expect(screen.getByText('unknown')).toBeInTheDocument();
     expect(screen.queryByText('no')).not.toBeInTheDocument();
+  });
+
+  // NULL SAFETY TESTS
+  it('handles null attribute object gracefully', () => {
+    const evidenceWithNullAttr = { ...mockEvidence, attribute: null };
+    
+    // Should render without crashing
+    render(<EvidenceCard evidence={evidenceWithNullAttr} showAttribute={true} />);
+    
+    // Evidence text should still be visible
+    expect(screen.getByText('Ramp present at main entrance')).toBeInTheDocument();
+  });
+
+  it('handles undefined attribute object gracefully', () => {
+    const evidenceWithUndefinedAttr = { ...mockEvidence, attribute: undefined };
+    
+    // Should render without crashing
+    render(<EvidenceCard evidence={evidenceWithUndefinedAttr} showAttribute={true} />);
+    
+    // Evidence text should still be visible
+    expect(screen.getByText('Ramp present at main entrance')).toBeInTheDocument();
+  });
+
+  it('renders evidence without attribute using available info', () => {
+    const evidenceWithoutAttribute = { 
+      ...mockEvidence, 
+      attribute: null,
+      evidence_text: 'Evidence without attribute reference'
+    };
+    
+    render(<EvidenceCard evidence={evidenceWithoutAttribute} />);
+    
+    // Should show evidence text
+    expect(screen.getByText('Evidence without attribute reference')).toBeInTheDocument();
+    
+    // Should show source info
+    expect(screen.getByText('Site Visit')).toBeInTheDocument();
+    
+    // Should show verification status
+    expect(screen.getByText('Verified')).toBeInTheDocument();
+  });
+
+  it('handles evidence with only attribute_id and no attribute object', () => {
+    const evidenceWithOnlyId = { 
+      ...mockEvidence, 
+      attribute: null,
+      attribute_id: 'orphan-attr-1'
+    };
+    
+    // Should render without crashing in list
+    render(<EvidenceList evidence={[evidenceWithOnlyId]} />);
+    
+    // Should show evidence
+    expect(screen.getByText('Ramp present at main entrance')).toBeInTheDocument();
+  });
+
+  it('handles list with mixed null and valid attributes', () => {
+    const mixedEvidence = [
+      mockEvidence, // has valid attribute
+      { ...mockEvidence, evidence_id: 'ev-null', attribute: null },
+      { ...mockEvidence, evidence_id: 'ev-undefined', attribute: undefined },
+    ];
+    
+    // Should render all without crashing
+    render(<EvidenceList evidence={mixedEvidence} />);
+    
+    // All three should be visible
+    const evidenceTexts = screen.getAllByText('Ramp present at main entrance');
+    expect(evidenceTexts.length).toBe(3);
   });
 });
