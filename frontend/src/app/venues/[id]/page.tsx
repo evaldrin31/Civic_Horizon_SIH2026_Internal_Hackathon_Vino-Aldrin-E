@@ -141,7 +141,6 @@ const DEMO_EVIDENCE: Evidence[] = [
       source_type: "official_venue",
       source_name: "Hospital Website",
       source_url: "https://example.com",
-      trust_level: 6,
       created_at: "2024-01-15T10:30:00Z",
     },
     attribute: DEMO_ATTRIBUTES[0],

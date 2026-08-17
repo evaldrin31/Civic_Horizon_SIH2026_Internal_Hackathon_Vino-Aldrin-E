@@ -35,7 +35,6 @@ const mockEvidence: Evidence = {
     source_id: 'src-1',
     source_type: 'direct_observation',
     source_name: 'Site Visit',
-    trust_level: 5,
     created_at: '2024-01-15T10:30:00Z',
   },
   attribute: {

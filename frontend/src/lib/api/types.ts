@@ -124,7 +124,6 @@ export interface Source {
   source_type: SourceType;
   source_name?: string;
   source_url?: string;
-  trust_level: number;
   created_at: string;
 }
 
