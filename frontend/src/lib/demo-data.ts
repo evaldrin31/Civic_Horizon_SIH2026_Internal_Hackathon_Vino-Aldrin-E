@@ -141,14 +141,14 @@ export function getDemoEvidence(venueId: string): Evidence[] {
   return [
     {
       evidence_id: "ev1",
-      venue_id: venueId,
-      url: (venue as any)?.imageUrl || "https://upload.wikimedia.org/wikipedia/commons/4/47/Meenakshi_Amman_West_Tower.jpg",
-      type: "image",
-      category: "mobility",
-      description: "Front entrance",
-      verified: true,
-      timestamp: new Date().toISOString(),
-      uploader_id: "u1"
+      attribute_id: "attr1",
+      evidence_media_url: (venue as any)?.imageUrl || "https://upload.wikimedia.org/wikipedia/commons/4/47/Meenakshi_Amman_West_Tower.jpg",
+      evidence_text: "Front entrance shows accessible ramp.",
+      collected_at: new Date().toISOString(),
+      observed_at: new Date().toISOString(),
+      collector: "user_1",
+      verification_status: "verified",
+      confidence: 0.95
     }
   ];
 }
