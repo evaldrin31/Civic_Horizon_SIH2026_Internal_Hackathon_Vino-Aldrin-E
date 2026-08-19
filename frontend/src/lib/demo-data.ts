@@ -111,8 +111,28 @@ export function getNearbyDemoVenues(lat: number, lng: number, radiusKm: number =
 
 export function getDemoAttributes(venueId: string): AccessibilityAttribute[] {
   return [
-    { category: "mobility", name: "Wheelchair Ramp", status: "yes", verificationSource: "user", updatedAt: new Date().toISOString() },
-    { category: "mobility", name: "Tactile Paths", status: "yes", verificationSource: "official", updatedAt: new Date().toISOString() }
+    { 
+      attribute_id: "attr1",
+      venue_id: venueId,
+      location_id: null,
+      category: "mobility", 
+      attribute_name: "wheelchair_ramp", 
+      value: "yes",
+      value_type: "boolean",
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    },
+    { 
+      attribute_id: "attr2",
+      venue_id: venueId,
+      location_id: null,
+      category: "mobility", 
+      attribute_name: "tactile_paths", 
+      value: "yes",
+      value_type: "boolean",
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    }
   ];
 }
 
