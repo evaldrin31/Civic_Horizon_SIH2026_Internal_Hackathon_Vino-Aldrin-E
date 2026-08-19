@@ -7,7 +7,7 @@ export function useSpeech() {
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [recognition, setRecognition] = useState<unknown>(null);
+  const [recognition, setRecognition] = useState<any>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
