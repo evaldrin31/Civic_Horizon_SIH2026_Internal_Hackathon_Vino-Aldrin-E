@@ -1,81 +1,263 @@
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Public+Sans:wght@600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* ─── Civic Horizon MD3 Palette ─── */
+    --background: 220 50% 98%;         /* #f8f9ff */
+    --foreground: 220 60% 10%;         /* near-black navy */
+
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 60% 10%;
+
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.5rem;
+    --popover-foreground: 220 60% 10%;
+
+    /* Civic Blue Primary */
+    --primary: 220 90% 42%;            /* #1b55d0 */
+    --primary-foreground: 0 0% 100%;
+
+    /* Teal Secondary */
+    --secondary: 188 100% 24%;         /* #00687a */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 30% 96%;
+    --muted-foreground: 220 15% 45%;
+
+    --accent: 220 50% 93%;
+    --accent-foreground: 220 60% 20%;
+
+    --destructive: 0 72% 51%;          /* #ba1a1a */
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 30% 88%;
+    --input: 220 30% 88%;
+    --ring: 220 90% 42%;
+
+    --radius: 0.75rem;
+
+    /* Semantic Status Colors */
+    --status-yes: 142 70% 34%;
+    --status-yes-bg: 142 60% 94%;
+    --status-no: 0 72% 50%;
+    --status-no-bg: 0 72% 96%;
+    --status-partial: 38 92% 48%;
+    --status-partial-bg: 38 92% 95%;
+    --status-unknown: 220 15% 55%;
+    --status-unknown-bg: 220 20% 95%;
+
+    /* Sidebar */
+    --sidebar: 220 50% 97%;
+    --sidebar-foreground: 220 60% 10%;
+    --sidebar-primary: 220 90% 42%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 50% 93%;
+    --sidebar-accent-foreground: 220 60% 20%;
+    --sidebar-border: 220 30% 88%;
+    --sidebar-ring: 220 90% 42%;
+
+    /* Chart colors */
+    --chart-1: 220 90% 42%;
+    --chart-2: 188 100% 24%;
+    --chart-3: 262 80% 56%;
+    --chart-4: 38 92% 48%;
+    --chart-5: 0 72% 50%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+    --background: 220 50% 8%;
+    --foreground: 220 20% 95%;
+    --card: 220 40% 12%;
+    --card-foreground: 220 20% 95%;
+    --popover: 220 40% 12%;
+    --popover-foreground: 220 20% 95%;
+    --primary: 220 80% 65%;
+    --primary-foreground: 220 90% 10%;
+    --secondary: 188 80% 45%;
+    --secondary-foreground: 220 60% 10%;
+    --muted: 220 30% 18%;
+    --muted-foreground: 220 15% 65%;
+    --accent: 220 30% 20%;
+    --accent-foreground: 220 20% 90%;
+    --destructive: 0 62% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 20% 22%;
+    --input: 220 20% 22%;
+    --ring: 220 80% 65%;
+    --sidebar: 220 40% 10%;
+    --sidebar-foreground: 220 20% 95%;
+    --sidebar-primary: 220 80% 65%;
+    --sidebar-primary-foreground: 220 90% 10%;
+    --sidebar-accent: 220 30% 18%;
+    --sidebar-accent-foreground: 220 20% 90%;
+    --sidebar-border: 220 20% 22%;
+    --sidebar-ring: 220 80% 65%;
   }
-}
 
-@layer base {
   * {
-    @apply border-border;
+    @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+
+  html {
+    @apply font-sans;
+  }
+
+  /* ─── Leaflet / MapLibre Overrides ─── */
+  .maplibregl-popup-content {
+    @apply bg-transparent! shadow-none! p-0! rounded-none!;
+  }
+  .maplibregl-popup-tip {
+    @apply hidden!;
+  }
+  .maplibregl-ctrl-attrib {
+    @apply bg-background! text-muted-foreground! border-border! rounded-md! border! shadow-sm!;
+  }
+  .maplibregl-ctrl-attrib a {
+    @apply text-muted-foreground!;
+  }
+  .maplibregl-ctrl-attrib a:hover {
+    @apply text-foreground!;
+  }
+  .maplibregl-ctrl-attrib-button {
+    @apply bg-transparent! dark:invert;
+  }
 }
 
-/* Accessibility Focus Styles */
+/* ─── Accessibility Category Color Utilities ─── */
 @layer utilities {
+  /* Mobility — civic blue */
+  .category-mobility {
+    --cat-color: #1b55d0;
+    --cat-bg: #e5eeff;
+    --cat-border: #b4c5ff;
+  }
+  /* Vision — violet */
+  .category-vision {
+    --cat-color: #7c3aed;
+    --cat-bg: #f3eeff;
+    --cat-border: #ddd6fe;
+  }
+  /* Hearing — teal */
+  .category-hearing {
+    --cat-color: #0d7c66;
+    --cat-bg: #e0f9f4;
+    --cat-border: #99f6e4;
+  }
+  /* Sensory — burnt orange */
+  .category-sensory {
+    --cat-color: #c2410c;
+    --cat-bg: #fff4ed;
+    --cat-border: #fed7aa;
+  }
+  /* Verified — green */
+  .category-verified {
+    --cat-color: #15803d;
+    --cat-bg: #f0fdf4;
+    --cat-border: #bbf7d0;
+  }
+
   .focus-ring {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
   }
-  
-  /* Skip link for keyboard navigation */
+
   .skip-link {
     @apply absolute -top-10 left-0 bg-primary text-primary-foreground px-4 py-2 z-50 transition-all;
   }
-  
   .skip-link:focus {
     @apply top-0;
   }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Staggered children animation helper */
+  .animate-stagger > * {
+    opacity: 0;
+    animation: fade-up 0.5s ease forwards;
+  }
+  .animate-stagger > *:nth-child(1) { animation-delay: 0.05s; }
+  .animate-stagger > *:nth-child(2) { animation-delay: 0.10s; }
+  .animate-stagger > *:nth-child(3) { animation-delay: 0.15s; }
+  .animate-stagger > *:nth-child(4) { animation-delay: 0.20s; }
+  .animate-stagger > *:nth-child(5) { animation-delay: 0.25s; }
+  .animate-stagger > *:nth-child(6) { animation-delay: 0.30s; }
+  .animate-stagger > *:nth-child(7) { animation-delay: 0.35s; }
+  .animate-stagger > *:nth-child(8) { animation-delay: 0.40s; }
 }
 
-/* Reduced motion preferences */
+/* ─── Keyframe Animations ─── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes progress-fill {
+  from { width: 0%; }
+}
+@keyframes ring-draw {
+  from { stroke-dashoffset: var(--ring-full, 251.2); }
+}
+@keyframes marker-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(27, 85, 208, 0.4); }
+  50%       { transform: scale(1.08); box-shadow: 0 0 0 8px rgba(27, 85, 208, 0); }
+}
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes chip-appear {
+  from { opacity: 0; transform: scale(0.9) translateY(4px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ─── Applied Animation Classes ─── */
+@layer utilities {
+  .animate-fade-up    { animation: fade-up 0.5s ease forwards; }
+  .animate-fade-in    { animation: fade-in 0.4s ease forwards; }
+  .animate-slide-right { animation: slide-in-right 0.4s ease forwards; }
+  .animate-chip       { animation: chip-appear 0.35s ease forwards; }
+
+  /* Delay utilities for staggering */
+  .anim-delay-1 { animation-delay: 0.05s; }
+  .anim-delay-2 { animation-delay: 0.10s; }
+  .anim-delay-3 { animation-delay: 0.15s; }
+  .anim-delay-4 { animation-delay: 0.20s; }
+  .anim-delay-5 { animation-delay: 0.25s; }
+  .anim-delay-6 { animation-delay: 0.30s; }
+
+  /* Progress bar with viewport animation */
+  .progress-bar-animated {
+    animation: progress-fill 1s ease-out forwards;
+  }
+
+  /* Score ring animation */
+  .ring-animated {
+    animation: ring-draw 1.2s ease-out forwards;
+  }
+
+  /* Map marker pulse for selected */
+  .marker-pulse {
+    animation: marker-pulse 2s ease-in-out infinite;
+  }
+}
+
+/* ─── Reduced Motion ─── */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -85,11 +267,15 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  .animate-stagger > * {
+    opacity: 1;
+    animation: none;
+  }
 }
 
-/* High contrast mode support */
+/* ─── High Contrast ─── */
 @media (prefers-contrast: high) {
   :root {
-    --border: 0 0% 0%;
+    --border: 220 60% 20%;
   }
 }

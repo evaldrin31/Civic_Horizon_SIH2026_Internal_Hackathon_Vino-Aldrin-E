@@ -1,7 +1,6 @@
 "use client";
 
 import { AccessibilityAttribute, AttributeValue, AttributeCategory } from "@/lib/api/types";
-import { VerificationBadge } from "./verification-badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { formatAttributeName, formatCategory, formatRelativeTime } from "@/lib/utils";
@@ -42,10 +41,10 @@ const valueLabels: Record<AttributeValue, string> = {
 };
 
 const valueClasses: Record<AttributeValue, string> = {
-  yes: "bg-green-50 text-green-700 border-green-200",
-  no: "bg-red-50 text-red-700 border-red-200",
-  unknown: "bg-gray-50 text-gray-600 border-gray-200",
-  partial: "bg-amber-50 text-amber-700 border-amber-200",
+  yes: "status-yes",
+  no: "status-no",
+  unknown: "status-unknown",
+  partial: "status-partial",
 };
 
 const categoryIcons: Record<AttributeCategory, React.ReactNode> = {
@@ -56,10 +55,13 @@ const categoryIcons: Record<AttributeCategory, React.ReactNode> = {
 };
 
 export function AttributeValueBadge({ value }: { value: AttributeValue }) {
+  // Use the semantic variant if it maps to our valid variant types, otherwise fallback
+  const variant = valueClasses[value] as 'status-yes' | 'status-no' | 'status-partial' | 'status-unknown';
+  
   return (
     <Badge 
-      variant="outline" 
-      className={`inline-flex items-center gap-1 ${valueClasses[value]}`}
+      variant={variant} 
+      className="inline-flex items-center gap-1 font-medium"
     >
       {valueIcons[value]}
       <span>{valueLabels[value]}</span>
@@ -184,19 +186,19 @@ export function AccessibilitySummaryCompact({
   return (
     <div className="flex flex-wrap gap-2">
       {yesCount > 0 && (
-        <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+        <Badge variant="status-yes">
           <CheckCircle2 className="h-3 w-3 mr-1" />
           {yesCount} available
         </Badge>
       )}
       {noCount > 0 && (
-        <Badge variant="outline" className="bg-red-50 text-red-700 border-red-200">
+        <Badge variant="status-no">
           <XCircle className="h-3 w-3 mr-1" />
           {noCount} unavailable
         </Badge>
       )}
       {unknownCount > 0 && (
-        <Badge variant="outline" className="bg-gray-50 text-gray-600 border-gray-200">
+        <Badge variant="status-unknown">
           <HelpCircle className="h-3 w-3 mr-1" />
           {unknownCount} unknown
         </Badge>

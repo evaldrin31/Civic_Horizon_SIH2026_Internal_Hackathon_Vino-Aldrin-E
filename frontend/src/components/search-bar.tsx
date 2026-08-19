@@ -10,7 +10,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Search, MapPin, SlidersHorizontal, X } from "lucide-react";
+import { Search, MapPin, SlidersHorizontal, X, Mic } from "lucide-react";
+import { getDemoCities, getDemoCategories } from "@/lib/demo-data";
+import { useSpeech } from "@/lib/hooks/use-speech";
+import { fuzzyMatch } from "@/lib/utils";
 
 interface SearchFilters {
   q: string;
@@ -18,6 +21,8 @@ interface SearchFilters {
   city: string;
   state: string;
   has_accessible_entrance?: boolean;
+  minScore?: number;
+  wheelchairAccessible?: boolean;
 }
 
 interface SearchBarProps {
@@ -29,32 +34,16 @@ interface SearchBarProps {
   variant?: "default" | "compact" | "hero";
 }
 
-const categories = [
-  { value: "", label: "All Categories" },
-  { value: "hospital", label: "Hospital" },
-  { value: "restaurant", label: "Restaurant" },
-  { value: "shopping", label: "Shopping" },
-  { value: "education", label: "Education" },
-  { value: "transport", label: "Transport" },
-  { value: "government", label: "Government" },
-  { value: "entertainment", label: "Entertainment" },
-  { value: "other", label: "Other" },
-];
-
 const states = [
   { value: "", label: "All States" },
-  { value: "Maharashtra", label: "Maharashtra" },
-  { value: "Karnataka", label: "Karnataka" },
-  { value: "Delhi", label: "Delhi" },
   { value: "Tamil Nadu", label: "Tamil Nadu" },
-  { value: "Telangana", label: "Telangana" },
-  { value: "Gujarat", label: "Gujarat" },
-  { value: "West Bengal", label: "West Bengal" },
+  { value: "Kerala", label: "Kerala" },
 ];
 
 const accessibilityFilters = [
   { value: "", label: "Any Accessibility" },
-  { value: "has_entrance", label: "Has Accessible Entrance" },
+  { value: "wheelchair", label: "Wheelchair Accessible" },
+  { value: "high_score", label: "High Score (80+)" },
 ];
 
 export function SearchBar({ 
@@ -65,18 +54,37 @@ export function SearchBar({
   isLocating = false,
   variant = "default"
 }: SearchBarProps) {
+  const { isListening, transcript, startListening, stopListening, isSupported } = useSpeech();
+
   const [filters, setFilters] = useState<SearchFilters>({
     q: initialFilters.q || "",
     category: initialFilters.category || "",
     city: initialFilters.city || "",
     state: initialFilters.state || "",
     has_accessible_entrance: initialFilters.has_accessible_entrance,
+    minScore: initialFilters.minScore,
+    wheelchairAccessible: initialFilters.wheelchairAccessible,
   });
   const [showFilters, setShowFilters] = useState(false);
+  const [cities, setCities] = useState<string[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
+
+  useEffect(() => {
+    // Load dynamic lists from demo data
+    setCities(getDemoCities());
+    setCategories(getDemoCategories());
+  }, []);
 
   const handleSearch = useCallback(() => {
     onSearch(filters);
   }, [filters, onSearch]);
+
+  useEffect(() => {
+    if (transcript) {
+      setFilters(prev => ({ ...prev, q: transcript }));
+      setTimeout(() => onSearch({ ...filters, q: transcript }), 100);
+    }
+  }, [transcript, onSearch]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
@@ -84,31 +92,66 @@ export function SearchBar({
     }
   };
 
-  const updateFilter = (key: keyof SearchFilters, value: string | boolean | undefined) => {
+  const updateFilter = (key: keyof SearchFilters, value: string | boolean | number | undefined) => {
     setFilters(prev => ({ ...prev, [key]: value }));
   };
 
-  const clearFilters = () => {
-    setFilters({ q: "", category: "", city: "", state: "", has_accessible_entrance: undefined });
+  const handleAccessibilityFilter = (value: string) => {
+    if (value === "wheelchair") {
+      setFilters(prev => ({ ...prev, wheelchairAccessible: true, minScore: undefined }));
+    } else if (value === "high_score") {
+      setFilters(prev => ({ ...prev, minScore: 80, wheelchairAccessible: undefined }));
+    } else {
+      setFilters(prev => ({ ...prev, wheelchairAccessible: undefined, minScore: undefined }));
+    }
   };
 
-  const hasActiveFilters = filters.category || filters.city || filters.state || filters.has_accessible_entrance !== undefined;
+  const clearFilters = () => {
+    setFilters({ 
+      q: "", 
+      category: "", 
+      city: "", 
+      state: "", 
+      has_accessible_entrance: undefined,
+      wheelchairAccessible: undefined,
+      minScore: undefined
+    });
+  };
+
+  const hasActiveFilters = filters.category || filters.city || filters.state || filters.has_accessible_entrance !== undefined || filters.wheelchairAccessible || filters.minScore;
 
   if (variant === "hero") {
     return (
-      <div className="w-full max-w-3xl mx-auto">
-        <div className="flex flex-col sm:flex-row gap-2">
+      <div className="w-full relative z-20">
+        <div className="flex flex-col sm:flex-row gap-3 p-3 bg-card/50 backdrop-blur-xl rounded-2xl border border-white/60 shadow-lg">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-6 w-6 text-muted-foreground" />
             <Input
               type="text"
-              placeholder="Search for venues by name..."
+              placeholder="Search for venues by name, city, or address..."
               value={filters.q}
               onChange={(e) => updateFilter("q", e.target.value)}
               onKeyDown={handleKeyDown}
-              className="pl-10 h-12 text-lg"
+              className="h-16 pl-12 pr-14 bg-card/70 border-border/80 focus-visible:ring-primary/50 text-foreground placeholder:text-muted-foreground rounded-xl shadow-inner transition-all hover:bg-card/90 text-lg font-medium"
               aria-label="Search venues"
             />
+            {isListening ? (
+              <button 
+                onClick={stopListening}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-red-500/10 text-red-500 rounded-full animate-pulse"
+                aria-label="Stop listening"
+              >
+                <div className="w-2 h-2 rounded-full bg-red-500 shrink-0" />
+              </button>
+            ) : isSupported ? (
+              <button
+                onClick={startListening}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
+                aria-label="Voice search"
+              >
+                <Mic className="w-6 h-6" />
+              </button>
+            ) : null}
           </div>
           <div className="flex gap-2">
             {showLocationButton && onLocationSearch && (
@@ -117,82 +160,88 @@ export function SearchBar({
                 size="lg"
                 onClick={onLocationSearch}
                 disabled={isLocating}
-                className="h-12 px-4"
+                className="h-16 px-6 bg-card/60 border-border hover:bg-card text-foreground shadow-sm rounded-xl transition-all font-medium"
               >
-                <MapPin className="h-5 w-5 mr-2" />
+                <MapPin className="h-5 w-5 mr-2 text-blue-600" />
                 {isLocating ? "Locating..." : "Near Me"}
               </Button>
             )}
             <Button 
               size="lg" 
               onClick={handleSearch}
-              className="h-12 px-6"
+              className="h-16 px-10 text-lg shadow-lg rounded-xl bg-blue-600 hover:bg-blue-500 text-white border-0 transition-all font-semibold"
             >
-              <Search className="h-5 w-5 mr-2" />
               Search
             </Button>
           </div>
         </div>
         
         {/* Quick Filters */}
-        <div className="flex flex-wrap gap-2 mt-4 justify-center">
-          {categories.slice(1, 5).map((cat) => (
+        <div className="flex flex-wrap gap-3 mt-6 justify-center">
+          {['hospital', 'shopping', 'transport', 'hotel'].map((cat) => (
             <Button
-              key={cat.value}
-              variant={filters.category === cat.value ? "default" : "outline"}
+              key={cat}
+              variant="outline"
               size="sm"
+              className={`rounded-full border backdrop-blur-sm transition-all px-4 py-1 h-8 ${
+                filters.category === cat 
+                  ? "bg-blue-600 text-white border-blue-500 shadow-md" 
+                  : "bg-card/70 border-border text-foreground hover:bg-card shadow-sm"
+              }`}
               onClick={() => {
-                updateFilter("category", filters.category === cat.value ? "" : cat.value);
-                // Trigger search after a brief delay
+                updateFilter("category", filters.category === cat ? "" : cat);
                 setTimeout(handleSearch, 0);
               }}
             >
-              {cat.label}
+              {cat.charAt(0).toUpperCase() + cat.slice(1)}
             </Button>
           ))}
           <Button
-            variant="ghost"
+            variant="outline"
             size="sm"
+            className="rounded-full border border-white/10 bg-card/5 text-muted-foreground hover:bg-card/15 hover:text-foreground backdrop-blur-sm transition-all px-4 py-1 h-8"
             onClick={() => setShowFilters(!showFilters)}
           >
-            <SlidersHorizontal className="h-4 w-4 mr-1" />
-            More Filters
+            <SlidersHorizontal className="h-4 w-4 mr-2" />
+            Advanced Filters
           </Button>
         </div>
 
         {/* Expanded Filters */}
         {showFilters && (
-          <div className="mt-4 p-4 bg-muted/50 rounded-lg">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="mt-6 p-5 bg-card  rounded-xl shadow-lg border border-border  animate-in fade-in slide-in-from-top-4 duration-200">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
               <div>
-                <label className="text-sm font-medium mb-1 block">Category</label>
+                <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5 block">Category</label>
                 <Select 
                   value={filters.category} 
-                  onValueChange={(value) => updateFilter("category", value)}
+                  onValueChange={(value) => updateFilter("category", value === "all" ? "" : value)}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className="h-10">
                     <SelectValue placeholder="All Categories" />
                   </SelectTrigger>
                   <SelectContent>
+                    <SelectItem value="all">All Categories</SelectItem>
                     {categories.map((cat) => (
-                      <SelectItem key={cat.value} value={cat.value}>
-                        {cat.label}
+                      <SelectItem key={cat} value={cat}>
+                        {cat.charAt(0).toUpperCase() + cat.slice(1)}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
               <div>
-                <label className="text-sm font-medium mb-1 block">State</label>
+                <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5 block">State</label>
                 <Select 
                   value={filters.state} 
-                  onValueChange={(value) => updateFilter("state", value)}
+                  onValueChange={(value) => updateFilter("state", value === "all" ? "" : value)}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className="h-10">
                     <SelectValue placeholder="All States" />
                   </SelectTrigger>
                   <SelectContent>
-                    {states.map((state) => (
+                    <SelectItem value="all">All States</SelectItem>
+                    {states.filter(s => s.value).map((state) => (
                       <SelectItem key={state.value} value={state.value}>
                         {state.label}
                       </SelectItem>
@@ -201,25 +250,36 @@ export function SearchBar({
                 </Select>
               </div>
               <div>
-                <label className="text-sm font-medium mb-1 block">City</label>
-                <Input
-                  type="text"
-                  placeholder="Enter city name"
-                  value={filters.city}
-                  onChange={(e) => updateFilter("city", e.target.value)}
-                />
+                <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5 block">City</label>
+                <Select 
+                  value={filters.city} 
+                  onValueChange={(value) => updateFilter("city", value === "all" ? "" : value)}
+                >
+                  <SelectTrigger className="h-10">
+                    <SelectValue placeholder="All Cities" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Cities</SelectItem>
+                    {cities.map((city) => (
+                      <SelectItem key={city} value={city}>
+                        {city}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
               <div>
-                <label className="text-sm font-medium mb-1 block">Accessibility</label>
+                <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5 block">Accessibility</label>
                 <Select 
-                  value={filters.has_accessible_entrance === true ? "has_entrance" : ""} 
-                  onValueChange={(value) => updateFilter("has_accessible_entrance", value === "has_entrance" ? true : undefined)}
+                  value={filters.wheelchairAccessible ? "wheelchair" : filters.minScore ? "high_score" : "all"} 
+                  onValueChange={(value) => handleAccessibilityFilter(value)}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className="h-10">
                     <SelectValue placeholder="Any Accessibility" />
                   </SelectTrigger>
                   <SelectContent>
-                    {accessibilityFilters.map((filter) => (
+                    <SelectItem value="all">Any Accessibility</SelectItem>
+                    {accessibilityFilters.filter(f => f.value).map((filter) => (
                       <SelectItem key={filter.value} value={filter.value}>
                         {filter.label}
                       </SelectItem>
@@ -229,9 +289,9 @@ export function SearchBar({
               </div>
             </div>
             {hasActiveFilters && (
-              <div className="mt-4 flex justify-end">
-                <Button variant="ghost" size="sm" onClick={clearFilters}>
-                  <X className="h-4 w-4 mr-1" />
+              <div className="mt-5 pt-4 border-t border-border  flex justify-end">
+                <Button variant="ghost" size="sm" onClick={clearFilters} className="text-muted-foreground">
+                  <X className="h-4 w-4 mr-2" />
                   Clear Filters
                 </Button>
               </div>
@@ -242,7 +302,7 @@ export function SearchBar({
     );
   }
 
-  // Default variant
+  // Default variant (used in header or other pages)
   return (
     <div className="w-full">
       <div className="flex gap-2">
@@ -254,11 +314,28 @@ export function SearchBar({
             value={filters.q}
             onChange={(e) => updateFilter("q", e.target.value)}
             onKeyDown={handleKeyDown}
-            className="pl-9"
+            className="pl-9 pr-10 bg-card"
             aria-label="Search venues"
           />
+          {isListening ? (
+            <button 
+              onClick={stopListening}
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center bg-red-500/10 text-red-500 rounded-full animate-pulse"
+              aria-label="Stop listening"
+            >
+              <div className="w-1.5 h-1.5 rounded-full bg-red-500 shrink-0" />
+            </button>
+          ) : isSupported ? (
+            <button
+              onClick={startListening}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
+              aria-label="Voice search"
+            >
+              <Mic className="w-4 h-4" />
+            </button>
+          ) : null}
         </div>
-        <Button variant="outline" size="icon" onClick={() => setShowFilters(!showFilters)}>
+        <Button variant="outline" size="icon" onClick={() => setShowFilters(!showFilters)} className="bg-card">
           <SlidersHorizontal className="h-4 w-4" />
         </Button>
         {showLocationButton && onLocationSearch && (
@@ -266,6 +343,7 @@ export function SearchBar({
             variant="outline" 
             onClick={onLocationSearch}
             disabled={isLocating}
+            className="bg-card"
           >
             <MapPin className="h-4 w-4 mr-2" />
             {isLocating ? "..." : "Nearby"}
@@ -277,54 +355,67 @@ export function SearchBar({
         </Button>
       </div>
 
-      {/* Expanded Filters */}
+      {/* Expanded Filters for Default Variant */}
       {showFilters && (
-        <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 p-4 bg-card  rounded-lg shadow-md border">
           <Select 
             value={filters.category} 
-            onValueChange={(value) => updateFilter("category", value)}
+            onValueChange={(value) => updateFilter("category", value === "all" ? "" : value)}
           >
             <SelectTrigger>
               <SelectValue placeholder="All Categories" />
             </SelectTrigger>
             <SelectContent>
+              <SelectItem value="all">All Categories</SelectItem>
               {categories.map((cat) => (
-                <SelectItem key={cat.value} value={cat.value}>
-                  {cat.label}
+                <SelectItem key={cat} value={cat}>
+                  {cat.charAt(0).toUpperCase() + cat.slice(1)}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
           <Select 
             value={filters.state} 
-            onValueChange={(value) => updateFilter("state", value)}
+            onValueChange={(value) => updateFilter("state", value === "all" ? "" : value)}
           >
             <SelectTrigger>
               <SelectValue placeholder="All States" />
             </SelectTrigger>
             <SelectContent>
-              {states.map((state) => (
+              <SelectItem value="all">All States</SelectItem>
+              {states.filter(s => s.value).map((state) => (
                 <SelectItem key={state.value} value={state.value}>
                   {state.label}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
-          <Input
-            type="text"
-            placeholder="City"
-            value={filters.city}
-            onChange={(e) => updateFilter("city", e.target.value)}
-          />
           <Select 
-            value={filters.has_accessible_entrance === true ? "has_entrance" : ""} 
-            onValueChange={(value) => updateFilter("has_accessible_entrance", value === "has_entrance" ? true : undefined)}
+            value={filters.city} 
+            onValueChange={(value) => updateFilter("city", value === "all" ? "" : value)}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="All Cities" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Cities</SelectItem>
+              {cities.map((city) => (
+                <SelectItem key={city} value={city}>
+                  {city}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select 
+            value={filters.wheelchairAccessible ? "wheelchair" : filters.minScore ? "high_score" : "all"} 
+            onValueChange={(value) => handleAccessibilityFilter(value)}
           >
             <SelectTrigger>
               <SelectValue placeholder="Any Accessibility" />
             </SelectTrigger>
             <SelectContent>
-              {accessibilityFilters.map((filter) => (
+              <SelectItem value="all">Any Accessibility</SelectItem>
+              {accessibilityFilters.filter(f => f.value).map((filter) => (
                 <SelectItem key={filter.value} value={filter.value}>
                   {filter.label}
                 </SelectItem>
@@ -332,7 +423,7 @@ export function SearchBar({
             </SelectContent>
           </Select>
           {hasActiveFilters && (
-            <div className="flex justify-end lg:col-span-4">
+            <div className="flex justify-end lg:col-span-4 pt-2">
               <Button variant="ghost" size="sm" onClick={clearFilters}>
                 <X className="h-4 w-4 mr-1" />
                 Clear Filters

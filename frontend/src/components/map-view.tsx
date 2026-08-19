@@ -1,15 +1,12 @@
-"use client";
+'use client';
 
 /**
- * MapView - Real Interactive Map Export
+ * MapView - Interactive Map using MapLibre + mapcn
  * 
- * Re-exports InteractiveMapView as the default MapView.
- * This ensures all pages get the real Google Maps implementation.
- * 
- * The deprecated MapPlaceholder has been removed.
+ * Using mapcn for clustered mapping without an API key (CARTO basemaps).
+ * Fallback to Leaflet is kept commented out below.
  */
 
-export { InteractiveMapView as MapView } from "./map/interactive-map";
-export { InteractiveMapView } from "./map/interactive-map";
-export type { InteractiveMapViewProps } from "./map/interactive-map";
-export type { MapContainerProps } from "@/lib/map/types";
+export { MapcnView as MapView, MapcnView as InteractiveMapView } from './mapcn-view';
+// export { LeafletMapView as MapView, LeafletMapView as InteractiveMapView } from './leaflet-map';
+export type { LeafletMapProps as InteractiveMapViewProps } from './leaflet-map'; // keeping props type interface compatible

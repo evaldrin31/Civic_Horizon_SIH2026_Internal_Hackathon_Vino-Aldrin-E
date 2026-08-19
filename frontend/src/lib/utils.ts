@@ -1,87 +1,77 @@
-import { type ClassValue, clsx } from "clsx"
+import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-/**
- * Format a distance in kilometers to a human-readable string
- */
-export function formatDistance(km: number): string {
-  if (km < 1) {
-    return `${Math.round(km * 1000)}m`;
-  }
-  return `${km.toFixed(1)}km`;
+export function formatCategory(c: string) {
+  return c.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
 }
 
-/**
- * Format a date to a readable string
- */
-export function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-IN', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
-}
+export function formatAttributeName(n: string) { return n.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()); }
+export function formatDate(d: string) { return new Date(d).toLocaleDateString(); }
 
-/**
- * Format a datetime to a readable string
- */
-export function formatDateTime(dateString: string): string {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-IN', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  });
-}
-
-/**
- * Calculate relative time (e.g., "2 days ago")
- */
-export function formatRelativeTime(dateString: string): string {
-  const date = new Date(dateString);
+export function formatRelativeTime(d: string) {
+  const date = new Date(d);
   const now = new Date();
-  const diffMs = now.getTime() - date.getTime();
-  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
   
-  if (diffDays === 0) {
-    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-    if (diffHours === 0) {
-      const diffMinutes = Math.floor(diffMs / (1000 * 60));
-      return diffMinutes <= 1 ? 'just now' : `${diffMinutes} minutes ago`;
-    }
-    return diffHours === 1 ? '1 hour ago' : `${diffHours} hours ago`;
+  if (diffInSeconds < 60) return "just now";
+  
+  const diffInHours = Math.floor(diffInSeconds / 3600);
+  if (diffInHours < 24) {
+    if (diffInHours === 1) return "1 hour ago";
+    return `${diffInHours} hours ago`;
   }
   
-  if (diffDays === 1) return 'Yesterday';
-  if (diffDays < 7) return `${diffDays} days ago`;
-  if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
-  if (diffDays < 365) return `${Math.floor(diffDays / 30)} months ago`;
-  return `${Math.floor(diffDays / 365)} years ago`;
+  const diffInDays = Math.floor(diffInHours / 24);
+  if (diffInDays === 1) return "Yesterday";
+  return `${diffInDays} days ago`;
 }
 
-/**
- * Format category name for display
- */
-export function formatCategory(category: string): string {
-  return category
-    .split('_')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+export function formatDistance(distanceKm: number): string {
+  if (distanceKm < 1) {
+    return Math.round(distanceKm * 1000) + 'm';
+  }
+  return distanceKm.toFixed(1) + 'km';
 }
 
-/**
- * Format attribute name for display
- */
-export function formatAttributeName(name: string): string {
-  return name
-    .split('_')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+
+export function getLevenshteinDistance(a: string, b: string): number {
+  if (a.length === 0) return b.length;
+  if (b.length === 0) return a.length;
+  const matrix = [];
+  for (let i = 0; i <= b.length; i++) {
+    matrix[i] = [i];
+  }
+  for (let j = 0; j <= a.length; j++) {
+    matrix[0][j] = j;
+  }
+  for (let i = 1; i <= b.length; i++) {
+    for (let j = 1; j <= a.length; j++) {
+      if (b.charAt(i - 1) === a.charAt(j - 1)) {
+        matrix[i][j] = matrix[i - 1][j - 1];
+      } else {
+        matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, Math.min(matrix[i][j - 1] + 1, matrix[i - 1][j] + 1));
+      }
+    }
+  }
+  return matrix[b.length][a.length];
+}
+
+export function fuzzyMatch(str: string, query: string): boolean {
+  if (!str || !query) return false;
+  str = str.toLowerCase();
+  query = query.toLowerCase();
+  if (str.includes(query)) return true;
+  
+  // Allow 1 typo for every 4 characters
+  const maxTypos = Math.floor(query.length / 4) + 1;
+  const words = str.split(/[^a-z0-9]/).filter(Boolean);
+  
+  return words.some(word => {
+    if (Math.abs(word.length - query.length) > maxTypos) return false;
+    return getLevenshteinDistance(word, query) <= maxTypos;
+  });
 }

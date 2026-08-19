@@ -3,7 +3,6 @@
 import { VerificationStatus } from "@/lib/api/types";
 import { Badge } from "@/components/ui/badge";
 import { 
-  CheckCircle2, 
   AlertCircle, 
   HelpCircle, 
   Clock, 

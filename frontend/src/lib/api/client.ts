@@ -17,7 +17,6 @@ import {
   Evidence,
   VerificationHistory,
   EvidenceConflict,
-  Source,
   VenueDetailResponse,
 } from './types';
 

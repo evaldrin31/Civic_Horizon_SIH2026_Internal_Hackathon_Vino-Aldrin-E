@@ -13,10 +13,8 @@ import {
   AccessibilityAttribute,
   Evidence,
   VenueSearchParams,
-  NearbySearchParams,
 } from "@/lib/api/types";
 import { searchApi, venuesApi, accessibilityApi, evidenceApi } from "@/lib/api/client";
-import { ApiClientError } from "@/lib/api/client";
 
 // ==================== Data Source Types ====================
 
@@ -283,7 +281,7 @@ export function useVenueSearch(initialParams?: VenueSearchParams) {
         isUsingDemoData: false,
         lastFetchTime: new Date(),
       });
-    } catch (error) {
+    } catch {
       console.log("API unavailable, using demo data");
 
       // Filter demo data based on search params
@@ -373,7 +371,7 @@ export function useNearbySearch() {
         isUsingDemoData: false,
         lastFetchTime: new Date(),
       });
-    } catch (error) {
+    } catch {
       console.log("API unavailable for nearby search, using demo data");
 
       // Calculate distances and sort
@@ -494,7 +492,7 @@ export function useVenueDetail(venueId: string | null) {
           isUsingDemoData: false,
           lastFetchTime: new Date(),
         });
-      } catch (error) {
+      } catch {
         console.log("API unavailable, using demo data for venue detail");
 
         // Check if it's a demo venue

@@ -14,7 +14,6 @@ import {
   MapViewport,
   MapBounds,
   MapMarker,
-  MapErrorType,
 } from "../types";
 
 export class GoogleMapsProvider implements MapProviderInstance {
@@ -209,11 +208,31 @@ export class GoogleMapsProvider implements MapProviderInstance {
     // Remove existing marker if present
     this.removeMarker(marker.id);
 
+    const getStatusColor = (status?: string) => {
+      switch (status) {
+        case 'yes': return '#16a34a'; // green-600
+        case 'no': return '#ef4444'; // red-500
+        case 'partial': return '#f59e0b'; // amber-500
+        default: return '#64748b'; // slate-500 (unknown)
+      }
+    };
+
+    const fillColor = getStatusColor(marker.accessibilityStatus);
+
     const googleMarker = new google.maps.Marker({
       position: marker.position,
       map: this.map,
       title: marker.title,
       animation: marker.selected ? google.maps.Animation.BOUNCE : undefined,
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: marker.selected ? 12 : 9,
+        fillColor: fillColor,
+        fillOpacity: 0.9,
+        strokeColor: "#FFFFFF",
+        strokeWeight: 2,
+      },
+      zIndex: marker.selected ? 1000 : 1,
     });
 
     // Store reference
@@ -239,6 +258,15 @@ export class GoogleMapsProvider implements MapProviderInstance {
       marker.setTitle(updates.title);
     }
     if (updates.selected !== undefined) {
+      const icon = marker.getIcon() as google.maps.Symbol;
+      if (icon) {
+        marker.setIcon({
+          ...icon,
+          scale: updates.selected ? 12 : 9,
+        });
+      }
+      marker.setZIndex(updates.selected ? 1000 : 1);
+
       if (updates.selected) {
         marker.setAnimation(google.maps.Animation.BOUNCE);
         setTimeout(() => marker.setAnimation(null), 750);

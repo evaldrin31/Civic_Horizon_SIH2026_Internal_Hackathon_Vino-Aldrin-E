@@ -27,6 +27,7 @@ export interface MapMarker {
   title: string;
   selected?: boolean;
   venue?: Venue;
+  accessibilityStatus?: 'yes' | 'no' | 'partial' | 'unknown';
 }
 
 export interface MapViewport {

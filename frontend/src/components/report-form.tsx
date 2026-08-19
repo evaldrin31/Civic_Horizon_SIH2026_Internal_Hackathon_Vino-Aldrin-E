@@ -20,7 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ReportFormData } from "@/lib/api/types";
+
 import { AlertTriangle, CheckCircle2, Loader2, Send } from "lucide-react";
 
 interface ReportFormProps {
@@ -61,7 +61,7 @@ const reportTypes: ReportTypeOption[] = [
   },
 ];
 
-export function ReportForm({ venueId, attributeId, trigger, onSuccess }: ReportFormProps) {
+export function ReportForm({ venueId: _venueId, attributeId: _attributeId, trigger, onSuccess }: ReportFormProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -113,7 +113,7 @@ export function ReportForm({ venueId, attributeId, trigger, onSuccess }: ReportF
         setFormData({ reportType: "", description: "", contactEmail: "" });
         onSuccess?.();
       }, 2000);
-    } catch (err) {
+    } catch {
       setError("Failed to submit report. Please try again.");
     } finally {
       setIsSubmitting(false);

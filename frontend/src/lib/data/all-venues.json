@@ -1,0 +1,5192 @@
+{
+  "venues": [
+    {
+      "venue_id": "venue_1",
+      "name": "Brihadisvara Temple, Gangaikonda Cholapuram",
+      "category": "devotional",
+      "city": "Ariyalur",
+      "state": "Tamil Nadu",
+      "address": "Brihadisvara Temple, Gangaikonda Cholapuram, Ariyalur, Tamil Nadu",
+      "latitude": 11.205,
+      "longitude": 79.449,
+      "accessibilityScore": 62,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": false,
+      "accessibleParking": true,
+      "accessibleRestroom": false,
+      "tactilePath": true,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 88,
+      "verificationStatus": "unverified",
+      "evidenceCount": 3,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Gangaikondacholapuram_Temple_4.jpg/960px-Gangaikondacholapuram_Temple_4.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 90,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 80,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 62,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 76,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 66,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_2",
+      "name": "Karaivetti Bird Sanctuary",
+      "category": "nature",
+      "city": "Ariyalur",
+      "state": "Tamil Nadu",
+      "address": "Karaivetti Bird Sanctuary, Ariyalur, Tamil Nadu",
+      "latitude": 10.965,
+      "longitude": 79.037,
+      "accessibilityScore": 74,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": true,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": false,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 93,
+      "verificationStatus": "verified",
+      "evidenceCount": 2,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Waterfowls_in_Karaivetti_Bird_Sanctuary_JEG3092.jpg/960px-Waterfowls_in_Karaivetti_Bird_Sanctuary_JEG3092.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 61,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 69,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 88,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 78,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 74,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_3",
+      "name": "Mahabalipuram Shore Temple",
+      "category": "devotional",
+      "city": "Chengalpattu",
+      "state": "Tamil Nadu",
+      "address": "Mahabalipuram Shore Temple, Chengalpattu, Tamil Nadu",
+      "latitude": 12.616,
+      "longitude": 80.198,
+      "accessibilityScore": 68,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": false,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": false,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": false,
+      "wheelchairSeating": false,
+      "confidence": 81,
+      "verificationStatus": "verified",
+      "evidenceCount": 4,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Shore_Temple_-Mamallapuram_-Tamil_Nadu_-N-TN-C55.jpg/960px-Shore_Temple_-Mamallapuram_-Tamil_Nadu_-N-TN-C55.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 81,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 72,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 84,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 70,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 90,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_4",
+      "name": "Vedanthangal Bird Sanctuary",
+      "category": "nature",
+      "city": "Chengalpattu",
+      "state": "Tamil Nadu",
+      "address": "Vedanthangal Bird Sanctuary, Chengalpattu, Tamil Nadu",
+      "latitude": 12.545,
+      "longitude": 79.855,
+      "accessibilityScore": 71,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": false,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": true,
+      "emergencyAssistance": false,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 84,
+      "verificationStatus": "verified",
+      "evidenceCount": 2,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Vedanthangal_Lake.JPG/960px-Vedanthangal_Lake.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 92,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 61,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 97,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 93,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 86,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_5",
+      "name": "SRM Institute of Science and Technology",
+      "category": "education",
+      "city": "Chengalpattu",
+      "state": "Tamil Nadu",
+      "address": "SRM Institute of Science and Technology, Chengalpattu, Tamil Nadu",
+      "latitude": 12.823,
+      "longitude": 80.044,
+      "accessibilityScore": 96,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": false,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": true,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": true,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 94,
+      "verificationStatus": "verified",
+      "evidenceCount": 4,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Old_Campus%2C_SRM_Institute_of_Science_and_Technology%2C_Kattankulathur_%28August%2C2024%29.jpg/960px-Old_Campus%2C_SRM_Institute_of_Science_and_Technology%2C_Kattankulathur_%28August%2C2024%29.jpg",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 96,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 79,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 63,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 82,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 86,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_6",
+      "name": "Marina Beach",
+      "category": "nature",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "address": "Marina Beach, Chennai, Tamil Nadu",
+      "latitude": 13.05,
+      "longitude": 80.282,
+      "accessibilityScore": 71,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": true,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 85,
+      "verificationStatus": "verified",
+      "evidenceCount": 5,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Chennai_-_bird%27s-eye_view.jpg/960px-Chennai_-_bird%27s-eye_view.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 100,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 79,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 74,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 89,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 65,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_7",
+      "name": "Phoenix Marketcity",
+      "category": "shopping",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "address": "Phoenix Marketcity, Chennai, Tamil Nadu",
+      "latitude": 12.991,
+      "longitude": 80.216,
+      "accessibilityScore": 91,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": true,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": true,
+      "emergencyAssistance": false,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 98,
+      "verificationStatus": "unverified",
+      "evidenceCount": 2,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Phoenix-marketcity-BLR-1.jpg/960px-Phoenix-marketcity-BLR-1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 81,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 80,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 69,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 95,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 76,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_8",
+      "name": "Apollo Hospitals Greams Road",
+      "category": "hospital",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "address": "Apollo Hospitals Greams Road, Chennai, Tamil Nadu",
+      "latitude": 13.061,
+      "longitude": 80.248,
+      "accessibilityScore": 89,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": true,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": true,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 80,
+      "verificationStatus": "unverified",
+      "evidenceCount": 1,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/IGMC_SHIMLA.jpg/960px-IGMC_SHIMLA.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 88,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 91,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 88,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 89,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 87,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_9",
+      "name": "Chennai Central Railway Station",
+      "category": "transport",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "address": "Chennai Central Railway Station, Chennai, Tamil Nadu",
+      "latitude": 13.082,
+      "longitude": 80.275,
+      "accessibilityScore": 96,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": false,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": true,
+      "brailleSignage": true,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 88,
+      "verificationStatus": "verified",
+      "evidenceCount": 1,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/32/Chennai_Central.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 80,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 77,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 74,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 68,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 98,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_10",
+      "name": "Marudhamalai Temple",
+      "category": "devotional",
+      "city": "Coimbatore",
+      "state": "Tamil Nadu",
+      "address": "Marudhamalai Temple, Coimbatore, Tamil Nadu",
+      "latitude": 11.045,
+      "longitude": 76.849,
+      "accessibilityScore": 63,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": false,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": true,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": false,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 98,
+      "verificationStatus": "unverified",
+      "evidenceCount": 2,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Maruthamalai_Rajagopuram_1.jpg/960px-Maruthamalai_Rajagopuram_1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 99,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 67,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 95,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 63,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 93,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_11",
+      "name": "Coimbatore Junction",
+      "category": "transport",
+      "city": "Coimbatore",
+      "state": "Tamil Nadu",
+      "address": "Coimbatore Junction, Coimbatore, Tamil Nadu",
+      "latitude": 10.999,
+      "longitude": 76.966,
+      "accessibilityScore": 93,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": false,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": true,
+      "brailleSignage": true,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 88,
+      "verificationStatus": "verified",
+      "evidenceCount": 4,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Coimbatore_junction.jpg/960px-Coimbatore_junction.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 99,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 70,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 86,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 67,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 75,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_12",
+      "name": "PSG Hospitals",
+      "category": "hospital",
+      "city": "Coimbatore",
+      "state": "Tamil Nadu",
+      "address": "PSG Hospitals, Coimbatore, Tamil Nadu",
+      "latitude": 11.023,
+      "longitude": 77.014,
+      "accessibilityScore": 61,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": false,
+      "tactilePath": true,
+      "brailleSignage": true,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 97,
+      "verificationStatus": "unverified",
+      "evidenceCount": 2,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/CHIL_SEZ.jpg/960px-CHIL_SEZ.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 61,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 96,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 93,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 67,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 77,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_13",
+      "name": "Nataraja Temple, Chidambaram",
+      "category": "devotional",
+      "city": "Cuddalore",
+      "state": "Tamil Nadu",
+      "address": "Nataraja Temple, Chidambaram, Cuddalore, Tamil Nadu",
+      "latitude": 11.399,
+      "longitude": 79.693,
+      "accessibilityScore": 61,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": false,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": true,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 89,
+      "verificationStatus": "unverified",
+      "evidenceCount": 5,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/44/Le_temple_de_Shiva_Nataraja_%28Chidambaram%2C_Inde%29_%2814037020332%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 90,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 93,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 79,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 60,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 69,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_14",
+      "name": "Pichavaram Mangrove Forest",
+      "category": "nature",
+      "city": "Cuddalore",
+      "state": "Tamil Nadu",
+      "address": "Pichavaram Mangrove Forest, Cuddalore, Tamil Nadu",
+      "latitude": 11.433,
+      "longitude": 79.791,
+      "accessibilityScore": 84,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": false,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": false,
+      "emergencyAssistance": false,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 81,
+      "verificationStatus": "verified",
+      "evidenceCount": 5,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Pichavaram-Pno.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 62,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 76,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 86,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 98,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 97,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_15",
+      "name": "Hogenakkal Falls",
+      "category": "nature",
+      "city": "Dharmapuri",
+      "state": "Tamil Nadu",
+      "address": "Hogenakkal Falls, Dharmapuri, Tamil Nadu",
+      "latitude": 12.118,
+      "longitude": 77.771,
+      "accessibilityScore": 73,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": true,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 86,
+      "verificationStatus": "verified",
+      "evidenceCount": 1,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Hogenakkal_Falls_Close.jpg/960px-Hogenakkal_Falls_Close.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 74,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 98,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 74,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 69,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 98,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_16",
+      "name": "Dharmapuri Medical College",
+      "category": "hospital",
+      "city": "Dharmapuri",
+      "state": "Tamil Nadu",
+      "address": "Dharmapuri Medical College, Dharmapuri, Tamil Nadu",
+      "latitude": 12.124,
+      "longitude": 78.153,
+      "accessibilityScore": 81,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": false,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": true,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 87,
+      "verificationStatus": "verified",
+      "evidenceCount": 3,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Aerial_view_dharmapuri.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 63,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 70,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 84,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 68,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 79,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_17",
+      "name": "Kodaikanal Lake",
+      "category": "nature",
+      "city": "Dindigul",
+      "state": "Tamil Nadu",
+      "address": "Kodaikanal Lake, Dindigul, Tamil Nadu",
+      "latitude": 10.233,
+      "longitude": 77.491,
+      "accessibilityScore": 86,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": false,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": true,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 95,
+      "verificationStatus": "unverified",
+      "evidenceCount": 5,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Boating_in_Kodaikanal_Lake_with_Mist.jpg/960px-Boating_in_Kodaikanal_Lake_with_Mist.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 81,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 71,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 65,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 88,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 72,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_18",
+      "name": "Dindigul Fort",
+      "category": "tourism",
+      "city": "Dindigul",
+      "state": "Tamil Nadu",
+      "address": "Dindigul Fort, Dindigul, Tamil Nadu",
+      "latitude": 10.364,
+      "longitude": 77.968,
+      "accessibilityScore": 83,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": false,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 99,
+      "verificationStatus": "verified",
+      "evidenceCount": 1,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/24Dindigul.jpg/960px-24Dindigul.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 89,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 83,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 63,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 88,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 89,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_19",
+      "name": "Bhavanisagar Dam",
+      "category": "nature",
+      "city": "Erode",
+      "state": "Tamil Nadu",
+      "address": "Bhavanisagar Dam, Erode, Tamil Nadu",
+      "latitude": 11.472,
+      "longitude": 77.123,
+      "accessibilityScore": 73,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": false,
+      "elevatorAvailable": true,
+      "rampAvailable": false,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": false,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 88,
+      "verificationStatus": "verified",
+      "evidenceCount": 2,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/BhavaniSagarDam.JPG/960px-BhavaniSagarDam.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 63,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 64,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 97,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 68,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 82,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_20",
+      "name": "Erode Junction",
+      "category": "transport",
+      "city": "Erode",
+      "state": "Tamil Nadu",
+      "address": "Erode Junction, Erode, Tamil Nadu",
+      "latitude": 11.332,
+      "longitude": 77.728,
+      "accessibilityScore": 79,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": false,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": false,
+      "quietZone": false,
+      "lowSensoryArea": true,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 94,
+      "verificationStatus": "verified",
+      "evidenceCount": 5,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Erode-Junction-Railway-Station-ED.JPG/960px-Erode-Junction-Railway-Station-ED.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 96,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 86,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 88,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 96,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 68,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_21",
+      "name": "Kalvarayan Hills",
+      "category": "tourism",
+      "city": "Kallakurichi",
+      "state": "Tamil Nadu",
+      "address": "Kalvarayan Hills, Kallakurichi, Tamil Nadu",
+      "latitude": 11.838,
+      "longitude": 78.683,
+      "accessibilityScore": 78,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": false,
+      "tactilePath": true,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": false,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 99,
+      "verificationStatus": "unverified",
+      "evidenceCount": 3,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/View_of_Kalvarayan_Hills_from_Arasampattu.jpg/960px-View_of_Kalvarayan_Hills_from_Arasampattu.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 77,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 90,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 63,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 82,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 69,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_22",
+      "name": "Kailasanathar Temple",
+      "category": "devotional",
+      "city": "Kanchipuram",
+      "state": "Tamil Nadu",
+      "address": "Kailasanathar Temple, Kanchipuram, Tamil Nadu",
+      "latitude": 12.842,
+      "longitude": 79.69,
+      "accessibilityScore": 82,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": false,
+      "tactilePath": true,
+      "brailleSignage": true,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": false,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 91,
+      "verificationStatus": "verified",
+      "evidenceCount": 1,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/7th_century_Sri_Kailashnathar_Temple_Kanchipuram_Tamil_Nadu_India_01_%2811%29.jpg/960px-7th_century_Sri_Kailashnathar_Temple_Kanchipuram_Tamil_Nadu_India_01_%2811%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 75,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 99,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 60,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 63,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 65,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_23",
+      "name": "Kamakshi Amman Temple",
+      "category": "devotional",
+      "city": "Kanchipuram",
+      "state": "Tamil Nadu",
+      "address": "Kamakshi Amman Temple, Kanchipuram, Tamil Nadu",
+      "latitude": 12.841,
+      "longitude": 79.703,
+      "accessibilityScore": 72,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": false,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": true,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 99,
+      "verificationStatus": "unverified",
+      "evidenceCount": 1,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/90/Kanchipuram.in_Kamakshi-Amman_Temple_-_panoramio_-_SINHA_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 81,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 60,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 90,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 74,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 67,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_24",
+      "name": "Vivekananda Rock Memorial",
+      "category": "tourism",
+      "city": "Kanyakumari",
+      "state": "Tamil Nadu",
+      "address": "Vivekananda Rock Memorial, Kanyakumari, Tamil Nadu",
+      "latitude": 8.078,
+      "longitude": 77.555,
+      "accessibilityScore": 88,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": false,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": false,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": true,
+      "emergencyAssistance": true,
+      "staffAssistance": false,
+      "wheelchairSeating": true,
+      "confidence": 96,
+      "verificationStatus": "unverified",
+      "evidenceCount": 2,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/RockMemorial.jpg/960px-RockMemorial.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 67,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 94,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 80,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 94,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 65,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_25",
+      "name": "Thiruvalluvar Statue",
+      "category": "tourism",
+      "city": "Kanyakumari",
+      "state": "Tamil Nadu",
+      "address": "Thiruvalluvar Statue, Kanyakumari, Tamil Nadu",
+      "latitude": 8.077,
+      "longitude": 77.554,
+      "accessibilityScore": 71,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": true,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": false,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 99,
+      "verificationStatus": "unverified",
+      "evidenceCount": 2,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Thiruvalluvar_Statue_at_Kanyakumari_02.jpg/960px-Thiruvalluvar_Statue_at_Kanyakumari_02.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 93,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 90,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 94,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 71,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 83,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_26",
+      "name": "Pasupatheeswarar Temple",
+      "category": "devotional",
+      "city": "Karur",
+      "state": "Tamil Nadu",
+      "address": "Pasupatheeswarar Temple, Karur, Tamil Nadu",
+      "latitude": 10.957,
+      "longitude": 78.082,
+      "accessibilityScore": 67,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": false,
+      "accessibleParking": true,
+      "accessibleRestroom": false,
+      "tactilePath": true,
+      "brailleSignage": true,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": false,
+      "emergencyAssistance": false,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 80,
+      "verificationStatus": "unverified",
+      "evidenceCount": 5,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Aavoor6.JPG/960px-Aavoor6.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 76,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 71,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 81,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 80,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 76,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_27",
+      "name": "Karur Government Hospital",
+      "category": "hospital",
+      "city": "Karur",
+      "state": "Tamil Nadu",
+      "address": "Karur Government Hospital, Karur, Tamil Nadu",
+      "latitude": 10.959,
+      "longitude": 78.077,
+      "accessibilityScore": 62,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": true,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": true,
+      "emergencyAssistance": true,
+      "staffAssistance": false,
+      "wheelchairSeating": false,
+      "confidence": 80,
+      "verificationStatus": "unverified",
+      "evidenceCount": 2,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/ba/City_of_karur.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 61,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 93,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 68,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 65,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 88,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_28",
+      "name": "Krishnagiri Dam",
+      "category": "nature",
+      "city": "Krishnagiri",
+      "state": "Tamil Nadu",
+      "address": "Krishnagiri Dam, Krishnagiri, Tamil Nadu",
+      "latitude": 12.477,
+      "longitude": 78.188,
+      "accessibilityScore": 93,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": false,
+      "accessibleParking": true,
+      "accessibleRestroom": false,
+      "tactilePath": true,
+      "brailleSignage": true,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": true,
+      "emergencyAssistance": false,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 82,
+      "verificationStatus": "unverified",
+      "evidenceCount": 2,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/KRP_Dam.jpg/960px-KRP_Dam.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 90,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 93,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 74,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 87,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 73,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_29",
+      "name": "Government Krishnagiri Medical College",
+      "category": "education",
+      "city": "Krishnagiri",
+      "state": "Tamil Nadu",
+      "address": "Government Krishnagiri Medical College, Krishnagiri, Tamil Nadu",
+      "latitude": 12.529,
+      "longitude": 78.214,
+      "accessibilityScore": 73,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": true,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": false,
+      "emergencyAssistance": false,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 95,
+      "verificationStatus": "unverified",
+      "evidenceCount": 1,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Krishnagiri_temple.jpg/960px-Krishnagiri_temple.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 80,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 76,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 62,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 83,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 89,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_30",
+      "name": "Meenakshi Amman Temple",
+      "category": "devotional",
+      "city": "Madurai",
+      "state": "Tamil Nadu",
+      "address": "Meenakshi Amman Temple, Madurai, Tamil Nadu",
+      "latitude": 9.919,
+      "longitude": 78.119,
+      "accessibilityScore": 88,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": false,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": true,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": true,
+      "emergencyAssistance": false,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 98,
+      "verificationStatus": "unverified",
+      "evidenceCount": 5,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/An_aerial_view_of_Madurai_city_from_atop_of_Meenakshi_Amman_temple.jpg/960px-An_aerial_view_of_Madurai_city_from_atop_of_Meenakshi_Amman_temple.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 96,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 91,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 87,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 75,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 68,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_31",
+      "name": "Madurai Junction",
+      "category": "transport",
+      "city": "Madurai",
+      "state": "Tamil Nadu",
+      "address": "Madurai Junction, Madurai, Tamil Nadu",
+      "latitude": 9.925,
+      "longitude": 78.111,
+      "accessibilityScore": 99,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": false,
+      "tactilePath": true,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 99,
+      "verificationStatus": "verified",
+      "evidenceCount": 3,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/%E0%AE%AE%E0%AE%A4%E0%AF%81%E0%AE%B0%E0%AF%88%E0%AE%A4%E0%AF%8D_%E0%AE%A4%E0%AF%8A%E0%AE%9F%E0%AE%B0%E0%AF%81%E0%AE%A8%E0%AF%8D%E0%AE%A4%E0%AF%81_%E0%AE%A8%E0%AE%BF%E0%AE%B2%E0%AF%88%E0%AE%AF%E0%AE%AE%E0%AF%8D_2022_%E0%AE%86%E0%AE%95%E0%AE%A4%E0%AF%8D%E0%AE%A4%E0%AF%81_13.jpg/960px-%E0%AE%AE%E0%AE%A4%E0%AF%81%E0%AE%B0%E0%AF%88%E0%AE%A4%E0%AF%8D_%E0%AE%A4%E0%AF%8A%E0%AE%9F%E0%AE%B0%E0%AF%81%E0%AE%A8%E0%AF%8D%E0%AE%A4%E0%AF%81_%E0%AE%A8%E0%AE%BF%E0%AE%B2%E0%AF%88%E0%AE%AF%E0%AE%AE%E0%AF%8D_2022_%E0%AE%86%E0%AE%95%E0%AE%A4%E0%AF%8D%E0%AE%A4%E0%AF%81_13.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 98,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 96,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 70,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 66,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 80,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_32",
+      "name": "Mattuthavani Bus Terminus",
+      "category": "transport",
+      "city": "Madurai",
+      "state": "Tamil Nadu",
+      "address": "Mattuthavani Bus Terminus, Madurai, Tamil Nadu",
+      "latitude": 9.939,
+      "longitude": 78.158,
+      "accessibilityScore": 88,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": false,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": true,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": false,
+      "emergencyAssistance": false,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 96,
+      "verificationStatus": "verified",
+      "evidenceCount": 5,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/MGR_Bus_Stand.jpg/960px-MGR_Bus_Stand.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 83,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 87,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 88,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 84,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 60,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_33",
+      "name": "Mayuranathaswami Temple",
+      "category": "devotional",
+      "city": "Mayiladuthurai",
+      "state": "Tamil Nadu",
+      "address": "Mayuranathaswami Temple, Mayiladuthurai, Tamil Nadu",
+      "latitude": 11.101,
+      "longitude": 79.654,
+      "accessibilityScore": 64,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": false,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": true,
+      "brailleSignage": true,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": true,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 98,
+      "verificationStatus": "unverified",
+      "evidenceCount": 4,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Main_rajagopuram.jpg/960px-Main_rajagopuram.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 65,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 81,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 68,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 81,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 80,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_34",
+      "name": "Velankanni Church",
+      "category": "devotional",
+      "city": "Nagapattinam",
+      "state": "Tamil Nadu",
+      "address": "Velankanni Church, Nagapattinam, Tamil Nadu",
+      "latitude": 10.68,
+      "longitude": 79.842,
+      "accessibilityScore": 76,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": false,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": true,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 99,
+      "verificationStatus": "unverified",
+      "evidenceCount": 1,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Velankanni_Church_2026.jpg/960px-Velankanni_Church_2026.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 94,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 67,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 82,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 70,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 70,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_35",
+      "name": "Nagore Dargah",
+      "category": "devotional",
+      "city": "Nagapattinam",
+      "state": "Tamil Nadu",
+      "address": "Nagore Dargah, Nagapattinam, Tamil Nadu",
+      "latitude": 10.82,
+      "longitude": 79.843,
+      "accessibilityScore": 83,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": false,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": false,
+      "staffAssistance": false,
+      "wheelchairSeating": true,
+      "confidence": 82,
+      "verificationStatus": "verified",
+      "evidenceCount": 4,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Nagore_dargah.jpg/960px-Nagore_dargah.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 76,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 64,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 65,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 66,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 95,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_36",
+      "name": "Namakkal Anjaneyar Temple",
+      "category": "devotional",
+      "city": "Namakkal",
+      "state": "Tamil Nadu",
+      "address": "Namakkal Anjaneyar Temple, Namakkal, Tamil Nadu",
+      "latitude": 11.222,
+      "longitude": 78.165,
+      "accessibilityScore": 89,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": false,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": false,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 80,
+      "verificationStatus": "verified",
+      "evidenceCount": 2,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Namakkal_Anjaneyar.jpg/960px-Namakkal_Anjaneyar.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 100,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 85,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 66,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 70,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 82,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_37",
+      "name": "Kolli Hills",
+      "category": "tourism",
+      "city": "Namakkal",
+      "state": "Tamil Nadu",
+      "address": "Kolli Hills, Namakkal, Tamil Nadu",
+      "latitude": 11.258,
+      "longitude": 78.337,
+      "accessibilityScore": 76,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": false,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": false,
+      "quietZone": true,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 88,
+      "verificationStatus": "verified",
+      "evidenceCount": 1,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Kollimalai_milagu_Thottam.JPG/960px-Kollimalai_milagu_Thottam.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 86,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 63,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 96,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 75,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 86,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_38",
+      "name": "Ooty Botanical Gardens",
+      "category": "nature",
+      "city": "Nilgiris",
+      "state": "Tamil Nadu",
+      "address": "Ooty Botanical Gardens, Nilgiris, Tamil Nadu",
+      "latitude": 11.417,
+      "longitude": 76.711,
+      "accessibilityScore": 82,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": false,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 92,
+      "verificationStatus": "verified",
+      "evidenceCount": 2,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Botanical_Gardens_-_Ootacamund_%28Ooty%29_-_India_03.JPG/960px-Botanical_Gardens_-_Ootacamund_%28Ooty%29_-_India_03.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 96,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 97,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 97,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 67,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 87,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_39",
+      "name": "Doddabetta Peak",
+      "category": "tourism",
+      "city": "Nilgiris",
+      "state": "Tamil Nadu",
+      "address": "Doddabetta Peak, Nilgiris, Tamil Nadu",
+      "latitude": 11.401,
+      "longitude": 76.735,
+      "accessibilityScore": 75,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": true,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 80,
+      "verificationStatus": "verified",
+      "evidenceCount": 2,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Arts_College_Hill_Ooty_Nilgiris_Mar21_A7C_00188.jpg/960px-Arts_College_Hill_Ooty_Nilgiris_Mar21_A7C_00188.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 100,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 74,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 79,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 92,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 87,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_40",
+      "name": "Ranjankudi Fort",
+      "category": "tourism",
+      "city": "Perambalur",
+      "state": "Tamil Nadu",
+      "address": "Ranjankudi Fort, Perambalur, Tamil Nadu",
+      "latitude": 11.319,
+      "longitude": 78.932,
+      "accessibilityScore": 65,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": true,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 85,
+      "verificationStatus": "unverified",
+      "evidenceCount": 2,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Ranjankudi_Fort-Perambalur_district-Tamil_Nadu.jpg/960px-Ranjankudi_Fort-Perambalur_district-Tamil_Nadu.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 73,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 87,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 78,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 70,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 60,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_41",
+      "name": "Sittanavasal Cave",
+      "category": "tourism",
+      "city": "Pudukkottai",
+      "state": "Tamil Nadu",
+      "address": "Sittanavasal Cave, Pudukkottai, Tamil Nadu",
+      "latitude": 10.455,
+      "longitude": 78.723,
+      "accessibilityScore": 94,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": true,
+      "brailleSignage": true,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": true,
+      "emergencyAssistance": false,
+      "staffAssistance": false,
+      "wheelchairSeating": false,
+      "confidence": 88,
+      "verificationStatus": "unverified",
+      "evidenceCount": 5,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/%E0%AE%9A%E0%AE%BF%E0%AE%A4%E0%AF%8D%E0%AE%A4%E0%AE%A9%E0%AF%8D%E0%AE%A9%E0%AE%B5%E0%AE%BE%E0%AE%9A%E0%AE%B2%E0%AF%8D.jpg/960px-%E0%AE%9A%E0%AE%BF%E0%AE%A4%E0%AF%8D%E0%AE%A4%E0%AE%A9%E0%AF%8D%E0%AE%A9%E0%AE%B5%E0%AE%BE%E0%AE%9A%E0%AE%B2%E0%AF%8D.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 99,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 98,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 72,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 75,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 76,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_42",
+      "name": "Thirumayam Fort",
+      "category": "tourism",
+      "city": "Pudukkottai",
+      "state": "Tamil Nadu",
+      "address": "Thirumayam Fort, Pudukkottai, Tamil Nadu",
+      "latitude": 10.244,
+      "longitude": 78.749,
+      "accessibilityScore": 86,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": false,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 80,
+      "verificationStatus": "unverified",
+      "evidenceCount": 4,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Fort_of_thirumayam.jpg/960px-Fort_of_thirumayam.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 76,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 93,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 62,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 71,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 76,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_43",
+      "name": "Ramanathaswamy Temple",
+      "category": "devotional",
+      "city": "Ramanathapuram",
+      "state": "Tamil Nadu",
+      "address": "Ramanathaswamy Temple, Ramanathapuram, Tamil Nadu",
+      "latitude": 9.288,
+      "longitude": 79.317,
+      "accessibilityScore": 73,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": false,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": false,
+      "staffAssistance": false,
+      "wheelchairSeating": false,
+      "confidence": 91,
+      "verificationStatus": "unverified",
+      "evidenceCount": 5,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Ramanathaswamy_temple7.JPG/960px-Ramanathaswamy_temple7.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 64,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 67,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 61,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 100,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 84,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_44",
+      "name": "Dhanushkodi Beach",
+      "category": "nature",
+      "city": "Ramanathapuram",
+      "state": "Tamil Nadu",
+      "address": "Dhanushkodi Beach, Ramanathapuram, Tamil Nadu",
+      "latitude": 9.227,
+      "longitude": 79.407,
+      "accessibilityScore": 100,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": false,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": true,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": false,
+      "emergencyAssistance": false,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 92,
+      "verificationStatus": "verified",
+      "evidenceCount": 1,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Road_to_Arichal_Munai.jpg/960px-Road_to_Arichal_Munai.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 66,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 99,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 90,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 83,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 90,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_45",
+      "name": "Pamban Bridge",
+      "category": "tourism",
+      "city": "Ramanathapuram",
+      "state": "Tamil Nadu",
+      "address": "Pamban Bridge, Ramanathapuram, Tamil Nadu",
+      "latitude": 9.278,
+      "longitude": 79.206,
+      "accessibilityScore": 89,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": true,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": false,
+      "quietZone": true,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 87,
+      "verificationStatus": "verified",
+      "evidenceCount": 2,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Pamban_Bridge_Train_Passing.jpg/960px-Pamban_Bridge_Train_Passing.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 62,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 84,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 84,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 79,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 73,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_46",
+      "name": "BHEL Ranipet",
+      "category": "government",
+      "city": "Ranipet",
+      "state": "Tamil Nadu",
+      "address": "BHEL Ranipet, Ranipet, Tamil Nadu",
+      "latitude": 12.934,
+      "longitude": 79.324,
+      "accessibilityScore": 60,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": true,
+      "emergencyAssistance": false,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 88,
+      "verificationStatus": "unverified",
+      "evidenceCount": 1,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/N-TN-C211_Monolithic_rockcut_Mahendravadi.jpg/960px-N-TN-C211_Monolithic_rockcut_Mahendravadi.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 98,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 78,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 100,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 87,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 85,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_47",
+      "name": "Yercaud Lake",
+      "category": "nature",
+      "city": "Salem",
+      "state": "Tamil Nadu",
+      "address": "Yercaud Lake, Salem, Tamil Nadu",
+      "latitude": 11.777,
+      "longitude": 78.208,
+      "accessibilityScore": 80,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": false,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": false,
+      "wheelchairSeating": false,
+      "confidence": 87,
+      "verificationStatus": "verified",
+      "evidenceCount": 5,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Yercaud_lake.jpg/960px-Yercaud_lake.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 68,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 64,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 100,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 63,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 79,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_48",
+      "name": "Salem Junction",
+      "category": "transport",
+      "city": "Salem",
+      "state": "Tamil Nadu",
+      "address": "Salem Junction, Salem, Tamil Nadu",
+      "latitude": 11.674,
+      "longitude": 78.136,
+      "accessibilityScore": 90,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": false,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": false,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 90,
+      "verificationStatus": "verified",
+      "evidenceCount": 1,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/95/Salem_Junction.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 93,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 95,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 80,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 93,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 70,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_49",
+      "name": "Pillayarpatti Karpaga Vinayagar Temple",
+      "category": "devotional",
+      "city": "Sivaganga",
+      "state": "Tamil Nadu",
+      "address": "Pillayarpatti Karpaga Vinayagar Temple, Sivaganga, Tamil Nadu",
+      "latitude": 10.119,
+      "longitude": 78.653,
+      "accessibilityScore": 99,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": false,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": false,
+      "wheelchairSeating": false,
+      "confidence": 97,
+      "verificationStatus": "unverified",
+      "evidenceCount": 3,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Karpaka_Vinayakar_temple%2C_Pillayarpatti_Pillayar_Koil%2C_Tiruppathur_Tamil_Nadu_-_01.jpg/960px-Karpaka_Vinayakar_temple%2C_Pillayarpatti_Pillayar_Koil%2C_Tiruppathur_Tamil_Nadu_-_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 70,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 96,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 70,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 93,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 84,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_50",
+      "name": "Chettinad Palace",
+      "category": "tourism",
+      "city": "Sivaganga",
+      "state": "Tamil Nadu",
+      "address": "Chettinad Palace, Sivaganga, Tamil Nadu",
+      "latitude": 10.169,
+      "longitude": 78.79,
+      "accessibilityScore": 84,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": false,
+      "tactilePath": true,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": false,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 91,
+      "verificationStatus": "unverified",
+      "evidenceCount": 4,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/The_Chettinad_palace_karaikudi_2013-09-07_00-11.jpg/960px-The_Chettinad_palace_karaikudi_2013-09-07_00-11.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 84,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 89,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 66,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 95,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 95,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_51",
+      "name": "Courtallam Main Falls",
+      "category": "nature",
+      "city": "Tenkasi",
+      "state": "Tamil Nadu",
+      "address": "Courtallam Main Falls, Tenkasi, Tamil Nadu",
+      "latitude": 8.935,
+      "longitude": 77.271,
+      "accessibilityScore": 76,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": false,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": true,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": true,
+      "clearSignage": false,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 88,
+      "verificationStatus": "unverified",
+      "evidenceCount": 4,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Courtallam.jpg/960px-Courtallam.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 72,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 71,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 60,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 82,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 68,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_52",
+      "name": "Kasi Viswanathar Temple",
+      "category": "devotional",
+      "city": "Tenkasi",
+      "state": "Tamil Nadu",
+      "address": "Kasi Viswanathar Temple, Tenkasi, Tamil Nadu",
+      "latitude": 8.958,
+      "longitude": 77.316,
+      "accessibilityScore": 85,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": false,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": true,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 95,
+      "verificationStatus": "unverified",
+      "evidenceCount": 1,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/The_magnificent_Kasi_Vishwanathat_Temple_Rajagopuram.jpg/960px-The_magnificent_Kasi_Vishwanathat_Temple_Rajagopuram.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 96,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 75,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 76,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 97,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 86,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_53",
+      "name": "Brihadisvara Temple",
+      "category": "devotional",
+      "city": "Thanjavur",
+      "state": "Tamil Nadu",
+      "address": "Brihadisvara Temple, Thanjavur, Tamil Nadu",
+      "latitude": 10.782,
+      "longitude": 79.131,
+      "accessibilityScore": 74,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": false,
+      "staffAssistance": false,
+      "wheelchairSeating": false,
+      "confidence": 99,
+      "verificationStatus": "unverified",
+      "evidenceCount": 3,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Brihadisvara_Temple_during_Maha_Shivaratri-WUS03611_%28edit%29.jpg/960px-Brihadisvara_Temple_during_Maha_Shivaratri-WUS03611_%28edit%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 89,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 94,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 80,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 71,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 83,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_54",
+      "name": "Thanjavur Maratha Palace",
+      "category": "tourism",
+      "city": "Thanjavur",
+      "state": "Tamil Nadu",
+      "address": "Thanjavur Maratha Palace, Thanjavur, Tamil Nadu",
+      "latitude": 10.791,
+      "longitude": 79.136,
+      "accessibilityScore": 82,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": false,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 96,
+      "verificationStatus": "verified",
+      "evidenceCount": 1,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Thanjavur_Maratha_Palace-WUS02790.jpg/960px-Thanjavur_Maratha_Palace-WUS02790.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 72,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 71,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 65,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 88,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 87,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_55",
+      "name": "Vaigai Dam",
+      "category": "nature",
+      "city": "Theni",
+      "state": "Tamil Nadu",
+      "address": "Vaigai Dam, Theni, Tamil Nadu",
+      "latitude": 10.052,
+      "longitude": 77.585,
+      "accessibilityScore": 96,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": false,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 86,
+      "verificationStatus": "verified",
+      "evidenceCount": 3,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Vaigai_Dam_full_view.jpg/960px-Vaigai_Dam_full_view.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 74,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 98,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 78,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 60,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 76,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_56",
+      "name": "Suruli Falls",
+      "category": "nature",
+      "city": "Theni",
+      "state": "Tamil Nadu",
+      "address": "Suruli Falls, Theni, Tamil Nadu",
+      "latitude": 9.697,
+      "longitude": 77.3,
+      "accessibilityScore": 88,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": true,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": false,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 91,
+      "verificationStatus": "verified",
+      "evidenceCount": 5,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Suruli_Falls.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 92,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 73,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 73,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 83,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 89,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_57",
+      "name": "Tiruchendur Murugan Temple",
+      "category": "devotional",
+      "city": "Thoothukudi",
+      "state": "Tamil Nadu",
+      "address": "Tiruchendur Murugan Temple, Thoothukudi, Tamil Nadu",
+      "latitude": 8.497,
+      "longitude": 78.127,
+      "accessibilityScore": 88,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": false,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 80,
+      "verificationStatus": "unverified",
+      "evidenceCount": 4,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Thiruchendur11.jpg/960px-Thiruchendur11.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 60,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 95,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 66,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 61,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 78,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_58",
+      "name": "Tuticorin Port",
+      "category": "government",
+      "city": "Thoothukudi",
+      "state": "Tamil Nadu",
+      "address": "Tuticorin Port, Thoothukudi, Tamil Nadu",
+      "latitude": 8.751,
+      "longitude": 78.175,
+      "accessibilityScore": 80,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": false,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": false,
+      "quietZone": false,
+      "lowSensoryArea": true,
+      "emergencyAssistance": false,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 83,
+      "verificationStatus": "unverified",
+      "evidenceCount": 4,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Dakshin_Bharat_Gateway_Terminal_of_V.O._Chidambaranar_Port_Authority.jpg/960px-Dakshin_Bharat_Gateway_Terminal_of_V.O._Chidambaranar_Port_Authority.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 69,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 81,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 80,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 79,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 93,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_59",
+      "name": "Sri Ranganathaswamy Temple",
+      "category": "devotional",
+      "city": "Tiruchirappalli",
+      "state": "Tamil Nadu",
+      "address": "Sri Ranganathaswamy Temple, Tiruchirappalli, Tamil Nadu",
+      "latitude": 10.862,
+      "longitude": 78.69,
+      "accessibilityScore": 79,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 90,
+      "verificationStatus": "verified",
+      "evidenceCount": 3,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Ranganathaswamy_temple_tiruchirappalli.jpg/960px-Ranganathaswamy_temple_tiruchirappalli.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 88,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 60,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 62,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 81,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 75,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_60",
+      "name": "Rockfort Temple",
+      "category": "devotional",
+      "city": "Tiruchirappalli",
+      "state": "Tamil Nadu",
+      "address": "Rockfort Temple, Tiruchirappalli, Tamil Nadu",
+      "latitude": 10.828,
+      "longitude": 78.697,
+      "accessibilityScore": 83,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 89,
+      "verificationStatus": "unverified",
+      "evidenceCount": 5,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Rock_Fort_Trichy.JPG/960px-Rock_Fort_Trichy.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 61,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 94,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 87,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 71,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 98,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_61",
+      "name": "NIT Trichy",
+      "category": "education",
+      "city": "Tiruchirappalli",
+      "state": "Tamil Nadu",
+      "address": "NIT Trichy, Tiruchirappalli, Tamil Nadu",
+      "latitude": 10.763,
+      "longitude": 78.816,
+      "accessibilityScore": 62,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": false,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": false,
+      "tactilePath": true,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": false,
+      "emergencyAssistance": false,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 84,
+      "verificationStatus": "unverified",
+      "evidenceCount": 5,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Rock_Fortress_-_Tiruchirappalli_-_India.JPG/960px-Rock_Fortress_-_Tiruchirappalli_-_India.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 75,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 87,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 66,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 77,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 73,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_62",
+      "name": "Nellaiappar Temple",
+      "category": "devotional",
+      "city": "Tirunelveli",
+      "state": "Tamil Nadu",
+      "address": "Nellaiappar Temple, Tirunelveli, Tamil Nadu",
+      "latitude": 8.727,
+      "longitude": 77.683,
+      "accessibilityScore": 91,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": false,
+      "accessibleParking": true,
+      "accessibleRestroom": false,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 83,
+      "verificationStatus": "verified",
+      "evidenceCount": 4,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Nellaiappar_temple_tower.jpg/960px-Nellaiappar_temple_tower.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 100,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 85,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 73,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 90,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 92,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_63",
+      "name": "Tirunelveli Medical College",
+      "category": "education",
+      "city": "Tirunelveli",
+      "state": "Tamil Nadu",
+      "address": "Tirunelveli Medical College, Tirunelveli, Tamil Nadu",
+      "latitude": 8.718,
+      "longitude": 77.755,
+      "accessibilityScore": 91,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": false,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": true,
+      "emergencyAssistance": false,
+      "staffAssistance": false,
+      "wheelchairSeating": true,
+      "confidence": 84,
+      "verificationStatus": "verified",
+      "evidenceCount": 4,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Tirunelveli_Medical_College2.JPG/960px-Tirunelveli_Medical_College2.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 78,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 68,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 95,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 83,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 62,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_64",
+      "name": "Palayamkottai Bus Stand",
+      "category": "transport",
+      "city": "Tirunelveli",
+      "state": "Tamil Nadu",
+      "address": "Palayamkottai Bus Stand, Tirunelveli, Tamil Nadu",
+      "latitude": 8.715,
+      "longitude": 77.738,
+      "accessibilityScore": 85,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": false,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": false,
+      "wheelchairSeating": false,
+      "confidence": 90,
+      "verificationStatus": "verified",
+      "evidenceCount": 1,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Chellapandiyanbridge.jpg/960px-Chellapandiyanbridge.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 84,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 63,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 69,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 65,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 63,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_65",
+      "name": "Yelagiri Lake",
+      "category": "nature",
+      "city": "Tirupathur",
+      "state": "Tamil Nadu",
+      "address": "Yelagiri Lake, Tirupathur, Tamil Nadu",
+      "latitude": 12.576,
+      "longitude": 78.641,
+      "accessibilityScore": 63,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": false,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": false,
+      "staffAssistance": false,
+      "wheelchairSeating": false,
+      "confidence": 94,
+      "verificationStatus": "unverified",
+      "evidenceCount": 5,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/01Yelagiri_Hills.jpg/960px-01Yelagiri_Hills.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 95,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 74,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 79,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 87,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 69,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_66",
+      "name": "Javadi Hills",
+      "category": "tourism",
+      "city": "Tirupathur",
+      "state": "Tamil Nadu",
+      "address": "Javadi Hills, Tirupathur, Tamil Nadu",
+      "latitude": 12.593,
+      "longitude": 78.835,
+      "accessibilityScore": 73,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": true,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": false,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 95,
+      "verificationStatus": "unverified",
+      "evidenceCount": 2,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Javadi_Hills.jpg/960px-Javadi_Hills.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 99,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 93,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 82,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 61,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 65,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_67",
+      "name": "Tiruppur Railway Station",
+      "category": "transport",
+      "city": "Tiruppur",
+      "state": "Tamil Nadu",
+      "address": "Tiruppur Railway Station, Tiruppur, Tamil Nadu",
+      "latitude": 11.108,
+      "longitude": 77.346,
+      "accessibilityScore": 77,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": false,
+      "emergencyAssistance": false,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 87,
+      "verificationStatus": "unverified",
+      "evidenceCount": 5,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Noyyal_River_in_Tiruppur_JEG0334.jpg/960px-Noyyal_River_in_Tiruppur_JEG0334.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 66,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 65,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 67,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 62,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 75,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_68",
+      "name": "Veera Raghavar Temple",
+      "category": "devotional",
+      "city": "Tiruvallur",
+      "state": "Tamil Nadu",
+      "address": "Veera Raghavar Temple, Tiruvallur, Tamil Nadu",
+      "latitude": 13.141,
+      "longitude": 79.907,
+      "accessibilityScore": 85,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": false,
+      "elevatorAvailable": true,
+      "rampAvailable": false,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": true,
+      "emergencyAssistance": true,
+      "staffAssistance": false,
+      "wheelchairSeating": false,
+      "confidence": 92,
+      "verificationStatus": "verified",
+      "evidenceCount": 3,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Tiruvallur7.jpg/960px-Tiruvallur7.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 84,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 97,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 74,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 90,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 84,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_69",
+      "name": "Pulicat Lake",
+      "category": "nature",
+      "city": "Tiruvallur",
+      "state": "Tamil Nadu",
+      "address": "Pulicat Lake, Tiruvallur, Tamil Nadu",
+      "latitude": 13.416,
+      "longitude": 80.316,
+      "accessibilityScore": 61,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": false,
+      "accessibleParking": false,
+      "accessibleRestroom": false,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": true,
+      "emergencyAssistance": true,
+      "staffAssistance": false,
+      "wheelchairSeating": false,
+      "confidence": 83,
+      "verificationStatus": "verified",
+      "evidenceCount": 5,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/India_-_Pulicat_Lake_-_023_-_lake_landscape.jpg/960px-India_-_Pulicat_Lake_-_023_-_lake_landscape.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 95,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 95,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 90,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 73,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 72,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_70",
+      "name": "Arunachalesvara Temple",
+      "category": "devotional",
+      "city": "Tiruvannamalai",
+      "state": "Tamil Nadu",
+      "address": "Arunachalesvara Temple, Tiruvannamalai, Tamil Nadu",
+      "latitude": 12.227,
+      "longitude": 79.067,
+      "accessibilityScore": 60,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": false,
+      "tactilePath": true,
+      "brailleSignage": true,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": false,
+      "staffAssistance": false,
+      "wheelchairSeating": true,
+      "confidence": 96,
+      "verificationStatus": "unverified",
+      "evidenceCount": 1,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Arunachalam_temple_from_a_nearby_hill.jpg/960px-Arunachalam_temple_from_a_nearby_hill.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 80,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 80,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 76,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 94,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 88,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_71",
+      "name": "Ramana Ashram",
+      "category": "devotional",
+      "city": "Tiruvannamalai",
+      "state": "Tamil Nadu",
+      "address": "Ramana Ashram, Tiruvannamalai, Tamil Nadu",
+      "latitude": 12.215,
+      "longitude": 79.056,
+      "accessibilityScore": 73,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 99,
+      "verificationStatus": "verified",
+      "evidenceCount": 3,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Ramanasram_main_entrance.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 84,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 60,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 61,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 90,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 84,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_72",
+      "name": "Thyagarajaswamy Temple",
+      "category": "devotional",
+      "city": "Tiruvarur",
+      "state": "Tamil Nadu",
+      "address": "Thyagarajaswamy Temple, Tiruvarur, Tamil Nadu",
+      "latitude": 10.768,
+      "longitude": 79.635,
+      "accessibilityScore": 71,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": false,
+      "tactilePath": false,
+      "brailleSignage": true,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": true,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 96,
+      "verificationStatus": "unverified",
+      "evidenceCount": 1,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/31/Marundeeswarar7.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 86,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 84,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 97,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 95,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 97,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_73",
+      "name": "Vellore Fort",
+      "category": "tourism",
+      "city": "Vellore",
+      "state": "Tamil Nadu",
+      "address": "Vellore Fort, Vellore, Tamil Nadu",
+      "latitude": 12.923,
+      "longitude": 79.13,
+      "accessibilityScore": 67,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": false,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": true,
+      "emergencyAssistance": false,
+      "staffAssistance": false,
+      "wheelchairSeating": false,
+      "confidence": 81,
+      "verificationStatus": "unverified",
+      "evidenceCount": 5,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Vellorefort.jpg/960px-Vellorefort.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 96,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 73,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 96,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 61,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 92,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_74",
+      "name": "CMC Vellore",
+      "category": "hospital",
+      "city": "Vellore",
+      "state": "Tamil Nadu",
+      "address": "CMC Vellore, Vellore, Tamil Nadu",
+      "latitude": 12.924,
+      "longitude": 79.133,
+      "accessibilityScore": 61,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": false,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 87,
+      "verificationStatus": "verified",
+      "evidenceCount": 2,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/CMCH_Vellore.JPG/960px-CMCH_Vellore.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 64,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 73,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 84,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 97,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 72,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_75",
+      "name": "Sripuram Golden Temple",
+      "category": "devotional",
+      "city": "Vellore",
+      "state": "Tamil Nadu",
+      "address": "Sripuram Golden Temple, Vellore, Tamil Nadu",
+      "latitude": 12.873,
+      "longitude": 79.088,
+      "accessibilityScore": 77,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": false,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": false,
+      "brailleSignage": false,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": false,
+      "wheelchairSeating": true,
+      "confidence": 93,
+      "verificationStatus": "verified",
+      "evidenceCount": 3,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Sripuram_Temple_Multiple_Views.gif?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 89,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 77,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 77,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 73,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 93,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_76",
+      "name": "Gingee Fort",
+      "category": "tourism",
+      "city": "Viluppuram",
+      "state": "Tamil Nadu",
+      "address": "Gingee Fort, Viluppuram, Tamil Nadu",
+      "latitude": 12.253,
+      "longitude": 79.39,
+      "accessibilityScore": 93,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": false,
+      "accessibleParking": false,
+      "accessibleRestroom": false,
+      "tactilePath": true,
+      "brailleSignage": true,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": false,
+      "wheelchairSeating": false,
+      "confidence": 95,
+      "verificationStatus": "verified",
+      "evidenceCount": 4,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Gingee_Fort_Hill_view_from_road.jpg/960px-Gingee_Fort_Hill_view_from_road.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 68,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 63,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 94,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 71,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 78,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_77",
+      "name": "Auroville",
+      "category": "tourism",
+      "city": "Viluppuram",
+      "state": "Tamil Nadu",
+      "address": "Auroville, Viluppuram, Tamil Nadu",
+      "latitude": 11.996,
+      "longitude": 79.808,
+      "accessibilityScore": 97,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": true,
+      "tactilePath": true,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": false,
+      "emergencyAssistance": false,
+      "staffAssistance": true,
+      "wheelchairSeating": true,
+      "confidence": 85,
+      "verificationStatus": "unverified",
+      "evidenceCount": 2,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Town_Hall_of_Auroville.jpg/960px-Town_Hall_of_Auroville.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 73,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 73,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 80,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 64,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 65,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_78",
+      "name": "Srivilliputhur Andal Temple",
+      "category": "devotional",
+      "city": "Virudhunagar",
+      "state": "Tamil Nadu",
+      "address": "Srivilliputhur Andal Temple, Virudhunagar, Tamil Nadu",
+      "latitude": 9.507,
+      "longitude": 77.632,
+      "accessibilityScore": 72,
+      "wheelchairAccessible": false,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": false,
+      "rampAvailable": true,
+      "accessibleParking": false,
+      "accessibleRestroom": false,
+      "tactilePath": true,
+      "brailleSignage": false,
+      "audioAssistance": false,
+      "signLanguageSupport": false,
+      "clearSignage": true,
+      "quietZone": true,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": false,
+      "wheelchairSeating": false,
+      "confidence": 83,
+      "verificationStatus": "verified",
+      "evidenceCount": 2,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Srivilliputhur_Andal_temple_%2829%29.jpg/960px-Srivilliputhur_Andal_temple_%2829%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 96,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 99,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 60,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 97,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 74,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    },
+    {
+      "venue_id": "venue_79",
+      "name": "Ayyanar Falls",
+      "category": "nature",
+      "city": "Virudhunagar",
+      "state": "Tamil Nadu",
+      "address": "Ayyanar Falls, Virudhunagar, Tamil Nadu",
+      "latitude": 9.387,
+      "longitude": 77.462,
+      "accessibilityScore": 61,
+      "wheelchairAccessible": true,
+      "stepFreeEntrance": true,
+      "elevatorAvailable": true,
+      "rampAvailable": true,
+      "accessibleParking": true,
+      "accessibleRestroom": false,
+      "tactilePath": false,
+      "brailleSignage": true,
+      "audioAssistance": true,
+      "signLanguageSupport": false,
+      "clearSignage": false,
+      "quietZone": false,
+      "lowSensoryArea": false,
+      "emergencyAssistance": true,
+      "staffAssistance": true,
+      "wheelchairSeating": false,
+      "confidence": 92,
+      "verificationStatus": "verified",
+      "evidenceCount": 2,
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Western_Ghats_RYM.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "accessibility_summary": {
+        "mobility": {
+          "score": 60,
+          "details": [
+            "Step-free access",
+            "Wheelchair ramps available"
+          ]
+        },
+        "vision": {
+          "score": 98,
+          "details": [
+            "Tactile paths",
+            "High contrast signage"
+          ]
+        },
+        "hearing": {
+          "score": 100,
+          "details": [
+            "Visual announcements"
+          ]
+        },
+        "cognitive": {
+          "score": 97,
+          "details": [
+            "Clear wayfinding"
+          ]
+        },
+        "sensory": {
+          "score": 92,
+          "details": [
+            "Quiet zones available"
+          ]
+        }
+      }
+    }
+  ],
+  "subDistrictMap": {
+    "cheranmahadevi": "Tirunelveli",
+    "ambasamudram": "Tirunelveli",
+    "palayamkottai": "Tirunelveli",
+    "radhapuram": "Tirunelveli",
+    "nanguneri": "Tirunelveli",
+    "tisaiyanvilai": "Tirunelveli",
+    "tambaram": "Chennai",
+    "velachery": "Chennai",
+    "guindy": "Chennai",
+    "ambattur": "Chennai",
+    "adayar": "Chennai",
+    "mylapore": "Chennai",
+    "t nagar": "Chennai",
+    "chengalpattu": "Chengalpattu",
+    "pollachi": "Coimbatore",
+    "mettupalayam": "Coimbatore",
+    "sulur": "Coimbatore",
+    "valparai": "Coimbatore",
+    "thondamuthur": "Coimbatore",
+    "srirangam": "Tiruchirappalli",
+    "thiruverumbur": "Tiruchirappalli",
+    "manapparai": "Tiruchirappalli",
+    "lalgudi": "Tiruchirappalli",
+    "thirumangalam": "Madurai",
+    "melur": "Madurai",
+    "usilampatti": "Madurai",
+    "vadipatti": "Madurai",
+    "yercaud": "Salem",
+    "attur": "Salem",
+    "omalur": "Salem",
+    "mettur": "Salem",
+    "kodaikanal": "Dindigul",
+    "palani": "Dindigul",
+    "nagercoil": "Kanyakumari",
+    "marthandam": "Kanyakumari",
+    "kanyakumari": "Kanyakumari",
+    "thanjavur": "Thanjavur",
+    "kumbakonam": "Thanjavur",
+    "pattukkottai": "Thanjavur",
+    "chidambaram": "Cuddalore",
+    "neyveli": "Cuddalore",
+    "panruti": "Cuddalore",
+    "sivakasi": "Virudhunagar",
+    "rajapalayam": "Virudhunagar",
+    "aruppukkottai": "Virudhunagar",
+    "kovilpatti": "Thoothukudi",
+    "tiruchendur": "Thoothukudi",
+    "hosur": "Krishnagiri",
+    "ooty": "Nilgiris",
+    "coonoor": "Nilgiris",
+    "kotagiri": "Nilgiris"
+  }
+}

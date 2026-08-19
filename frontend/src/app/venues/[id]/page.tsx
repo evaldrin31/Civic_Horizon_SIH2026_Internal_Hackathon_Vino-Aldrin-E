@@ -1,460 +1,655 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { Header, Footer } from "@/components/layout";
-import { Venue, AccessibilityAttribute, Evidence, VenueAccessibilityDetail } from "@/lib/api/types";
-import { venuesApi, accessibilityApi, evidenceApi } from "@/lib/api/client";
-import { AccessibilityAttributeList } from "@/components/accessibility-attributes";
-import { LocationBasedAttributes, VerificationSummary } from "@/components/location-based-attributes";
-import { EvidenceList } from "@/components/evidence";
-import { VerificationLegend } from "@/components/verification-badge";
-import { DataSourceIndicator, DataSourceAlert } from "@/components/data-source-indicator";
-import { ReportForm } from "@/components/report-form";
-import { MapView } from "@/components/map-view";
+import { Venue, AccessibilityAttribute, Evidence } from "@/lib/api/types";
+import { venuesApi } from "@/lib/api/client";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { formatCategory, formatDate } from "@/lib/utils";
-import { 
-  Building2, 
-  MapPin, 
-  Globe, 
-  Phone, 
-  Mail, 
-  ArrowLeft,
-  Accessibility,
-  AlertTriangle,
-  FileText,
-  ShieldCheck,
-  ExternalLink,
-  Clock,
-  CheckCircle2
+import { formatCategory } from "@/lib/utils";
+import {
+  Building2, MapPin, Globe, ArrowLeft, Accessibility,
+  Eye, Ear, Brain, Activity, ShieldCheck, CheckCircle2,
+  Camera, AlertCircle, PhoneCall, Heart, Navigation, Map
 } from "lucide-react";
+import { getDemoVenues, getDemoAttributes, getDemoEvidence, DemoVenue } from "@/lib/demo-data";
+import { calculateVenueScore, calculateProfileMatch } from "@/lib/scoring";
+import { MapLibre3D } from "@/components/maplibre-3d";
+import { VenueImage } from "@/components/ui/venue-image";
+import { useProfile } from "@/lib/hooks/use-profile";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
-// DEMO DATA - Clearly marked
-const DEMO_VENUE: Venue = {
-  venue_id: "demo-venue-1",
-  name: "City General Hospital - Demo",
-  category: "hospital",
-  address: "123 Healthcare Avenue",
-  city: "Mumbai",
-  state: "Maharashtra",
-  country: "India",
-  postal_code: "400001",
-  latitude: 19.0760,
-  longitude: 72.8777,
-  official_url: undefined,
-  contact_phone: undefined,
-  contact_email: undefined,
-  created_at: "2024-01-15T10:30:00Z",
-  updated_at: "2024-01-15T10:30:00Z",
-};
+/* ── Animated score ring ── */
+function ScoreRingLarge({ score }: { score: number }) {
+  const circleRef = useRef<SVGCircleElement>(null);
+  const scoreRef = useRef<HTMLSpanElement>(null);
+  const radius = 45;
+  const circumference = 2 * Math.PI * radius;
 
-const DEMO_ATTRIBUTES: AccessibilityAttribute[] = [
-  {
-    attribute_id: "demo-attr-1",
-    venue_id: "demo-venue-1",
-    location_id: null,
-    category: "mobility",
-    attribute_name: "ramp",
-    value: "yes",
-    value_type: "boolean",
-    notes: "Accessible ramp at main entrance with handrails on both sides. Slope approximately 1:12. - DEMO DATA",
-    last_observed_at: "2024-01-15T00:00:00Z",
-    location: {
-      location_id: "demo-loc-1",
-      venue_id: "demo-venue-1",
-      name: "Main Entrance",
-      location_type: "entrance",
-      description: "Primary hospital entrance facing Healthcare Avenue",
-    },
-    created_at: "2024-01-15T10:30:00Z",
-    updated_at: "2024-01-15T10:30:00Z",
-  },
-  {
-    attribute_id: "demo-attr-2",
-    venue_id: "demo-venue-1",
-    location_id: null,
-    category: "mobility",
-    attribute_name: "elevator",
-    value: "yes",
-    value_type: "boolean",
-    notes: "Elevator access to all floors. Located near main reception. - DEMO DATA",
-    last_observed_at: "2024-01-15T00:00:00Z",
-    location: null,
-    created_at: "2024-01-15T10:30:00Z",
-    updated_at: "2024-01-15T10:30:00Z",
-  },
-  {
-    attribute_id: "demo-attr-3",
-    venue_id: "demo-venue-1",
-    location_id: null,
-    category: "mobility",
-    attribute_name: "accessible_toilet",
-    value: "yes",
-    value_type: "boolean",
-    notes: "Accessible toilet available on ground floor near reception area. - DEMO DATA",
-    last_observed_at: "2024-01-15T00:00:00Z",
-    location: {
-      location_id: "demo-loc-2",
-      venue_id: "demo-venue-1",
-      name: "Ground Floor",
-      location_type: "floor",
-      description: "Main floor with reception",
-    },
-    created_at: "2024-01-15T10:30:00Z",
-    updated_at: "2024-01-15T10:30:00Z",
-  },
-  {
-    attribute_id: "demo-attr-4",
-    venue_id: "demo-venue-1",
-    location_id: null,
-    category: "visual",
-    attribute_name: "braille_signage",
-    value: "unknown",
-    value_type: "boolean",
-    notes: "Information not yet collected - DEMO DATA",
-    last_observed_at: undefined,
-    location: undefined,
-    created_at: "2024-01-15T10:30:00Z",
-    updated_at: "2024-01-15T10:30:00Z",
-  },
-];
+  useGSAP(() => {
+    gsap.fromTo(circleRef.current,
+      { strokeDashoffset: circumference },
+      { strokeDashoffset: circumference - (score / 100) * circumference, duration: 1.5, ease: "power3.out", delay: 0.2 }
+    );
+    gsap.fromTo(scoreRef.current,
+      { innerText: 0 },
+      { 
+        innerText: score, 
+        duration: 1.5, 
+        ease: "power3.out", 
+        delay: 0.2, 
+        snap: { innerText: 1 },
+      }
+    );
+  }, [score, circumference]);
 
-const DEMO_EVIDENCE: Evidence[] = [
+  const color = score >= 80 ? "#10b981" : score >= 50 ? "#f59e0b" : "#ef4444";
+  const label = score >= 80 ? "Excellent" : score >= 50 ? "Good" : "Needs Improvement";
+
+  return (
+    <div className="flex flex-col items-center justify-center p-6 bg-card rounded-2xl shadow-sm border border-border">
+      <div className="relative w-32 h-32 flex items-center justify-center mb-3">
+        <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100" aria-hidden="true">
+          <circle cx="50" cy="50" r={radius} fill="none" stroke="#e5eeff" strokeWidth="8" />
+          <circle
+            ref={circleRef}
+            cx="50" cy="50" r={radius}
+            fill="none"
+            stroke={color}
+            strokeWidth="8"
+            strokeLinecap="round"
+            strokeDasharray={circumference}
+            strokeDashoffset={circumference}
+          />
+        </svg>
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <span ref={scoreRef} className="text-4xl font-display font-black text-foreground">0</span>
+          <span className="text-xs font-bold text-muted-foreground">/100</span>
+        </div>
+      </div>
+      <span className="text-sm font-bold text-foreground">Access Score</span>
+      <span className="text-xs font-medium mt-0.5" style={{ color }}>{label}</span>
+    </div>
+  );
+}
+
+/* ── Animated passport progress bar ── */
+function PassportBar({ score, max, color }: { score: number; max: number; color: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          gsap.to(el, { width: `${(score / max) * 100}%`, duration: 1.2, ease: "power3.out" });
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [score, max]);
+
+  return (
+    <div className="w-full h-1.5 rounded-full bg-black/8 mt-auto">
+      <div
+        ref={ref}
+        className="h-1.5 rounded-full w-0"
+        style={{ backgroundColor: color }}
+      />
+    </div>
+  );
+}
+
+/* ── Side panel progress bar ── */
+function SideProgressBar({ value, max, color }: { value: number; max: number; color: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          gsap.to(el, { width: `${(value / max) * 100}%`, duration: 1.2, ease: "power3.out" });
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.4 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [value, max]);
+
+  return (
+    <div className="w-24 bg-muted rounded-full h-1.5 hidden sm:block">
+      <div
+        ref={ref}
+        className="h-1.5 rounded-full w-0"
+        style={{ backgroundColor: color }}
+      />
+    </div>
+  );
+}
+
+/* ── Accessibility bento config ── */
+const BENTO_CONFIG = [
   {
-    evidence_id: "demo-evidence-1",
-    attribute_id: "demo-attr-1",
-    source_id: undefined,
-    evidence_text: "Hospital website lists accessible entrance with ramp - DEMO EVIDENCE",
-    evidence_media_url: undefined,
-    observed_at: "2024-01-15T00:00:00Z",
-    collected_at: "2024-01-15T10:30:00Z",
-    collector: "demo_collector",
-    verification_status: "reported",
-    confidence: 0.7,
-    notes: "DEMO DATA - NOT VERIFIED: Based on hospital website claims, not yet independently verified.",
-    source: {
-      source_id: "demo-source-1",
-      source_type: "official_venue",
-      source_name: "Hospital Website",
-      source_url: "https://example.com",
-      created_at: "2024-01-15T10:30:00Z",
-    },
-    attribute: DEMO_ATTRIBUTES[0],
-    created_at: "2024-01-15T10:30:00Z",
-    updated_at: "2024-01-15T10:30:00Z",
+    id: "mobility",
+    label: "Mobility",
+    sublabel: "Physical access & wayfinding",
+    icon: Accessibility,
+    color: "#2563eb",
+    bg: "#eff6ff",
+    border: "#bfdbfe",
+    max: 25,
   },
-];
+  {
+    id: "vision",
+    label: "Vision",
+    sublabel: "Braille, audio & tactile",
+    icon: Eye,
+    color: "#7c3aed",
+    bg: "#f5f3ff",
+    border: "#ddd6fe",
+    max: 15,
+  },
+  {
+    id: "hearing",
+    label: "Hearing",
+    sublabel: "Visual alerts & sign language",
+    icon: Ear,
+    color: "#0d9488",
+    bg: "#f0fdfa",
+    border: "#99f6e4",
+    max: 15,
+  },
+  {
+    id: "cognitive",
+    label: "Cognitive",
+    sublabel: "Clear signage & navigation",
+    icon: Brain,
+    color: "#e11d48",
+    bg: "#fff1f2",
+    border: "#fecdd3",
+    max: 15,
+  },
+  {
+    id: "sensory",
+    label: "Sensory",
+    sublabel: "Quiet zones & calm spaces",
+    icon: Activity,
+    color: "#d97706",
+    bg: "#fffbeb",
+    border: "#fde68a",
+    max: 15,
+  },
+] as const;
 
 export default function VenueDetailPage() {
   const params = useParams();
-  const venueId = params.id as string;
-  
+  const rawId = (params?.id as string) || "";
+  const { profile } = useProfile();
+
   const [venue, setVenue] = useState<Venue | null>(null);
-  const [attributes, setAttributes] = useState<AccessibilityAttribute[]>([]);
+  const [_attributes, setAttributes] = useState<AccessibilityAttribute[]>([]);
   const [evidence, setEvidence] = useState<Evidence[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [dataSource, setDataSource] = useState<"api" | "demo" | "error">("demo");
+  const [notFound, setNotFound] = useState(false);
+  const [userLocation, setUserLocation] = useState<{lat: number, lng: number} | null>(null);
+  const [etaInfo, setEtaInfo] = useState<{distanceKm: number, timeMins: number} | null>(null);
+
+  const containerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+        () => setUserLocation({ lat: 13.0827, lng: 80.2707 }), // Default Chennai
+        { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    if (userLocation && venue && (venue as DemoVenue).latitude && (venue as DemoVenue).longitude) {
+      const R = 6371;
+      const dLat = ((venue as DemoVenue).latitude - userLocation.lat) * (Math.PI/180);
+      const dLon = ((venue as DemoVenue).longitude - userLocation.lng) * (Math.PI/180); 
+      const a = 
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(userLocation.lat * (Math.PI/180)) * Math.cos((venue as DemoVenue).latitude * (Math.PI/180)) * 
+        Math.sin(dLon/2) * Math.sin(dLon/2); 
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+      const distanceKm = R * c;
+      const timeMins = Math.max(1, Math.round((distanceKm / 25) * 60));
+      setEtaInfo({ distanceKm: Number(distanceKm.toFixed(1)), timeMins });
+    }
+  }, [userLocation, venue]);
 
   useEffect(() => {
     const loadVenueData = async () => {
       setIsLoading(true);
-      setError(null);
+      setNotFound(false);
+      const decodedId = decodeURIComponent(rawId);
 
       try {
-        // Use the optimized detail endpoint
-        const detailData = await venuesApi.getDetail(venueId);
-
+        const detailData = await venuesApi.getDetail(decodedId);
         setVenue(detailData.venue);
         setAttributes(detailData.attributes);
         setEvidence(detailData.evidence);
-        setDataSource("api");
-      } catch (err) {
-        console.log("API unavailable, checking for demo data");
-        // Only use demo data in development mode
-        if (process.env.NODE_ENV === 'development' && venueId.startsWith("demo-")) {
-          setVenue(DEMO_VENUE);
-          setAttributes(DEMO_ATTRIBUTES);
-          setEvidence(DEMO_EVIDENCE);
-          setDataSource("demo");
+      } catch {
+        let demoVenue = getDemoVenues().find(v => v.venue_id === decodedId);
+        if (!demoVenue) demoVenue = getDemoVenues().find(v => v.venue_id === `venue-${decodedId}`);
+        if (demoVenue) {
+          setVenue(demoVenue as unknown as Venue);
+          setAttributes(getDemoAttributes(demoVenue.venue_id));
+          setEvidence(getDemoEvidence(demoVenue.venue_id));
         } else {
-          setError("Failed to load venue data. The accessibility database may be unavailable.");
-          setDataSource("error");
+          setNotFound(true);
         }
       } finally {
         setIsLoading(false);
       }
     };
 
-    loadVenueData();
-  }, [venueId]);
+    if (rawId) loadVenueData();
+  }, [rawId]);
+
+  useGSAP(() => {
+    if (!isLoading && !notFound && venue) {
+      gsap.from(".bento-item", {
+        y: 30,
+        opacity: 0,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: "power3.out",
+        delay: 0.1
+      });
+
+      gsap.from(".evidence-item", {
+        scale: 0.9,
+        opacity: 0,
+        stagger: 0.05,
+        duration: 0.6,
+        ease: "back.out(1.2)",
+        delay: 0.3
+      });
+      
+      if (profile) {
+        gsap.from(".profile-match-banner", {
+          y: -20,
+          opacity: 0,
+          duration: 0.6,
+          ease: "back.out(1.5)",
+          delay: 0.5
+        });
+      }
+    }
+  }, [isLoading, notFound, venue, profile]);
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex flex-col">
-        <Header />
-        <main id="main-content" className="flex-1 container py-8">
-          <div className="animate-pulse space-y-4">
-            <div className="h-8 bg-muted rounded w-1/3" />
-            <div className="h-4 bg-muted rounded w-1/2" />
-            <div className="h-64 bg-muted rounded" />
-          </div>
-        </main>
-        <Footer />
-      </div>
+      <main className="min-h-screen flex items-center justify-center bg-background">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-10 h-10 rounded-full border-[3px] border-primary border-t-transparent animate-spin" />
+          <p className="text-muted-foreground font-medium text-sm">Loading venue details…</p>
+        </div>
+      </main>
     );
   }
 
-  if (!venue) {
+  if (notFound || !venue) {
     return (
-      <div className="min-h-screen flex flex-col">
-        <Header />
-        <main id="main-content" className="flex-1 container py-16 text-center">
-          <h1 className="text-2xl font-bold mb-4">Venue Not Found</h1>
-          <p className="text-muted-foreground mb-6">
-            The venue you're looking for doesn't exist or has been removed.
+      <main className="min-h-screen flex flex-col items-center justify-center bg-background p-6">
+        <div className="max-w-sm w-full bg-card text-center p-8 rounded-2xl shadow-sm border border-border">
+          <AlertCircle className="w-14 h-14 text-destructive mx-auto mb-5" aria-hidden="true" />
+          <h1 className="text-2xl font-display font-bold text-foreground mb-2">Venue Not Found</h1>
+          <p className="text-muted-foreground text-sm mb-6">
+            We couldn't locate this venue. It may have been removed or the link is incorrect.
           </p>
-          <Button asChild>
-            <Link href="/">
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Search
-            </Link>
-          </Button>
-        </main>
-        <Footer />
-      </div>
+          <Link href="/">
+            <Button className="w-full h-11 rounded-xl font-semibold gap-2">
+              <ArrowLeft className="w-4 h-4" />
+              Back to Directory
+            </Button>
+          </Link>
+        </div>
+      </main>
     );
   }
 
-  // Calculate stats
-  const yesCount = attributes.filter(a => a.value === 'yes').length;
-  const noCount = attributes.filter(a => a.value === 'no').length;
-  const unknownCount = attributes.filter(a => a.value === 'unknown').length;
-  const verifiedEvidence = evidence.filter(e => e.verification_status === 'verified').length;
+  const isDemo = "accessibilityScore" in venue;
+  const demoVenue = isDemo ? (venue as DemoVenue) : null;
+  const score = isDemo ? demoVenue!.accessibilityScore : 85;
+  const breakdown = isDemo ? calculateVenueScore(demoVenue!) : {
+    mobility: 20, vision: 10, hearing: 12, sensory: 14, facilities: 12, safety: 8, total: 76,
+  };
+
+  const matchData = profile && demoVenue ? calculateProfileMatch(demoVenue, profile) : null;
+
+  const bentoItems = BENTO_CONFIG.map(cfg => ({
+    ...cfg,
+    score: cfg.id === "cognitive" ? (breakdown.facilities || 12) : breakdown[cfg.id as keyof typeof breakdown] as number || 0,
+  }));
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      
-      <main id="main-content" className="flex-1">
-        {/* Data Source Banner */}
-        <div className={`border-b ${dataSource === 'demo' ? 'bg-amber-50 border-amber-200' : dataSource === 'api' ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'}`}>
-          <div className="container py-3">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <DataSourceIndicator source={dataSource} />
-                {dataSource === 'demo' && (
-                  <span className="text-amber-800 text-sm">
-                    Synthetic data for development. Real data coming from research.
-                  </span>
-                )}
-                {dataSource === 'api' && (
-                  <span className="text-green-800 text-sm">
-                    Live data from accessibility database
-                  </span>
+    <main ref={containerRef} className="min-h-screen bg-muted/50 font-sans pb-20">
+
+      {/* ── Hero ── */}
+      <section className="relative pt-14 pb-12 overflow-hidden border-b border-border bg-card">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 via-background to-background pointer-events-none" aria-hidden="true" />
+
+        <div className="container relative z-10 px-4 md:px-8 max-w-6xl">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors mb-6"
+            aria-label="Back to search"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Search
+          </Link>
+
+          <div className="w-full h-[300px] md:h-[400px] rounded-3xl overflow-hidden relative shadow-lg mb-10 group bg-muted">
+            <VenueImage 
+              src={(venue as unknown as Record<string, string>).imageUrl} 
+              venueId={venue.venue_id} 
+              venueName={venue.name} 
+              category={venue.category} 
+              type="venue" 
+              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.02]" 
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+          </div>
+
+          <div className="flex flex-col lg:flex-row gap-8 lg:items-start justify-between">
+            <div className="flex-1 max-w-2xl">
+              {profile && matchData && (
+                <div className="profile-match-banner inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 text-primary rounded-full mb-4 font-semibold text-sm border border-primary/20">
+                  <Heart className="w-4 h-4 fill-primary" />
+                  {matchData.matchPercentage}% Match for your {profile} profile
+                </div>
+              )}
+              <div className="flex flex-wrap gap-2 mb-4">
+                <Badge className="bg-primary text-white rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider">
+                  <Building2 className="w-3 h-3 mr-1 inline" aria-hidden="true" />
+                  {formatCategory(venue.category)}
+                </Badge>
+                {demoVenue?.verificationStatus === "demo" && (
+                  <Badge variant="outline" className="bg-green-500/10 text-green-500 border-green-500/20 rounded-full px-3 py-1 text-xs font-bold flex items-center gap-1">
+                    <ShieldCheck className="w-3 h-3" aria-hidden="true" />
+                    Civic Partner
+                  </Badge>
                 )}
               </div>
+
+              <h1 className="text-3xl md:text-5xl font-display font-black text-foreground mb-3 leading-tight tracking-tight">
+                {venue.name}
+              </h1>
+
+              <div className="flex flex-col gap-3 mb-6">
+                <div className="flex items-center text-muted-foreground font-medium text-sm">
+                  <MapPin className="w-4 h-4 mr-2 text-primary shrink-0" aria-hidden="true" />
+                  {venue.address}, {venue.city}, {venue.state}
+                </div>
+                {etaInfo && (
+                  <div className="flex items-center gap-3">
+                    <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200 rounded-lg px-3 py-1.5 text-sm font-semibold flex items-center gap-1.5 shadow-sm">
+                      <Navigation className="w-4 h-4" aria-hidden="true" />
+                      {etaInfo.timeMins} min drive
+                    </Badge>
+                    <span className="text-muted-foreground text-sm font-medium flex items-center gap-1">
+                      <Map className="w-4 h-4 shrink-0 text-muted-foreground" />
+                      {etaInfo.distanceKm} km away
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              {demoVenue?.description && (
+                <p className="text-muted-foreground text-base leading-relaxed max-w-xl">
+                  {demoVenue.description}
+                </p>
+              )}
+            </div>
+
+            {/* Score Ring */}
+            <div className="shrink-0">
+              <ScoreRingLarge score={score} />
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Venue Header */}
-        <section className="bg-muted/30 border-b">
-          <div className="container py-8">
-            <Button variant="ghost" size="sm" className="mb-4" asChild>
-              <Link href="/">
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Back to Search
-              </Link>
-            </Button>
-            
-            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <Badge variant="secondary">
-                    <Building2 className="h-3 w-3 mr-1" />
-                    {formatCategory(venue.category)}
-                  </Badge>
-                  {verifiedEvidence > 0 && (
-                    <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-                      <ShieldCheck className="h-3 w-3 mr-1" />
-                      {verifiedEvidence} Verified
-                    </Badge>
+      {/* ── Content ── */}
+      <div className="container px-4 md:px-8 py-10 max-w-6xl">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+          {/* ── Main column ── */}
+          <div className="lg:col-span-2 space-y-10">
+
+            {/* Accessibility Passport */}
+            <section aria-labelledby="passport-heading">
+              <h2 id="passport-heading" className="text-xl font-display font-bold text-foreground mb-5 flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-primary" aria-hidden="true" />
+                Accessibility Passport
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                {bentoItems.map((item) => (
+                  <div
+                    key={item.id}
+                    className="bento-item p-5 rounded-2xl border flex flex-col shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5"
+                    style={{ backgroundColor: item.bg, borderColor: item.border }}
+                  >
+                    <div className="flex justify-between items-start mb-3">
+                      <div className="p-2 rounded-xl bg-card/70" style={{ color: item.color }}>
+                        <item.icon className="w-5 h-5" aria-hidden="true" />
+                      </div>
+                      <div className="text-right">
+                        <span className="text-2xl font-black text-foreground">{item.score}</span>
+                        <span className="text-xs font-medium text-muted-foreground">/{item.max}</span>
+                      </div>
+                    </div>
+                    <h3 className="font-bold text-foreground text-base mb-0.5">{item.label}</h3>
+                    <p className="text-xs text-muted-foreground mb-3">{item.sublabel}</p>
+                    <PassportBar score={item.score} max={item.max} color={item.color} />
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Evidence Dossier */}
+            <section aria-labelledby="evidence-heading">
+              <div className="flex items-center justify-between mb-5">
+                <h2 id="evidence-heading" className="text-xl font-display font-bold text-foreground flex items-center gap-2">
+                  <Camera className="w-5 h-5 text-primary" aria-hidden="true" />
+                  Evidence Dossier
+                </h2>
+                <Badge variant="secondary" className="rounded-full px-3 text-xs font-semibold">
+                  {evidence.length} sources
+                </Badge>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                {evidence.length > 0 ? evidence.map((e, i) => {
+                  const hasValidImage = e.evidence_media_url && e.evidence_media_url.startsWith('http');
+                  return (
+                  <div
+                    key={i}
+                    className="evidence-item aspect-square rounded-xl overflow-hidden bg-muted relative group shadow-sm border border-border"
+                  >
+                    {hasValidImage ? (
+                      <img
+                        src={e.evidence_media_url}
+                        alt="Evidence photo"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        onError={(evt) => {
+                          (evt.target as HTMLImageElement).style.display = 'none';
+                          const parent = (evt.target as HTMLImageElement).parentElement;
+                          if (parent) parent.classList.add('broken-image');
+                        }}
+                      />
+                    ) : (
+                      <VenueImage type="evidence" text={e.notes || "Evidence"} className="w-full h-full transition-transform duration-700 group-hover:scale-105" />
+                    )}
+                    
+                    {hasValidImage && (
+                      <div className="absolute inset-0 hidden group-[.broken-image]:block bg-muted">
+                         <VenueImage type="evidence" text={e.notes || "Evidence"} className="w-full h-full transition-transform duration-700 group-hover:scale-105" />
+                      </div>
+                    )}
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-[.broken-image]:opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 z-10">
+                      <span className="text-white text-[10px] font-medium leading-relaxed line-clamp-2 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                        {e.notes || "Community verified"}
+                      </span>
+                    </div>
+                  </div>
+                )}) : (
+                  [1, 2, 3, 4].map(i => (
+                    <div key={i} className="evidence-item aspect-square rounded-xl overflow-hidden bg-muted">
+                       <VenueImage type="evidence" text="No evidence" className="w-full h-full rounded-xl" />
+                    </div>
+                  ))
+                )}
+              </div>
+            </section>
+          </div>
+
+          {/* ── Side panel ── */}
+          <div className="space-y-5">
+
+            {/* Location & Contact */}
+            <Card className="rounded-2xl border-border shadow-sm bg-card overflow-hidden">
+              <CardHeader className="bg-muted/40 border-b border-border pb-4">
+                <CardTitle className="text-base font-display font-bold text-foreground">Location & Contact</CardTitle>
+              </CardHeader>
+              <CardContent className="p-0">
+                <div className="h-[180px] w-full bg-muted relative">
+                  <MapLibre3D
+                    venues={[venue]}
+                    selectedVenueId={venue.venue_id}
+                    showGeolocateControl={false}
+                  />
+                </div>
+                <div className="p-5 space-y-3">
+                  <div className="flex items-start gap-3">
+                    <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" aria-hidden="true" />
+                    <span className="text-sm text-foreground leading-relaxed">
+                      {venue.address}, {venue.city}, {venue.state}
+                    </span>
+                  </div>
+                  {Boolean((venue as Venue & { official_url?: string }).official_url) && (
+                    <div className="flex items-center gap-3">
+                      <Globe className="w-4 h-4 text-primary shrink-0" aria-hidden="true" />
+                      <a
+                        href={(venue as Venue & { official_url?: string }).official_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm font-medium text-primary hover:underline truncate"
+                      >
+                        {(venue as Venue & { official_url?: string }).official_url}
+                      </a>
+                    </div>
+                  )}
+                  {venue.contact_phone && (
+                    <div className="flex items-center gap-3">
+                      <PhoneCall className="w-4 h-4 text-primary shrink-0" aria-hidden="true" />
+                      <span className="text-sm text-foreground">{venue.contact_phone}</span>
+                    </div>
                   )}
                 </div>
-                <h1 className="text-3xl font-bold tracking-tight">{venue.name}</h1>
-                <div className="flex flex-wrap items-center gap-4 mt-2 text-muted-foreground">
-                  <span className="flex items-center gap-1">
-                    <MapPin className="h-4 w-4" />
-                    {venue.address}, {venue.city}, {venue.state}
-                  </span>
-                </div>
-              </div>
-              
-              <div className="flex gap-2">
-                <ReportForm 
-                  venueId={venue.venue_id}
-                  trigger={
-                    <Button variant="outline">
-                      <AlertTriangle className="h-4 w-4 mr-2" />
-                      Report Issue
-                    </Button>
-                  }
-                />
-              </div>
-            </div>
+              </CardContent>
+            </Card>
 
-            {/* Contact Info */}
-            <div className="flex flex-wrap gap-4 mt-6 text-sm">
-              {venue.official_url && (
-                <a 
-                  href={venue.official_url} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-primary hover:underline"
-                >
-                  <Globe className="h-4 w-4" />
-                  Official Website
-                  <ExternalLink className="h-3 w-3" />
-                </a>
-              )}
-              {venue.contact_phone && (
-                <a 
-                  href={`tel:${venue.contact_phone}`}
-                  className="flex items-center gap-1 text-muted-foreground hover:text-foreground"
-                >
-                  <Phone className="h-4 w-4" />
-                  {venue.contact_phone}
-                </a>
-              )}
-              {venue.contact_email && (
-                <a 
-                  href={`mailto:${venue.contact_email}`}
-                  className="flex items-center gap-1 text-muted-foreground hover:text-foreground"
-                >
-                  <Mail className="h-4 w-4" />
-                  {venue.contact_email}
-                </a>
-              )}
-            </div>
-          </div>
-        </section>
+            {/* Score Breakdown */}
+            <Card className="rounded-2xl border-border shadow-sm bg-card">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-base font-display font-bold text-foreground">Score Breakdown</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {bentoItems.map(item => (
+                  <div key={item.id} className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <item.icon className="w-4 h-4 shrink-0" style={{ color: item.color }} aria-hidden="true" />
+                      <span className="text-sm font-medium text-foreground">{item.label}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <SideProgressBar value={item.score} max={item.max} color={item.color} />
+                      <span className="text-xs font-bold text-foreground w-10 text-right">
+                        {item.score}/{item.max}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
 
-        {/* Main Content */}
-        <section className="container py-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Left Column - Accessibility Info */}
-            <div className="lg:col-span-2 space-y-8">
-              {/* Summary Stats */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Accessibility className="h-5 w-5" />
-                    Accessibility Overview
-                  </CardTitle>
-                  <CardDescription>
-                    Summary of accessibility features with evidence
-                  </CardDescription>
+            {/* Quick features */}
+            {demoVenue && (
+              <Card className="rounded-2xl border-border shadow-sm bg-card">
+                <CardHeader className="pb-4">
+                  <CardTitle className="text-base font-display font-bold text-foreground">Key Features</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div className="text-center p-4 bg-green-50 rounded-lg">
-                      <div className="text-2xl font-bold text-green-700">{yesCount}</div>
-                      <div className="text-sm text-green-600">Available</div>
-                    </div>
-                    <div className="text-center p-4 bg-red-50 rounded-lg">
-                      <div className="text-2xl font-bold text-red-700">{noCount}</div>
-                      <div className="text-sm text-red-600">Not Available</div>
-                    </div>
-                    <div className="text-center p-4 bg-gray-50 rounded-lg">
-                      <div className="text-2xl font-bold text-gray-700">{unknownCount}</div>
-                      <div className="text-sm text-gray-600">Unknown</div>
-                    </div>
-                    <div className="text-center p-4 bg-blue-50 rounded-lg">
-                      <div className="text-2xl font-bold text-blue-700">{evidence.length}</div>
-                      <div className="text-sm text-blue-600">Evidence</div>
-                    </div>
+                  <div className="flex flex-wrap gap-2">
+                    {demoVenue.wheelchairAccessible && (
+                      <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-[#e5eeff] text-[#1b55d0] border border-[#b4c5ff]">
+                        <Accessibility className="w-3 h-3" aria-hidden="true" /> Wheelchair
+                      </span>
+                    )}
+                    {demoVenue.rampAvailable && (
+                      <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-[#e5eeff] text-[#1b55d0] border border-[#b4c5ff]">
+                        Ramp
+                      </span>
+                    )}
+                    {demoVenue.elevatorAvailable && (
+                      <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-[#e5eeff] text-[#1b55d0] border border-[#b4c5ff]">
+                        Elevator
+                      </span>
+                    )}
+                    {demoVenue.accessibleParking && (
+                      <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-[#e0f9f4] text-[#0d7c66] border border-[#99f6e4]">
+                        Parking
+                      </span>
+                    )}
+                    {demoVenue.accessibleRestroom && (
+                      <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-[#e0f9f4] text-[#0d7c66] border border-[#99f6e4]">
+                        Restroom
+                      </span>
+                    )}
+                    {demoVenue.brailleSignage && (
+                      <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-[#f3eeff] text-[#7c3aed] border border-[#ddd6fe]">
+                        <Eye className="w-3 h-3" aria-hidden="true" /> Braille
+                      </span>
+                    )}
+                    {demoVenue.audioAssistance && (
+                      <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-[#f3eeff] text-[#7c3aed] border border-[#ddd6fe]">
+                        Audio Guide
+                      </span>
+                    )}
+                    {demoVenue.signLanguageSupport && (
+                      <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-[#e0f9f4] text-[#0d7c66] border border-[#99f6e4]">
+                        <Ear className="w-3 h-3" aria-hidden="true" /> Sign Language
+                      </span>
+                    )}
+                    {demoVenue.tactilePath && (
+                      <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-[#fff4ed] text-[#c2410c] border border-[#fed7aa]">
+                        Tactile Path
+                      </span>
+                    )}
                   </div>
                 </CardContent>
               </Card>
-
-              {/* Detailed Attributes - Location Based */}
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-semibold">Detailed Accessibility</h2>
-                  <VerificationSummary attributes={attributes} />
-                </div>
-                <LocationBasedAttributes attributes={attributes} showEvidenceCount={true} />
-              </div>
-
-              {/* Evidence Section */}
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-semibold flex items-center gap-2">
-                    <FileText className="h-5 w-5" />
-                    Evidence & Verification
-                  </h2>
-                </div>
-                <EvidenceList evidence={evidence} groupByStatus={true} />
-              </div>
-            </div>
-
-            {/* Right Column - Map & Info */}
-            <div className="space-y-6">
-              {/* Map */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-base">Location</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <MapView 
-                    venues={[venue]} 
-                    height="250px"
-                    selectedVenueId={venue.venue_id}
-                  />
-                  <div className="mt-4 text-sm text-muted-foreground">
-                    <p>{venue.address}</p>
-                    <p>{venue.city}, {venue.state} {venue.postal_code}</p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Verification Legend */}
-              <VerificationLegend />
-
-              {/* Last Updated */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-base flex items-center gap-2">
-                    <Clock className="h-4 w-4" />
-                    Data Freshness
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm text-muted-foreground">
-                  <p className="mb-2">
-                    Last updated: {formatDate(venue.updated_at)}
-                  </p>
-                  <p className="text-xs">
-                    Some information may be outdated. Please verify before visiting.
-                  </p>
-                  <Button variant="outline" size="sm" className="w-full mt-4" asChild>
-                    <Link href="#" onClick={(e) => { e.preventDefault(); alert('Update feature coming soon'); }}>
-                      <CheckCircle2 className="h-4 w-4 mr-2" />
-                      Confirm Information
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
+            )}
           </div>
-        </section>
-      </main>
-
-      <Footer />
-    </div>
+        </div>
+      </div>
+    </main>
   );
 }

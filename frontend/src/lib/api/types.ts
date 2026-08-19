@@ -29,15 +29,15 @@ export interface Venue {
   address: string;
   city: string;
   state: string;
-  country: string;
+  country?: string;
   postal_code?: string;
   latitude: number;
   longitude: number;
   official_url?: string;
   contact_phone?: string;
   contact_email?: string;
-  created_at: string;
-  updated_at: string;
+  created_at?: string;
+  updated_at?: string;
   // Optional accessibility summary from search results
   accessibility_summary?: {
     total_attributes: number;

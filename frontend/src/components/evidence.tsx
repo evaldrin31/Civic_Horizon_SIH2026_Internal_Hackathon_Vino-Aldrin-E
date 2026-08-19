@@ -9,9 +9,7 @@ import {
   FileText, 
   Camera, 
   User, 
-  Calendar, 
   Building2, 
-  Scale, 
   AlertCircle,
   CheckCircle2,
   Clock,
@@ -34,10 +32,6 @@ interface EvidenceListProps {
   evidence: Evidence[];
   groupByStatus?: boolean;
   showConflicts?: boolean;
-}
-
-interface ConflictDisplayProps {
-  evidence: Evidence[];
 }
 
 interface FreshnessIndicatorProps {
@@ -259,16 +253,18 @@ export function ConflictWarning({ evidence }: { evidence: Evidence[] }) {
   const conflictCount = conflicts.size;
 
   return (
-    <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6">
-      <div className="flex items-start gap-3">
-        <AlertTriangle className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
+    <div className="bg-amber-50/50 border border-amber-200/60 rounded-xl p-5 mb-8 shadow-sm">
+      <div className="flex items-start gap-4">
+        <div className="bg-amber-100 text-amber-700 p-2 rounded-lg shrink-0 mt-0.5">
+          <AlertTriangle className="h-5 w-5" />
+        </div>
         <div>
-          <h4 className="font-medium text-amber-900">
-            Conflicting Reports
+          <h4 className="font-semibold text-amber-900 text-base">
+            Conflicting Reports Detected
           </h4>
-          <p className="text-sm text-amber-800 mt-1">
+          <p className="text-sm text-amber-800/90 mt-1.5 leading-relaxed">
             {conflictCount} {conflictCount === 1 ? 'attribute has' : 'attributes have'} conflicting evidence from different sources. 
-            Review the evidence below to understand the differences.
+            Review the detailed dossier below to understand the differences before making a decision.
           </p>
         </div>
       </div>
@@ -283,34 +279,44 @@ export function EvidenceCard({ evidence, showAttribute = false, showConflict = f
   const isConflicting = showConflict && evidence.verification_status === 'conflicting';
   
   return (
-    <Card className={`border-l-4 ${isConflicting ? 'border-l-amber-500' : 'border-l-primary'}`}>
-      <CardHeader className="pb-3">
+    <Card className={`overflow-hidden transition-all duration-300 ${isConflicting ? 'border-amber-200 shadow-sm ring-1 ring-amber-100/50 bg-amber-50/30' : 'border-slate-200/80 shadow-sm hover:shadow-md hover:border-slate-300'}`}>
+      {isConflicting && <div className="h-1 w-full bg-gradient-to-r from-amber-400 to-amber-500" />}
+      {!isConflicting && <div className="h-1 w-full bg-gradient-to-r from-slate-200 to-slate-300" />}
+      
+      <CardHeader className="pb-4 pt-5">
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1 min-w-0">
             {showAttribute && evidence.attribute && (
-              <CardDescription className="mb-1 flex items-center gap-2">
-                <span className="font-medium">{evidence.attribute.attribute_name}</span>
+              <CardDescription className="mb-2.5 flex items-center gap-2">
+                <span className="font-semibold text-foreground/80 tracking-tight">{evidence.attribute.attribute_name}</span>
                 {evidence.attribute.value && (
-                  <Badge variant="outline" className="text-xs">
-                    {evidence.attribute.value === 'yes' && <CheckCircle2 className="h-3 w-3 mr-1 text-green-600" />}
-                    {evidence.attribute.value === 'no' && <XCircle className="h-3 w-3 mr-1 text-red-500" />}
-                    {evidence.attribute.value === 'partial' && <AlertCircle className="h-3 w-3 mr-1 text-amber-500" />}
-                    {evidence.attribute.value === 'unknown' && <HelpCircle className="h-3 w-3 mr-1 text-gray-400" />}
+                  <Badge variant={
+                    evidence.attribute.value === 'yes' ? 'status-yes' :
+                    evidence.attribute.value === 'no' ? 'status-no' :
+                    evidence.attribute.value === 'partial' ? 'status-partial' :
+                    'status-unknown'
+                  } className="text-xs uppercase tracking-wider font-semibold shadow-sm">
+                    {evidence.attribute.value === 'yes' && <CheckCircle2 className="h-3 w-3 mr-1" />}
+                    {evidence.attribute.value === 'no' && <XCircle className="h-3 w-3 mr-1" />}
+                    {evidence.attribute.value === 'partial' && <AlertCircle className="h-3 w-3 mr-1" />}
+                    {evidence.attribute.value === 'unknown' && <HelpCircle className="h-3 w-3 mr-1" />}
                     {evidence.attribute.value}
                   </Badge>
                 )}
               </CardDescription>
             )}
-            <CardTitle className="text-base">
-              {evidence.evidence_text || (
-                <span className="text-muted-foreground italic">No description available</span>
+            <CardTitle className="text-base font-medium leading-snug">
+              {evidence.evidence_text ? (
+                evidence.evidence_text
+              ) : (
+                <span className="text-muted-foreground italic font-normal">No description provided</span>
               )}
             </CardTitle>
           </div>
-          <div className="flex flex-col items-end gap-1 shrink-0">
+          <div className="flex flex-col items-end gap-2 shrink-0">
             <VerificationBadge status={evidence.verification_status} size="sm" />
             {isConflicting && (
-              <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200 text-xs">
+              <Badge variant="outline" className="bg-amber-100 text-amber-800 border-amber-300 text-[10px] uppercase font-bold tracking-widest shadow-sm">
                 <AlertTriangle className="h-3 w-3 mr-1" />
                 Conflict
               </Badge>
@@ -318,67 +324,65 @@ export function EvidenceCard({ evidence, showAttribute = false, showConflict = f
           </div>
         </div>
       </CardHeader>
-      <CardContent className="pt-0 space-y-3">
+      
+      <CardContent className="pt-0 space-y-5">
         {/* Source Information */}
-        {source ? (
-          <div className="flex flex-wrap items-center gap-2">
-            <SourceTypeBadge sourceType={source.source_type} />
-            {source.source_name ? (
-              <span className="text-sm text-muted-foreground">{source.source_name}</span>
-            ) : (
-              <span className="text-sm text-muted-foreground italic">Source name unavailable</span>
-            )}
-            {source.source_url && (
-              <a 
-                href={source.source_url} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-xs text-primary hover:underline"
-              >
-                View source →
-              </a>
-            )}
-          </div>
-        ) : (
-          <div className="text-sm text-muted-foreground italic">
-            Source information not available
-          </div>
-        )}
-        
-        {/* Evidence Details */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
-          {evidence.observed_at ? (
-            <div className="flex items-center gap-1 text-muted-foreground">
-              <Eye className="h-3 w-3" />
-              <span>Observed: {formatDate(evidence.observed_at)}</span>
-            </div>
+        <div className="flex items-center gap-2 px-3 py-2 bg-slate-50/50 rounded-lg border border-slate-100">
+          <SourceTypeBadge sourceType={source?.source_type || 'public_review'} />
+          <div className="w-px h-4 bg-slate-200 mx-1"></div>
+          {source?.source_name ? (
+            <span className="text-sm font-medium text-slate-700">{source.source_name}</span>
           ) : (
-            <div className="flex items-center gap-1 text-muted-foreground">
-              <Eye className="h-3 w-3" />
-              <span className="italic">Observation date unknown</span>
-            </div>
+            <span className="text-sm text-slate-500 italic">Anonymous Source</span>
           )}
-          <div className="flex items-center gap-1 text-muted-foreground">
-            <Clock className="h-3 w-3" />
-            <span>Recorded: {formatRelativeTime(evidence.collected_at)}</span>
-          </div>
-          {evidence.collector ? (
-            <div className="flex items-center gap-1 text-muted-foreground">
-              <User className="h-3 w-3" />
-              <span>By: {evidence.collector}</span>
-            </div>
-          ) : (
-            <div className="flex items-center gap-1 text-muted-foreground">
-              <User className="h-3 w-3" />
-              <span className="italic">Collector unknown</span>
-            </div>
+          {source?.source_url && (
+            <a 
+              href={source.source_url} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-xs font-medium text-primary hover:text-primary/80 transition-colors ml-auto flex items-center"
+            >
+              Verify <Eye className="h-3 w-3 ml-1" />
+            </a>
           )}
         </div>
         
-        {/* Confidence and Freshness */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-border">
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-muted-foreground">Confidence:</span>
+        {/* Evidence Metadata Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-y-3 gap-x-4 text-sm px-1">
+          <div className="space-y-1">
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/70">Observation</p>
+            {evidence.observed_at ? (
+              <p className="font-medium text-slate-700 flex items-center"><Camera className="h-3 w-3 mr-1.5 text-slate-400" />{formatDate(evidence.observed_at)}</p>
+            ) : (
+              <p className="text-slate-500 italic flex items-center"><Camera className="h-3 w-3 mr-1.5 text-slate-300" />Unknown</p>
+            )}
+          </div>
+          <div className="space-y-1">
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/70">Recorded</p>
+            <p className="font-medium text-slate-700 flex items-center"><Clock className="h-3 w-3 mr-1.5 text-slate-400" />{formatRelativeTime(evidence.collected_at)}</p>
+          </div>
+          <div className="space-y-1">
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/70">Collector</p>
+            {evidence.collector ? (
+              <p className="font-medium text-slate-700 flex items-center"><User className="h-3 w-3 mr-1.5 text-slate-400" />{evidence.collector}</p>
+            ) : (
+              <p className="text-slate-500 italic flex items-center"><User className="h-3 w-3 mr-1.5 text-slate-300" />Unknown</p>
+            )}
+          </div>
+        </div>
+        
+        {/* Notes */}
+        {evidence.notes && (
+          <div className="text-sm text-slate-600 bg-slate-50 p-3 rounded-lg border border-slate-100 flex items-start">
+            <Info className="h-4 w-4 mr-2 mt-0.5 text-slate-400 shrink-0" />
+            <p className="leading-relaxed">{evidence.notes}</p>
+          </div>
+        )}
+
+        {/* Confidence Footer */}
+        <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+          <div className="flex items-center gap-3">
+            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70">Trust Score</span>
             <ConfidenceIndicator confidence={evidence.confidence} />
           </div>
           <FreshnessIndicator 
@@ -386,14 +390,6 @@ export function EvidenceCard({ evidence, showAttribute = false, showConflict = f
             collectedAt={evidence.collected_at} 
           />
         </div>
-        
-        {/* Notes */}
-        {evidence.notes && (
-          <div className="text-sm text-muted-foreground bg-muted p-2 rounded">
-            <Info className="h-3 w-3 inline mr-1" />
-            {evidence.notes}
-          </div>
-        )}
       </CardContent>
     </Card>
   );
@@ -511,13 +507,13 @@ export function EvidenceSummary({
         </Badge>
       )}
       {verifiedCount > 0 && (
-        <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200 text-xs">
+        <Badge variant="outline" className="bg-green-500/10 text-green-500 border-green-500/20 text-xs">
           <CheckCircle2 className="h-3 w-3 mr-1" />
           {verifiedCount} verified
         </Badge>
       )}
       {conflictingCount > 0 && (
-        <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200 text-xs">
+        <Badge variant="outline" className="bg-orange-500/10 text-orange-500 border-orange-500/20 text-xs">
           <AlertTriangle className="h-3 w-3 mr-1" />
           {conflictingCount} conflicting
         </Badge>
@@ -536,28 +532,44 @@ export function AttributeConflictDetail({
   conflictingEvidence: Evidence[];
 }) {
   return (
-    <div className="bg-amber-50/50 border border-amber-200 rounded-lg p-4">
-      <h4 className="font-medium text-amber-900 mb-3 flex items-center gap-2">
-        <AlertTriangle className="h-4 w-4" />
-        Conflicting Evidence: {attributeName}
+    <div className="bg-amber-50/40 border border-amber-200/60 rounded-xl p-5">
+      <h4 className="font-semibold text-amber-900 mb-4 flex items-center gap-2">
+        <AlertTriangle className="h-5 w-5 text-amber-600" />
+        Conflict Analysis: <span className="font-bold">{attributeName}</span>
       </h4>
-      <div className="space-y-3">
+      <div className="grid gap-3 sm:grid-cols-2">
         {conflictingEvidence.map((e) => (
-          <div key={e.evidence_id} className="bg-white rounded p-3 border border-amber-100">
-            <div className="flex items-center justify-between mb-2">
-              <Badge variant="outline" className="text-xs">
-                Claims: {e.attribute?.value || 'unknown'}
+          <div key={e.evidence_id} className="bg-white rounded-lg p-4 border border-amber-100 shadow-sm relative overflow-hidden group hover:border-amber-200 transition-colors">
+            <div className="absolute top-0 left-0 w-1 h-full bg-amber-300 group-hover:bg-amber-400 transition-colors" />
+            
+            <div className="flex items-center justify-between mb-3 pl-2">
+              <Badge variant={
+                e.attribute?.value === 'yes' ? 'status-yes' :
+                e.attribute?.value === 'no' ? 'status-no' :
+                e.attribute?.value === 'partial' ? 'status-partial' :
+                'status-unknown'
+              } className="text-[10px] uppercase tracking-wider font-bold shadow-sm">
+                Claim: {e.attribute?.value || 'unknown'}
               </Badge>
               <VerificationBadge status={e.verification_status} size="sm" />
             </div>
-            <p className="text-sm text-muted-foreground">{e.evidence_text || 'No description'}</p>
-            {e.source && (
-              <p className="text-xs text-muted-foreground mt-2">
-                Source: {e.source.source_name || sourceTypeLabels[e.source.source_type]}
-              </p>
-            )}
-            <div className="text-xs text-muted-foreground mt-1">
-              <FreshnessIndicator observedAt={e.observed_at} collectedAt={e.collected_at} />
+            
+            <p className="text-sm font-medium text-slate-800 mb-3 pl-2 leading-snug">
+              {e.evidence_text ? e.evidence_text : <span className="italic text-slate-500 font-normal">No description provided</span>}
+            </p>
+            
+            <div className="pt-3 border-t border-slate-100 pl-2 space-y-2">
+              <div className="flex items-center gap-2 text-xs">
+                <SourceTypeBadge sourceType={e.source?.source_type || 'public_review'} />
+                <span className="text-slate-600 truncate font-medium">
+                  {e.source?.source_name || sourceTypeLabels[e.source?.source_type || 'public_review']}
+                </span>
+              </div>
+              
+              <div className="flex justify-between items-center text-xs text-slate-500">
+                <FreshnessIndicator observedAt={e.observed_at} collectedAt={e.collected_at} />
+                <span className="font-semibold">Trust: {Math.round((e.confidence || 0) * 100)}%</span>
+              </div>
             </div>
           </div>
         ))}

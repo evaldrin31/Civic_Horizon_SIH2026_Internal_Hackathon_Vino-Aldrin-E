@@ -221,12 +221,14 @@ function LocationCard({
 
 function AttributeRow({ 
   attribute, 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   showEvidenceCount 
 }: { 
   attribute: AccessibilityAttribute; 
   showEvidenceCount: boolean;
 }) {
-  const valueIcons: Record<string, React.ReactNode> = {
+  // Icon lookup kept for potential future use
+  const _valueIcons: Record<string, React.ReactNode> = {
     yes: <CheckCircle2 className="h-4 w-4 text-green-600" />,
     no: <XCircle className="h-4 w-4 text-red-500" />,
     unknown: <HelpCircle className="h-4 w-4 text-gray-400" />,

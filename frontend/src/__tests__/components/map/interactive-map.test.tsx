@@ -2,8 +2,8 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { Venue } from '@/lib/api/types';
 
 // Mock the map component to test UI behavior without actual Google Maps
-jest.mock('@/components/map/interactive-map', () => ({
-  InteractiveMapView: ({ venues, selectedVenueId, onVenueSelect }: { venues: Venue[]; selectedVenueId?: string; onVenueSelect?: (venue: Venue) => void }) => (
+jest.mock('@/components/map-view', () => ({
+  MapView: ({ venues, selectedVenueId, onVenueSelect }: { venues: Venue[]; selectedVenueId?: string; onVenueSelect?: (venue: Venue) => void }) => (
     <div data-testid="interactive-map">
       <div data-testid="venue-count">{venues.length} venues found</div>
       <div data-testid="map-error">Map Error</div>
@@ -27,9 +27,9 @@ jest.mock('@/components/map/interactive-map', () => ({
   )
 }));
 
-import { InteractiveMapView } from '@/components/map/interactive-map';
+import { MapView } from '@/components/map-view';
 
-describe('InteractiveMapView', () => {
+describe('MapView', () => {
   const mockVenues: Venue[] = [
     {
       venue_id: 'venue-1',
@@ -64,7 +64,7 @@ describe('InteractiveMapView', () => {
   });
 
   it('renders venue list', () => {
-    render(<InteractiveMapView venues={mockVenues} />);
+    render(<MapView venues={mockVenues} />);
     
     expect(screen.getByText('2 venues found')).toBeInTheDocument();
     expect(screen.getByText('Test Hospital')).toBeInTheDocument();
@@ -73,7 +73,7 @@ describe('InteractiveMapView', () => {
 
   it('calls onVenueSelect when venue is clicked', () => {
     const onVenueSelect = jest.fn();
-    render(<InteractiveMapView venues={mockVenues} onVenueSelect={onVenueSelect} />);
+    render(<MapView venues={mockVenues} onVenueSelect={onVenueSelect} />);
     
     const venueButton = screen.getByText('Test Hospital');
     fireEvent.click(venueButton);
@@ -82,31 +82,31 @@ describe('InteractiveMapView', () => {
   });
 
   it('shows error state when map fails', () => {
-    render(<InteractiveMapView venues={mockVenues} />);
+    render(<MapView venues={mockVenues} />);
     
     expect(screen.getByTestId('map-error')).toBeInTheDocument();
   });
 
   it('renders list view button', () => {
-    render(<InteractiveMapView venues={mockVenues} />);
+    render(<MapView venues={mockVenues} />);
     
     expect(screen.getByText('List')).toBeInTheDocument();
   });
 
   it('shows correct venue count', () => {
-    render(<InteractiveMapView venues={mockVenues} />);
+    render(<MapView venues={mockVenues} />);
     expect(screen.getByText('2 venues found')).toBeInTheDocument();
   });
 
   it('shows singular venue count for single venue', () => {
-    render(<InteractiveMapView venues={[mockVenues[0]]} />);
+    render(<MapView venues={[mockVenues[0]]} />);
     expect(screen.getByText('1 venues found')).toBeInTheDocument();
   });
 });
 
 describe('Map Error States', () => {
   it('shows error fallback', () => {
-    render(<InteractiveMapView venues={[]} />);
+    render(<MapView venues={[]} />);
     expect(screen.getByText('0 venues found')).toBeInTheDocument();
   });
 });

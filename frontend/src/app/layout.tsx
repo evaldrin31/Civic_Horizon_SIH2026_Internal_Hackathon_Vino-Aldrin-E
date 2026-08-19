@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { AppLayout } from "@/components/layout";
+import { LenisProvider } from "@/components/lenis-provider";
+import { CursorGlow } from "@/components/cursor-glow";
+
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
-  title: "Accessibility Intelligence Platform",
-  description: "Discover evidence-backed accessibility information for venues across India",
+  title: "Civic Horizon",
+  description: "Accessibility Intelligence Platform. Built for SIH 2026.",
 };
 
 export default function RootLayout({
@@ -12,9 +17,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="min-h-screen bg-background font-sans antialiased">
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body className="antialiased font-sans bg-background text-foreground">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <LenisProvider>
+            <CursorGlow />
+            <AppLayout>
+              {children}
+            </AppLayout>
+          </LenisProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
