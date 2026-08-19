@@ -148,7 +148,9 @@ export function getDemoEvidence(venueId: string): Evidence[] {
       observed_at: new Date().toISOString(),
       collector: "user_1",
       verification_status: "verified",
-      confidence: 0.95
+      confidence: 0.95,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
     }
   ];
 }
