@@ -46,7 +46,7 @@ export function calculateVenueScore(venue: DemoVenue): {
   if (venue.staffAssistance) safetyScore += 2;
 
   // Confidence (5)
-  const confidenceScore = (venue.confidence / 100) * 5;
+  const confidenceScore = ((venue.confidence || 0) / 100) * 5;
 
   const total = mobilityScore + visionScore + hearingScore + sensoryScore + facilitiesScore + safetyScore + confidenceScore;
 
